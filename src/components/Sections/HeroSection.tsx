@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function HeroSection(){
+    const images = [
+        "/assets/images/tour-du-rwanda.jpg",
+        "/assets/images/Tourjff094.jpg", // Replace with your second image
+        // "/assets/images/yet-another-image.jpg", // Replace with your third image
+      ];
+
+      const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+      // Handle image slide change
+      const nextImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      };
+    
+      useEffect(() => {
+        const interval = setInterval(nextImage, 5000); // Change image every 5 seconds
+        return () => clearInterval(interval); // Clear interval on component unmount
+      }, []);
+    
+    
     return(
         <section className="container mx-auto px-4 py-12 md:py-24">
         <div className="flex flex-col lg:flex-row items-center">
@@ -26,13 +45,52 @@ export default function HeroSection(){
               </a>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <img 
-              src="/assets/images/heroImage.png" 
-              alt="Headphones Globe Illustration" 
-              className="w-full max-w-lg mx-auto"
-            />
-          </div>
+          <div className="lg:w-1/2 relative overflow-hidden">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center opacity-60"
+    style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
+  ></div>
+  
+  {/* Actual Image */}
+  <img
+    src={images[currentImageIndex]}
+    alt="Background Image"
+    className="hero-image"
+  />
+</div>
+
+<style jsx>{`
+  .lg\\:w-1\\/2 {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 400px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Ensure the image covers the space without distortion */
+    border-radius: 15px;
+   
+    filter: saturate(1.2) contrast(1.3) brightness(0.95); /* Enhance the painted effect */
+    z-index: 1; /* Image stays above the background */
+  }
+
+  /* Optional: Hover effect for zoom */
+  .hero-image:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+  }
+
+  /* Optional: Ensure background image covers the area */
+  .absolute {
+    z-index: -1; /* Move background image behind the content */
+  }
+`}</style>
+
+
+
         </div>
       </section>
   
