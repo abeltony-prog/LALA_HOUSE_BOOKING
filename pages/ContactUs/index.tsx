@@ -26,15 +26,15 @@ export default function ContactUsPage() {
             <div className="flex gap-6">
               <div>
                 <span className="font-semibold">Location:</span>
-                <p className="text-gray-600">Kigali, Rwanda</p>
+                <p className="text-gray-600">18 KG 6 AVENUE , Kigali, Kimihurura, Rwanda</p>
               </div>
               <div>
                 <span className="font-semibold">Contact:</span>
-                <p className="text-gray-600">+234 0000 0 0 0</p>
+                <p className="text-gray-600">+250 788 301 974</p>
               </div>
               <div>
                 <span className="font-semibold">Email:</span>
-                <p className="text-gray-600">example@test.com</p>
+                <p className="text-gray-600">info@planetevents.rw</p>
               </div>
             </div>
             <div>

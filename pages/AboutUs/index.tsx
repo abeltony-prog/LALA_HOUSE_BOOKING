@@ -42,20 +42,16 @@ export default function AboutUsPage() {
           <div className="space-y-8 lg:w-1/2">
             <div>
               <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">
-                Mission
+                Who we are
               </h2>
               <p className="text-gray-600">
-                is simply dummy text of the printing and typesetting industry
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley
+              Planet Events Group is an event management and production firm in Rwanda that specializes in crafting events that are truly out of this world. From conceptualization to execution, our innovative team brings a fresh perspective to event planning and production ensuring that each event we create is a unique and unforgettable masterpiece.
               </p>
             </div>
             <div>
-              <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">Vision</h2>
+              <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">Expertise</h2>
               <p className="text-gray-600">
-                is simply dummy text of the printing and typesetting industry
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley
+              Whether it's an intimate soirée or a large-scale festival or conference, we bring unparalleled expertise and creativity to every project. Backed by the most experienced team and state-of-the-art stage, sound, and lighting equipment, we ensure that your event leaves a lasting impression.
               </p>
             </div>
             <button className="rounded-full border-2 border-red-500 bg-white px-6 py-2 text-red-500 transition-colors hover:bg-red-500 hover:text-white">

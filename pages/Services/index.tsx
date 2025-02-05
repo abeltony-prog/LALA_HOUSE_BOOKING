@@ -16,9 +16,9 @@ export default function ServicesPage() {
           <path d="M7 10L7 14M11 8L11 16M15 6L15 18M19 10L19 14" />
         </svg>
       ),
-      title: "Lorem Ipsum",
+      title: "Event Production",
       description:
-        "is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+        "With our state-of-the-art audiovisual equipment, you can trust us to handle every aspect of your event, from concept to execution.",
     },
     {
       icon: (
@@ -33,9 +33,9 @@ export default function ServicesPage() {
           <path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 18h2M14 18h2" />
         </svg>
       ),
-      title: "Lorem Ipsum",
+      title: "Event Managment",
       description:
-        "is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+        "From venue selection and logistics coordination to vendor management and on-site execution, we bring your vision to life.",
     },
     {
       icon: (
@@ -52,7 +52,7 @@ export default function ServicesPage() {
       ),
       title: "Lorem Ipsum",
       description:
-        "is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+        "With our state-of-the-art audiovisual equipment, you can trust us to handle every aspect of your event, from concept to execution.",
     },
     {
       icon: (
@@ -66,9 +66,9 @@ export default function ServicesPage() {
           <path d="M17 17h2a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12v.01" />
         </svg>
       ),
-      title: "Lorem Ipsum",
+      title: "Branding & Print Services",
       description:
-        "is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+        "From business cards to banners, we create eye-catching promotional materials tailored to your brand's needs.",
     },
   ];
   return (

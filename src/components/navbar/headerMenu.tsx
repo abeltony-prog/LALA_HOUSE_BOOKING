@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";  // Import useRouter
 
 export default function HeaderMenu() {
+  const router = useRouter();  // Initialize useRouter hook to access the current path
+
   return (
     <header className="container mx-auto px-4 py-4">
       <div className="flex items-center justify-between">
@@ -9,25 +12,35 @@ export default function HeaderMenu() {
           <img
             src="/assets/images/logo/logo.png"
             alt="Planet"
-            className="h-12"
+            className="h-12 cursor-pointer"
           />
         </div>
         <nav className="hidden items-center space-x-8 md:flex">
           <Link href={"/"} passHref>
-            <span className="font-medium text-red-600">Home</span>
+            <span
+              className={` cursor-pointer hover:text-red-600 font-medium ${router.pathname === "/" ? "text-red-600" : "text-[#2B3990]"}`}
+            >
+              Home
+            </span>
           </Link>
           <Link href={"/Services"} passHref>
-            <span className="cursor-pointer text-[#2B3990] hover:text-red-600">
+            <span
+              className={`cursor-pointer hover:text-red-600 ${router.pathname === "/Services" ? "text-red-600" : "text-[#2B3990]"}`}
+            >
               Our Services
             </span>
           </Link>
           <Link href={"/AboutUs"} passHref>
-            <span className="cursor-pointer text-[#2B3990] hover:text-red-600">
+            <span
+              className={`cursor-pointer hover:text-red-600 ${router.pathname === "/AboutUs" ? "text-red-600" : "text-[#2B3990]"}`}
+            >
               About Us
             </span>
           </Link>
           <Link href={"/ContactUs"} passHref>
-            <span className="text-[#2B3990] hover:text-red-600">
+            <span
+              className={`cursor-pointer hover:text-red-600 ${router.pathname === "/ContactUs" ? "text-red-600" : "text-[#2B3990]"}`}
+            >
               Contact Us
             </span>
           </Link>
