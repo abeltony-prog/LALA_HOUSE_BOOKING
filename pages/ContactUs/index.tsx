@@ -26,7 +26,9 @@ export default function ContactUsPage() {
             <div className="flex gap-6">
               <div>
                 <span className="font-semibold">Location:</span>
-                <p className="text-gray-600">18 KG 6 AVENUE , Kigali, Kimihurura, Rwanda</p>
+                <p className="text-gray-600">
+                  18 KG 6 AVENUE , Kigali, Kimihurura, Rwanda
+                </p>
               </div>
               <div>
                 <span className="font-semibold">Contact:</span>

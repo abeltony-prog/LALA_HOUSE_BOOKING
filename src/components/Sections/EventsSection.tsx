@@ -4,32 +4,29 @@ export default function EventsSection() {
   const events = [
     {
       id: 1,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKEBak-4eVMbinGqXuaH_TJKFQuePXrpixg&s",
+      image: "https://www.planetevents.rw/assets/img/images/11.jpg",
       alt: "Music producer in green sweater working in studio",
     },
     {
       id: 2,
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKEBak-4eVMbinGqXuaH_TJKFQuePXrpixg&s",
+        "https://i0.wp.com/www.topafricanews.com/wp-content/uploads/2024/07/53831498254_d1a46a19aa_o.jpg?fit=1000%2C667&ssl=1",
       alt: "Person in orange jacket at mixing board",
     },
     {
       id: 3,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKEBak-4eVMbinGqXuaH_TJKFQuePXrpixg&s",
+      image: "/assets/images/tour-du-rwanda.jpg",
       alt: "Music producer in green sweater working in studio",
     },
     {
       id: 4,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKEBak-4eVMbinGqXuaH_TJKFQuePXrpixg&s",
+      image: "https://www.planetevents.rw/assets/img/images/8.jpg",
       alt: "Music producer in green sweater working in studio",
     },
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-24">
+    <div className="container mx-auto px-4 py-12 md:py-12">
       {/* Events Section */}
       <h2 className="mb-12 text-3xl font-bold text-[#2B3990] md:text-4xl">
         Events

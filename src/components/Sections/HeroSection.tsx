@@ -24,12 +24,14 @@ export default function HeroSection() {
       <div className="flex flex-col items-center lg:flex-row">
         <div className="mb-8 lg:mb-0 lg:w-1/2">
           <h1 className="mb-6 text-4xl font-bold text-[#2B3990] md:text-5xl lg:text-6xl">
-            Lorem Ipsum
+            Planet Events Group
           </h1>
           <p className="mb-8 max-w-lg text-gray-700">
-            is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an unknown printer took a galley
+            Is an event management and production firm in Rwanda that
+            specializes in crafting events that are truly out of this world.
+            From conceptualization to execution, our innovative team brings a
+            fresh perspective to event planning and production ensuring that
+            each event we create is a unique and unforgettable masterpiece.
           </p>
           <button className="rounded-full bg-red-600 px-8 py-3 text-white transition-colors hover:bg-red-700">
             Reach Us

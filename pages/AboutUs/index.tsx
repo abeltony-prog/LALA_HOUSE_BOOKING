@@ -4,21 +4,16 @@ import React from "react";
 export default function AboutUsPage() {
   const teamMembers = [
     {
-      name: "Team 1",
-      role: "Founder",
-      image: "https://www.gestcall.it/wp-content/uploads/2017/04/team1.jpg",
+      name: "Adoré Robert RUTAYISIRE",
+      role: "Chief Executive Officer",
+      image: "https://www.planetevents.rw/assets/img/team/Team2.png",
     },
+
     {
-      name: "Team 1",
-      role: "CTO",
+      name: "Emery KWIZERA",
+      role: "Chief Finance Officer",
       image:
-        "https://cbeyondsal.com/wp-content/uploads/2017/02/team_member_01-540x540.jpg",
-    },
-    {
-      name: "Team 1",
-      role: "COO",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5XWqlmON1G75BbuqhsDfkb6V7to9IbBtpG9HFE6QQJIy26u1YxHXCFLeL4bzAcGAkm1I&usqp=CAU",
+        "https://www.planetevents.rw/assets/img/team/Team1.png",
     },
   ];
   return (
@@ -42,21 +37,40 @@ export default function AboutUsPage() {
           <div className="space-y-8 lg:w-1/2">
             <div>
               <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">
-                Who we are
+                Mission
               </h2>
               <p className="text-gray-600">
-              Planet Events Group is an event management and production firm in Rwanda that specializes in crafting events that are truly out of this world. From conceptualization to execution, our innovative team brings a fresh perspective to event planning and production ensuring that each event we create is a unique and unforgettable masterpiece.
+                To become the leading event management and production company in
+                the region, recognized for delivering unparalleled service and
+                empowering Rwandan youth in the industry.{" "}
               </p>
             </div>
             <div>
-              <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">Expertise</h2>
+              <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">Vision</h2>
               <p className="text-gray-600">
-              Whether it's an intimate soirée or a large-scale festival or conference, we bring unparalleled expertise and creativity to every project. Backed by the most experienced team and state-of-the-art stage, sound, and lighting equipment, we ensure that your event leaves a lasting impression.
+                To exceed our clients’ expectations through exceptional service,
+                creativity, and innovation.{" "}
               </p>
             </div>
-            <button className="rounded-full border-2 border-red-500 bg-white px-6 py-2 text-red-500 transition-colors hover:bg-red-500 hover:text-white">
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-[#2B3990]">
+                Expertise
+              </h2>
+              <p className="text-gray-600">
+                Whether it's an intimate soirée or a large-scale festival or
+                conference, we bring unparalleled expertise and creativity to
+                every project. Backed by the most experienced team and
+                state-of-the-art stage, sound, and lighting equipment, we ensure
+                that your event leaves a lasting impression.
+              </p>
+            </div>
+            <a
+              target="_blank"
+              href="https://drive.google.com/file/d/1KZMQtDTliBUFsP0BJlVyUfrtpz4pdrzV/view?usp=sharing"
+              className="rounded-full  border-2 border-red-500 bg-white px-6 py-2 text-red-500 transition-colors hover:bg-red-500 hover:text-white"
+            >
               View More
-            </button>
+            </a>
           </div>
         </div>
 
