@@ -44,10 +44,10 @@ export default function Sidebar() {
         </div>
 
         {/* Price Range */}
-        <div className="bg-red-300">
+        <div>
           <div className="mb-4 flex justify-between">
             <h2 className="font-medium">Price Range</h2>
-            <button className="flex items-center gap-1 text-sm text-red-500">
+            <button className="flex items-center gap-1 text-sm text-gray-500">
               Monthly
               <ChevronDown className="h-4 w-4" />
             </button>

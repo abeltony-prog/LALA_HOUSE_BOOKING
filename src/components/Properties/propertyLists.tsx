@@ -55,6 +55,47 @@ export default function PropertyList() {
             baths: "3 baths",
             area: "120 m²",
           },
+          {
+            title: "Luxury Penthouse",
+            location: "Eixample, Barcelona",
+            price: "7,900",
+            image:
+              "https://img.jamesedition.com/listing_images/2023/11/01/14/48/19/8245a78e-4e0e-4a16-b338-8d80772120a0/je/507x312xc.jpg",
+            beds: "3 bedrooms",
+            baths: "3 baths",
+            area: "120 m²",
+          },
+          {
+            title: "Luxury Penthouse",
+            location: "Eixample, Barcelona",
+            price: "7,900",
+            image:
+              "https://img.jamesedition.com/listing_images/2023/11/01/14/48/19/8245a78e-4e0e-4a16-b338-8d80772120a0/je/507x312xc.jpg",
+            beds: "3 bedrooms",
+            baths: "3 baths",
+            area: "120 m²",
+          },
+          {
+            title: "Luxury Penthouse",
+            location: "Eixample, Barcelona",
+            price: "7,900",
+            image:
+              "https://img.jamesedition.com/listing_images/2023/11/01/14/48/19/8245a78e-4e0e-4a16-b338-8d80772120a0/je/507x312xc.jpg",
+            beds: "3 bedrooms",
+            baths: "3 baths",
+            area: "120 m²",
+          },
+          {
+            title: "Luxury Penthouse",
+            location: "Eixample, Barcelona",
+            price: "7,900",
+            image:
+              "https://img.jamesedition.com/listing_images/2023/11/01/14/48/19/8245a78e-4e0e-4a16-b338-8d80772120a0/je/507x312xc.jpg",
+            beds: "3 bedrooms",
+            baths: "3 baths",
+            area: "120 m²",
+          },
+          
         ].map((property) => (
           <div
             key={property.title}
