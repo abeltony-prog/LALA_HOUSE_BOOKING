@@ -12,8 +12,7 @@ export default function AboutUsPage() {
     {
       name: "Emery KWIZERA",
       role: "Chief Finance Officer",
-      image:
-        "https://www.planetevents.rw/assets/img/team/Team1.png",
+      image: "https://www.planetevents.rw/assets/img/team/Team1.png",
     },
   ];
   return (
