@@ -21,7 +21,7 @@ export default function Property({ property }: any) {
 
         <div className="space-y-4 p-4">
           <div>
-            <h3 className="font-medium">{property.title}</h3>
+            <h5 className="font-medium">{property.title}</h5>
             <p className="text-sm text-gray-500">{property.location}</p>
           </div>
           <div className="flex items-center justify-between">

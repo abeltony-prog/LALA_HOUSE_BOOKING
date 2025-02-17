@@ -26,7 +26,7 @@ export default function PropertyDrawer({ property }: any) {
               className="h-10 w-10 rounded-full border"
             />
             <div className="ml-3">
-              <h4 className="text-sm font-semibold">{property.hostName}</h4>
+              <h5 className="text-sm font-semibold">{property.hostName}</h5>
               <p className="text-xs text-gray-600">Host</p>
             </div>
           </div>
