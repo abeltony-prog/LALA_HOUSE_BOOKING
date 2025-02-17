@@ -1,8 +1,13 @@
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import { Router, useRouter } from "next/router";
 
 export default function Sidebar() {
+  const router =  useRouter()
+  const RedictURL = ()=>{
+    router.push('/signin')
+  }
   return (
     <>
  {/* Sidebar */}
@@ -62,31 +67,8 @@ export default function Sidebar() {
     </div>
   </div>
 
-  {/* Price Range
-  <div>
-    <div className="mb-4 flex justify-between">
-      <h5 className="font-medium">Price Range</h5>
-      <button className="flex items-center gap-1 text-sm text-gray-500">
-        Monthly
-        <ChevronDown className="h-4 w-4" />
-      </button>
-    </div>
-    <div className="space-y-4">
-      <div className="relative h-12 rounded-lg bg-gray-100">
-        <div className="absolute left-[15%] right-[15%] top-1/2 h-1 rounded bg-black" />
-        <div className="absolute left-[15%] top-1/2 h-4 w-4 -translate-y-1/2 rounded-full bg-black" />
-        <div className="absolute right-[15%] top-1/2 h-4 w-4 -translate-y-1/2 rounded-full bg-black" />
-      </div>
-      <div className="flex justify-between text-sm">
-        <span>$ 900</span>
-        <span>$ 5500</span>
-      </div>
-    </div>
-  </div> */}
-
-
   <div className="mt-auto">
-    <button className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800">
+    <button onClick={RedictURL} className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800">
       Sign In
     </button>
   </div>
