@@ -9,10 +9,10 @@ export default function Signup() {
   const router = useRouter();
 
   const { mutate: createUser } = useAddUsersMutation({
-    onSuccess: () => {
+    onSuccess(){
       router.push("/");
     },
-    onError: (error) => {
+    onError (error: any){
       console.error("Mutation Error:", error);
     },
   });
