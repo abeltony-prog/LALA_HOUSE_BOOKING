@@ -108,7 +108,7 @@ export default function Signin() {
         {/* Login Link */}
         <div className="text-center">
           <p className="text-sm text-gray-500">
-            Already don't have an account?{" "}
+            Already don {`&lsquo`} t have an account?{" "}
             <Link href={"/signup"} passHref>
               <span className="cursor-pointer text-black hover:underline">
                 Register
