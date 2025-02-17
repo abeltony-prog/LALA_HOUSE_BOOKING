@@ -3,9 +3,9 @@ import ParentTheme from "@components/Theme/parentTheme";
 import React from "react";
 
 export default function Home() {
-  return( 
+  return (
     <ParentTheme>
-
-  <PropertyList />
-  </ParentTheme>)
+      <PropertyList />
+    </ParentTheme>
+  );
 }
