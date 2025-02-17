@@ -11,8 +11,8 @@ generates:
       - "typescript-operations"
       - "typescript-react-query"
     config:
-      exposeQueryKeys: true  
-      exposeMutationKeys: true  
+      exposeQueryKeys: true
+      exposeMutationKeys: true
       fetcher:
         endpoint: ${HASURA_GRAPHQL_URL}
         fetchParams:

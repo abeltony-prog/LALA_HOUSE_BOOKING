@@ -9,10 +9,10 @@ export default function Signup() {
   const router = useRouter();
 
   const { mutate: createUser } = useAddUsersMutation({
-    onSuccess(){
+    onSuccess() {
       router.push("/");
     },
-    onError (error: any){
+    onError(error: any) {
       console.error("Mutation Error:", error);
     },
   });
@@ -35,11 +35,11 @@ export default function Signup() {
   const hasNumber = /\d/.test(NewUserInputs.password);
   const hasMinLength = NewUserInputs.password.length >= 8;
 
-  const RegisterUserAccount = async (e : any) => {
-    e.preventDefault()
+  const RegisterUserAccount = async (e: any) => {
+    e.preventDefault();
     const hashedPassword = await bcrypt.hash(NewUserInputs.password, 10);
     try {
-        createUser({
+      createUser({
         name: NewUserInputs.name,
         gender: NewUserInputs.gender,
         email: NewUserInputs.email,
@@ -49,7 +49,7 @@ export default function Signup() {
     } catch (error) {
       console.error("Registration Error:", error);
     }
-  }
+  };
   return (
     <form onSubmit={RegisterUserAccount} className="space-y-6">
       <div className="space-y-4">

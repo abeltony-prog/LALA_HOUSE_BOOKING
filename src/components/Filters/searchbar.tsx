@@ -9,7 +9,7 @@ export default function SearchProperties() {
         <input
           type="text"
           placeholder="Park|Guel, Barcelona"
-          className="outline-none w-full text-lg"
+          className="w-full text-lg outline-none"
         />
       </div>
       <button className="rounded-full p-2 hover:bg-gray-100">
