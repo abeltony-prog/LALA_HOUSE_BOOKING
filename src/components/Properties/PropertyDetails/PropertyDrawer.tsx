@@ -1,19 +1,25 @@
-import { BedDouble, ShowerHead, Star, Users, UtensilsCrossed } from "lucide-react";
+import {
+  BedDouble,
+  ShowerHead,
+  Star,
+  Users,
+  UtensilsCrossed,
+} from "lucide-react";
 import React from "react";
 import { Drawer, Placeholder } from "rsuite";
 
-export default function PropertyDrawer({property} : any){
-    return(
-        <>
-    <Drawer.Body>
+export default function PropertyDrawer({ property }: any) {
+  return (
+    <>
+      <Drawer.Body>
         {/* Header Section with Images & Host Info */}
         <div className="relative">
           <img
             src={property.image || "/placeholder.svg"}
             alt={property.title}
-            className="h-[250px] w-full object-cover rounded-t-lg"
+            className="h-[250px] w-full rounded-t-lg object-cover"
           />
-          <div className="absolute top-4 left-4 flex items-center bg-white/80 p-2 rounded-lg shadow">
+          <div className="absolute top-4 left-4 flex items-center rounded-lg bg-white/80 p-2 shadow">
             <img
               src={property.hostImage || "/default-avatar.png"}
               alt="Host"
@@ -27,12 +33,15 @@ export default function PropertyDrawer({property} : any){
         </div>
 
         {/* Property Details */}
-        <div className="p-6 space-y-4">
+        <div className="space-y-4 p-6">
           {/* Title, Location, and Price */}
           <div>
             <h2 className="text-2xl font-semibold">{property.title}</h2>
             <p className="text-sm text-gray-500">{property.location}</p>
-            <p className="text-lg font-semibold mt-2">${property.price} <span className="text-sm text-gray-500">/ month</span></p>
+            <p className="mt-2 text-lg font-semibold">
+              ${property.price}{" "}
+              <span className="text-sm text-gray-500">/ month</span>
+            </p>
           </div>
 
           {/* Description */}
@@ -49,11 +58,15 @@ export default function PropertyDrawer({property} : any){
             </div>
             <div className="flex items-center gap-2">
               <Users className="h-5 w-5 text-gray-700" />
-              <span className="text-sm">Accommodates {property.capacity} people</span>
+              <span className="text-sm">
+                Accommodates {property.capacity} people
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <UtensilsCrossed className="h-5 w-5 text-gray-700" />
-              <span className="text-sm">{property.kitchen ? "Kitchen Available" : "No Kitchen"}</span>
+              <span className="text-sm">
+                {property.kitchen ? "Kitchen Available" : "No Kitchen"}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <ShowerHead className="h-5 w-5 text-gray-700" />
@@ -64,19 +77,20 @@ export default function PropertyDrawer({property} : any){
           {/* Reviews Section */}
           <div>
             <h3 className="text-lg font-semibold">Reviews</h3>
-            <div className="space-y-4 grid grid-cols-2 gap-4 mt-2">
-              {[{
-                userName: "dkdkds",
-                rating:5,
-                comment: "the house is greate and care"
-              },
-              {
-                userName: "James",
-                rating:4,
-                comment: "the house is greate and care"
-              }
-            ].map((review: any, index: number) => (
-                <div key={index} className="p-3 border rounded-lg bg-gray-50">
+            <div className="mt-2 grid grid-cols-2 gap-4 space-y-4">
+              {[
+                {
+                  userName: "dkdkds",
+                  rating: 5,
+                  comment: "the house is greate and care",
+                },
+                {
+                  userName: "James",
+                  rating: 4,
+                  comment: "the house is greate and care",
+                },
+              ].map((review: any, index: number) => (
+                <div key={index} className="rounded-lg border bg-gray-50 p-3">
                   <div className="flex items-center gap-2">
                     <img
                       src={review.userImage || "/default-avatar.png"}
@@ -92,7 +106,7 @@ export default function PropertyDrawer({property} : any){
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 mt-2">{review.comment}</p>
+                  <p className="mt-2 text-sm text-gray-600">{review.comment}</p>
                 </div>
               ))}
             </div>
@@ -100,12 +114,12 @@ export default function PropertyDrawer({property} : any){
         </div>
 
         {/* Booking Button */}
-        <div className="p-4 border-t bg-white">
-          <button className="w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800">
+        <div className="border-t bg-white p-4">
+          <button className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800">
             Book Now
           </button>
         </div>
       </Drawer.Body>
-        </>
-    )
+    </>
+  );
 }

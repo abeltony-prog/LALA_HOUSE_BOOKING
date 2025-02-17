@@ -96,9 +96,8 @@ export default function PropertyList() {
             baths: "3 baths",
             area: "120 m²",
           },
-          
         ].map((property) => (
-       <Property property={property} />
+          <Property property={property} />
         ))}
       </div>
     </div>
