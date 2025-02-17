@@ -7,7 +7,6 @@ export default function Sidebar() {
     <>
  {/* Sidebar */}
 <div className="w-80 flex flex-col border-r p-6 overflow-y-auto">
-  {/* Rent/Buy Toggle */}
   <div className="flex rounded-lg bg-gray-100 p-1">
     <button className="flex-1 rounded-md bg-black py-2 px-4 text-white">
       Rent
@@ -41,7 +40,7 @@ export default function Sidebar() {
     </div>
   </div>
 
-  {/* Price Range */}
+  {/* Price Range
   <div>
     <div className="mb-4 flex justify-between">
       <h5 className="font-medium">Price Range</h5>
@@ -61,9 +60,9 @@ export default function Sidebar() {
         <span>$ 5500</span>
       </div>
     </div>
-  </div>
+  </div> */}
 
-  {/* Sign In Button (Fixed at the Bottom) */}
+
   <div className="mt-auto">
     <button className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800">
       Sign In
