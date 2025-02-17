@@ -35,7 +35,8 @@ export default function Signup() {
   const hasNumber = /\d/.test(NewUserInputs.password);
   const hasMinLength = NewUserInputs.password.length >= 8;
 
-  const RegisterUserAccount = async () => {
+  const RegisterUserAccount = async (e : any) => {
+    e.preventDefault()
     const hashedPassword = await bcrypt.hash(NewUserInputs.password, 10);
     try {
         createUser({
