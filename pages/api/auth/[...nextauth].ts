@@ -13,16 +13,16 @@ interface UserSession {
 
 const query = {
   getUserByEmail: gql`
-  query getUserByEmail($email: String!) {
-    users(where: {email: {_eq: $email}}) {
-      email
-      gender
-      password
-      role
-      UID
-      name
+    query getUserByEmail($email: String!) {
+      users(where: { email: { _eq: $email } }) {
+        email
+        gender
+        password
+        role
+        UID
+        name
+      }
     }
-  }  
   `,
 };
 

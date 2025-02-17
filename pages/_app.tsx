@@ -9,7 +9,10 @@ import { Session } from "next-auth";
 
 const queryCache = new QueryCache();
 
-export default function App({ Component, pageProps }: AppProps & { pageProps: { session?: Session } }) {
+export default function App({
+  Component,
+  pageProps,
+}: AppProps & { pageProps: { session?: Session } }) {
   const queryClient = new QueryClient({
     queryCache,
   });

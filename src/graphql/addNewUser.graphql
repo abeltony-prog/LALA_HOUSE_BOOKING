@@ -1,5 +1,19 @@
-mutation AddNewUser($role: String = "", $password: String = "", $name: String = "", $gender: String = "", $email: String = "") {
-  insert_users(objects: {role: $role, password: $password, name: $name, gender: $gender, email: $email}) {
+mutation AddNewUser(
+  $role: String = ""
+  $password: String = ""
+  $name: String = ""
+  $gender: String = ""
+  $email: String = ""
+) {
+  insert_users(
+    objects: {
+      role: $role
+      password: $password
+      name: $name
+      gender: $gender
+      email: $email
+    }
+  ) {
     affected_rows
   }
 }

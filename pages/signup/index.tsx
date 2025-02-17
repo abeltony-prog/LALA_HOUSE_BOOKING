@@ -2,7 +2,6 @@ import Signup from "@components/Theme/Signup";
 import React from "react";
 
 export default function ContactUsPage() {
-
   return (
     <div className="flex min-h-screen">
       {/* Left Section */}
@@ -21,10 +20,11 @@ export default function ContactUsPage() {
           </div>
           <div className="mt-auto">
             <h1 className="mt-40 font-mono text-3xl">
-              Discover the Cozy 
+              Discover the Cozy
               <br />
-              Resourts and house<span className="mx-2 inline-block h-6 w-6">🏠</span>
-             of your choice
+              Resourts and house
+              <span className="mx-2 inline-block h-6 w-6">🏠</span>
+              of your choice
             </h1>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function ContactUsPage() {
             <h2 className="text-3xl font-semibold">Join Now</h2>
           </div>
 
-   <Signup />
+          <Signup />
         </div>
       </div>
     </div>
