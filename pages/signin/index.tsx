@@ -1,4 +1,5 @@
 import { EyeOff, Eye } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function ServicesPage() {
@@ -91,10 +92,13 @@ export default function ServicesPage() {
             {/* Login Link */}
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                Already have an account?{" "}
-                <a href="#" className="text-black hover:underline">
+                Already don't have an account?{" "}
+                <Link href={'/signup'} passHref>
+                <span className="text-black cursor-pointer hover:underline">
                   Register
-                </a>
+                </span>
+                </Link>
+        
               </p>
             </div>
 

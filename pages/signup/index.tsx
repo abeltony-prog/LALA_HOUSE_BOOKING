@@ -1,4 +1,5 @@
 import { EyeOff, Eye } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function ContactUsPage() {
@@ -25,10 +26,10 @@ export default function ContactUsPage() {
           </div>
           <div className="mt-auto">
             <h1 className="mt-40 font-mono text-3xl">
-              Discover the Future of Finance
+              Discover the Cozy 
               <br />
-              from Mars <span className="mx-2 inline-block h-6 w-6">🚀</span> to
-              Your Wallet
+              Resourts and house<span className="mx-2 inline-block h-6 w-6">🏠</span>
+             of your choice
             </h1>
           </div>
         </div>
@@ -167,9 +168,11 @@ export default function ContactUsPage() {
             <div className="text-center">
               <p className="text-sm text-gray-500">
                 Already have an account?{" "}
-                <a href="#" className="text-black hover:underline">
-                  Log in
-                </a>
+                <Link href={'/signin'} passHref>
+                <span className="text-black cursor-pointer hover:underline">
+                  Login
+                </span>
+                </Link>
               </p>
             </div>
           </form>
