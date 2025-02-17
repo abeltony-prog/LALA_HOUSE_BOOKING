@@ -22,10 +22,10 @@ export default function ServicesPage() {
           </div>
           <div className="mt-auto">
             <h1 className="mt-40 font-mono text-3xl">
-              Discover the Future of Finance
+              Discover the Cozy 
               <br />
-              from Mars <span className="mx-2 inline-block h-6 w-6">🚀</span> to
-              Your Wallet
+              Resourts and house<span className="mx-2 inline-block h-6 w-6">🏠</span>
+             of your choice
             </h1>
           </div>
         </div>
