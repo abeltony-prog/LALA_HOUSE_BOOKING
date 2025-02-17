@@ -1,5 +1,6 @@
 import React from "react";
-import { Drawer, ButtonToolbar, Button, Placeholder } from 'rsuite';
+import { Drawer} from 'rsuite';
+import PropertyDrawer from "./PropertyDetails/PropertyDrawer";
 
 export default function Property({property} : any){
     const [open, setOpen] = React.useState(false);
@@ -7,7 +8,7 @@ export default function Property({property} : any){
         <><div
             onClick={() => setOpen(true)}
             key={property.title}
-            className="overflow-hidden rounded-xl border border-gray-200 transition-shadow hover:shadow-lg"
+            className="overflow-hidden rounded-xl border border-gray-200 cursor-pointer transition-shadow hover:shadow-lg"
         >
             <img
                 alt={property.title}
@@ -35,9 +36,7 @@ export default function Property({property} : any){
             </div>
 
         </div><Drawer open={open} onClose={() => setOpen(false)}>
-                <Drawer.Body>
-                    <Placeholder.Paragraph />
-                </Drawer.Body>
+              <PropertyDrawer property={property} />
             </Drawer></>
     )
 }
