@@ -1,11 +1,22 @@
 import bcrypt from "bcryptjs";
 import { EyeOff, Eye } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useAddNewUserMutation } from "src/graphql/generated/graphql";
+import { useAddUsersMutation } from "src/graphql/generated/graphql";
 
 export default function Signup() {
-  const { mutate: addUser } = useAddNewUserMutation();
+  const router = useRouter();
+
+  const { mutate: createUser } = useAddUsersMutation({
+    onSuccess: () => {
+      router.push("/");
+    },
+    onError: (error) => {
+      console.error("Mutation Error:", error);
+    },
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const [NewUserInputs, setNewUserInputs] = useState({
     name: "",
@@ -21,23 +32,23 @@ export default function Signup() {
     });
   };
 
-  const hasNumber = /\d/.test(NewUserInputs?.password);
-  const hasMinLength = NewUserInputs?.password.length >= 8;
+  const hasNumber = /\d/.test(NewUserInputs.password);
+  const hasMinLength = NewUserInputs.password.length >= 8;
 
   const RegisterUserAccount = async () => {
-    const hashedPassword = await bcrypt.hash(NewUserInputs?.password, 10);
+    const hashedPassword = await bcrypt.hash(NewUserInputs.password, 10);
     try {
-      addUser({
-        name: NewUserInputs?.name,
-        gender: NewUserInputs?.gender,
-        email: NewUserInputs?.email,
+        createUser({
+        name: NewUserInputs.name,
+        gender: NewUserInputs.gender,
+        email: NewUserInputs.email,
         role: "Renter",
         password: hashedPassword,
       });
     } catch (error) {
-      console.log(error);
+      console.error("Registration Error:", error);
     }
-  };
+  }
   return (
     <form onSubmit={RegisterUserAccount} className="space-y-6">
       <div className="space-y-4">
@@ -70,7 +81,6 @@ export default function Signup() {
           </select>
         </div>
 
-        {/* Email Input */}
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-medium">
             Email*
@@ -85,7 +95,6 @@ export default function Signup() {
           />
         </div>
 
-        {/* Password Input */}
         <div>
           <label htmlFor="password" className="mb-2 block text-sm font-medium">
             Password*
@@ -108,7 +117,6 @@ export default function Signup() {
             </button>
           </div>
 
-          {/* Password Requirements */}
           <div className="mt-2 space-y-2">
             <p className="text-sm text-gray-500">
               Your password need to include:
@@ -141,7 +149,6 @@ export default function Signup() {
         </div>
       </div>
 
-      {/* Terms Checkbox */}
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -160,7 +167,6 @@ export default function Signup() {
         </label>
       </div>
 
-      {/* Sign Up Button */}
       <button
         type="submit"
         className="w-full rounded-lg bg-black py-2 px-4 text-white transition-colors hover:bg-black/90"
@@ -168,7 +174,6 @@ export default function Signup() {
         SIGN ME UP!
       </button>
 
-      {/* Login Link */}
       <div className="text-center">
         <p className="text-sm text-gray-500">
           Already have an account?{" "}

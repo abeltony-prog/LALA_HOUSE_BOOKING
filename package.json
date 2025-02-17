@@ -9,6 +9,7 @@
     "codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
+    "@tanstack/query-core": "^5.66.3",
     "@tanstack/react-query": "^5.66.3",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^3.0.0",

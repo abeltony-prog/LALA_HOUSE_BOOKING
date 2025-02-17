@@ -1,4 +1,4 @@
-mutation AddNewUser(
+mutation addUsers(
   $role: String = ""
   $password: String = ""
   $name: String = ""

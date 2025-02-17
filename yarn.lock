@@ -1764,7 +1764,7 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/query-core@5.66.3":
+"@tanstack/query-core@5.66.3", "@tanstack/query-core@^5.66.3":
   version "5.66.3"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.66.3.tgz#3ab0daa49477cfae38c45c02b8dc0bc39ec9cc5d"
   integrity sha512-+2iDxH7UFdtwcry766aJszGmbByQDIzTltJ3oQAZF9bhCxHCIN3yDwHa6qDCZxcpMGvUphCRx/RYJvLbM8mucQ==
