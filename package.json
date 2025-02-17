@@ -9,7 +9,9 @@
     "codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.3",
     "bcrypt": "^5.1.0",
+    "bcryptjs": "^3.0.0",
     "draft-js": "^0.11.7",
     "exceljs": "^4.4.0",
     "firebase": "^10.3.1",
@@ -18,7 +20,7 @@
     "lucide-react": "^0.475.0",
     "moment": "^2.30.1",
     "next": "^12.1.6",
-    "next-auth": "^4.22.1",
+    "next-auth": "^4.24.11",
     "next-seo": "^5.15.0",
     "primereact": "^10.7.0",
     "puppeteer": "^23.2.0",
@@ -35,8 +37,10 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "^4.0.3",
     "@graphql-codegen/typescript": "^2.4.11",
     "@graphql-codegen/typescript-operations": "2.4.0",
+    "@graphql-codegen/typescript-react-query": "^6.1.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.56.0",
     "eslint-config-next": "^12.1.6",
