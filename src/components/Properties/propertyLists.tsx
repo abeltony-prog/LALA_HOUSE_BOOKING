@@ -23,7 +23,20 @@ export default function PropertyList() {
               area: "50 m²",
             },
           ]
-        : LoggedUser?.userInfo?.hosts[0]?.properties;
+        : LoggedUser?.userInfo?.hosts[0]?.properties?.map((pro : any)=>{
+          return{
+            name:pro?.name,
+            description: pro.description,
+            cost: pro?.cost,
+            image:
+              "https://m.economictimes.com/thumb/height-450,width-600,imgsize-22382,msid-111780228/which-mansion-tops-the-list-of-the-worlds-most-expensive-houses.jpg",
+            beds: pro?.beds,
+            bath: pro?.bath,
+            per: pro?.per,
+            amenities: pro?.amenities,
+            host: LoggedUser?.userInfo?.name
+          }
+        })
   } catch (error) {
     console.log(error);
   }
@@ -37,8 +50,8 @@ export default function PropertyList() {
 
       {/* Property Grid - 4 per row */}
       <div className="grid grid-cols-4 gap-6">
-        {properties?.map((property: { title: any }) => (
-          <Property key={property?.title} property={property} />
+        {properties?.map((property: any) => (
+          <Property User={LoggedUser?.userInfo} key={property?.name} property={property} />
         ))}
       </div>
     </div>
