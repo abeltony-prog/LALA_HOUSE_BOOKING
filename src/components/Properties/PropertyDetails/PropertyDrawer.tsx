@@ -48,7 +48,7 @@ export default function PropertyDrawer({ property, User }: any) {
                 <h2 className="text-2xl font-semibold">{property.title}</h2>
                 <p className="text-sm text-gray-500">{property.location}</p>
                 <p className="mt-2 text-lg font-semibold">
-                  ${property.price}{" "}
+                  ${property.cost}{" "}
                   <span className="text-sm text-gray-500">/ month</span>
                 </p>
               </div>

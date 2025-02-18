@@ -14,14 +14,14 @@ export default function PropertyList() {
       LoggedUser?.userInfo?.role === "Renter"
         ? [
             {
-              title: "Cozy Central Apartment",
-              location: "El Camp d'En Grassot i Gracia Nova, Barcelona",
-              price: "5,300",
+              name: "Cozy Central Apartment",
+              description: "El Camp d'En Grassot i Gracia Nova, Barcelona",
+              cost: "5,300",
               image:
                 "https://m.economictimes.com/thumb/height-450,width-600,imgsize-22382,msid-111780228/which-mansion-tops-the-list-of-the-worlds-most-expensive-houses.jpg",
               beds: "1 bedroom",
-              baths: "1 bath",
-              area: "50 m²",
+              bath: "1 bath",
+              per: "50 m²",
             },
           ]
         : LoggedUser?.userInfo?.hosts[0]?.properties?.map((pro: any) => {
