@@ -12,9 +12,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: session, status } = useSession();
   const {data:userDetails} = useGetUsersQuery({
     email: session?.user?.email
-  })
-  console.log(userDetails);
-  
+  })  
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
