@@ -1,5 +1,5 @@
 query getUsers($email: String = "") {
-  users(where: {email: {_eq: $email}}) {
+  users(where: { email: { _eq: $email } }) {
     UID
     email
     gender

@@ -11,9 +11,9 @@ interface iProps {
 
 const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: session, status } = useSession();
-  const {data:userDetails , refetch} = useGetUsersQuery({
-    email: session?.user?.email
-  })  
+  const { data: userDetails, refetch } = useGetUsersQuery({
+    email: session?.user?.email,
+  });
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
@@ -24,15 +24,17 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
       <div className="flex flex-1">
         <>
           {" "}
-          <Sidebar refetch={refetch} SessionDetails={{
-            details : session?.user,
-            status: status,
-            User:userDetails?.users[0]
-          }} />
-          <MyProvider value={{userInfo : userDetails?.users[0]}}>
-          {children}
+          <Sidebar
+            refetch={refetch}
+            SessionDetails={{
+              details: session?.user,
+              status: status,
+              User: userDetails?.users[0],
+            }}
+          />
+          <MyProvider value={{ userInfo: userDetails?.users[0] }}>
+            {children}
           </MyProvider>
-        
         </>
       </div>
     </div>

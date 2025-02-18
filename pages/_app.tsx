@@ -38,11 +38,11 @@ export default function App({
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={pageProps.session}>
-          {loading && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
-              <PuffLoader color="#000000" />
-            </div>
-          )}
+        {loading && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
+            <PuffLoader color="#000000" />
+          </div>
+        )}
         <Component {...pageProps} />
       </SessionProvider>
     </QueryClientProvider>

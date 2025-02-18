@@ -6,24 +6,27 @@ import { userAuth } from "context/auth";
 export default function PropertyList() {
   const LoggedUser = useContext(userAuth) as unknown as any;
 
-let properties
-  try{
-     properties = LoggedUser?.userInfo?.role === "Renter" ? [
-      {
-        title: "Cozy Central Apartment",
-        location: "El Camp d'En Grassot i Gracia Nova, Barcelona",
-        price: "5,300",
-        image:
-          "https://m.economictimes.com/thumb/height-450,width-600,imgsize-22382,msid-111780228/which-mansion-tops-the-list-of-the-worlds-most-expensive-houses.jpg",
-        beds: "1 bedroom",
-        baths: "1 bath",
-        area: "50 m²",
-      },
-    ] : LoggedUser?.userInfo?.hosts[0]?.properties
-  }catch(error){
+  let properties;
+  try {
+    properties =
+      LoggedUser?.userInfo?.role === "Renter"
+        ? [
+            {
+              title: "Cozy Central Apartment",
+              location: "El Camp d'En Grassot i Gracia Nova, Barcelona",
+              price: "5,300",
+              image:
+                "https://m.economictimes.com/thumb/height-450,width-600,imgsize-22382,msid-111780228/which-mansion-tops-the-list-of-the-worlds-most-expensive-houses.jpg",
+              beds: "1 bedroom",
+              baths: "1 bath",
+              area: "50 m²",
+            },
+          ]
+        : LoggedUser?.userInfo?.hosts[0]?.properties;
+  } catch (error) {
     console.log(error);
   }
-  
+
   return (
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
@@ -36,8 +39,8 @@ let properties
 
       {/* Property Grid - 4 per row */}
       <div className="grid grid-cols-4 gap-6">
-        {properties?.map((property: { title: any; }) => (
-          <Property  key={property?.title} property={property} />
+        {properties?.map((property: { title: any }) => (
+          <Property key={property?.title} property={property} />
         ))}
       </div>
     </div>

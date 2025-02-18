@@ -8,7 +8,7 @@ import { useAddUsersMutation } from "src/graphql/generated/graphql";
 export default function Signup() {
   const router = useRouter();
 
-  const { mutate: createUser ,isLoading} = useAddUsersMutation({
+  const { mutate: createUser, isLoading } = useAddUsersMutation({
     onSuccess() {
       router.push("/signin");
     },
@@ -172,10 +172,7 @@ export default function Signup() {
         type="submit"
         className="w-full rounded-lg bg-black py-2 px-4 text-white transition-colors hover:bg-black/90"
       >
-        {
-            isLoading ? "SIGNING UP...." : "SIGN ME UP!"
-        }
-       
+        {isLoading ? "SIGNING UP...." : "SIGN ME UP!"}
       </button>
 
       <div className="text-center">
