@@ -11,7 +11,7 @@ export default function Sidebar({ SessionDetails, refetch }: any) {
   const RedictURL = () => {
     router.push("/signin");
   };
-  console.log(SessionDetails?.User);
+  // console.log(SessionDetails?.User);
 
   if (SessionDetails?.User?.role === "Renter") {
     userRole = "Host";
@@ -172,7 +172,7 @@ export default function Sidebar({ SessionDetails, refetch }: any) {
           ) : (
             <button
               onClick={RedictURL}
-              className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800"
+              className="w-full  bg-black py-3 text-white transition hover:bg-gray-800"
             >
               Sign In
             </button>

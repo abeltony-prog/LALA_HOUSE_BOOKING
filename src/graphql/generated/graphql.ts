@@ -31,7 +31,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  json: any;
+  jsonb: any;
   timestamptz: any;
   uuid: any;
 };
@@ -331,17 +331,32 @@ export type Hosts_Updates = {
   where: Hosts_Bool_Exp;
 };
 
-/** Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'. */
-export type Json_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['json']>;
-  _gt?: InputMaybe<Scalars['json']>;
-  _gte?: InputMaybe<Scalars['json']>;
-  _in?: InputMaybe<Array<Scalars['json']>>;
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
+  /** is the column contained in the given json value */
+  _contained_in?: InputMaybe<Scalars['jsonb']>;
+  /** does the column contain the given json value at the top level */
+  _contains?: InputMaybe<Scalars['jsonb']>;
+  _eq?: InputMaybe<Scalars['jsonb']>;
+  _gt?: InputMaybe<Scalars['jsonb']>;
+  _gte?: InputMaybe<Scalars['jsonb']>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: InputMaybe<Scalars['String']>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: InputMaybe<Array<Scalars['String']>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: InputMaybe<Array<Scalars['String']>>;
+  _in?: InputMaybe<Array<Scalars['jsonb']>>;
   _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['json']>;
-  _lte?: InputMaybe<Scalars['json']>;
-  _neq?: InputMaybe<Scalars['json']>;
-  _nin?: InputMaybe<Array<Scalars['json']>>;
+  _lt?: InputMaybe<Scalars['jsonb']>;
+  _lte?: InputMaybe<Scalars['jsonb']>;
+  _neq?: InputMaybe<Scalars['jsonb']>;
+  _nin?: InputMaybe<Array<Scalars['jsonb']>>;
 };
 
 /** mutation root */
@@ -492,6 +507,11 @@ export type Mutation_RootUpdate_Hosts_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_PropertiesArgs = {
+  _append?: InputMaybe<Properties_Append_Input>;
+  _delete_at_path?: InputMaybe<Properties_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Properties_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Properties_Delete_Key_Input>;
+  _prepend?: InputMaybe<Properties_Prepend_Input>;
   _set?: InputMaybe<Properties_Set_Input>;
   where: Properties_Bool_Exp;
 };
@@ -499,6 +519,11 @@ export type Mutation_RootUpdate_PropertiesArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Properties_By_PkArgs = {
+  _append?: InputMaybe<Properties_Append_Input>;
+  _delete_at_path?: InputMaybe<Properties_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Properties_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Properties_Delete_Key_Input>;
+  _prepend?: InputMaybe<Properties_Prepend_Input>;
   _set?: InputMaybe<Properties_Set_Input>;
   pk_columns: Properties_Pk_Columns_Input;
 };
@@ -549,7 +574,7 @@ export enum Order_By {
 export type Properties = {
   __typename?: 'properties';
   PID: Scalars['uuid'];
-  amenities?: Maybe<Scalars['json']>;
+  amenities?: Maybe<Scalars['jsonb']>;
   bath: Scalars['String'];
   beds: Scalars['String'];
   cost: Scalars['String'];
@@ -557,7 +582,7 @@ export type Properties = {
   host_id: Scalars['uuid'];
   /** An object relationship */
   hosts: Hosts;
-  image?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['jsonb']>;
   listed_on: Scalars['timestamptz'];
   name: Scalars['String'];
   per: Scalars['String'];
@@ -567,6 +592,12 @@ export type Properties = {
 
 /** columns and relationships of "properties" */
 export type PropertiesAmenitiesArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "properties" */
+export type PropertiesImageArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
 
@@ -610,6 +641,12 @@ export type Properties_Aggregate_Order_By = {
   min?: InputMaybe<Properties_Min_Order_By>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Properties_Append_Input = {
+  amenities?: InputMaybe<Scalars['jsonb']>;
+  image?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** input type for inserting array relation for remote table "properties" */
 export type Properties_Arr_Rel_Insert_Input = {
   data: Array<Properties_Insert_Input>;
@@ -623,14 +660,14 @@ export type Properties_Bool_Exp = {
   _and?: InputMaybe<Array<Properties_Bool_Exp>>;
   _not?: InputMaybe<Properties_Bool_Exp>;
   _or?: InputMaybe<Array<Properties_Bool_Exp>>;
-  amenities?: InputMaybe<Json_Comparison_Exp>;
+  amenities?: InputMaybe<Jsonb_Comparison_Exp>;
   bath?: InputMaybe<String_Comparison_Exp>;
   beds?: InputMaybe<String_Comparison_Exp>;
   cost?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   host_id?: InputMaybe<Uuid_Comparison_Exp>;
   hosts?: InputMaybe<Hosts_Bool_Exp>;
-  image?: InputMaybe<String_Comparison_Exp>;
+  image?: InputMaybe<Jsonb_Comparison_Exp>;
   listed_on?: InputMaybe<Timestamptz_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   per?: InputMaybe<String_Comparison_Exp>;
@@ -643,17 +680,35 @@ export enum Properties_Constraint {
   PropertiesPkey = 'properties_pkey'
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Properties_Delete_At_Path_Input = {
+  amenities?: InputMaybe<Array<Scalars['String']>>;
+  image?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Properties_Delete_Elem_Input = {
+  amenities?: InputMaybe<Scalars['Int']>;
+  image?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Properties_Delete_Key_Input = {
+  amenities?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+};
+
 /** input type for inserting data into table "properties" */
 export type Properties_Insert_Input = {
   PID?: InputMaybe<Scalars['uuid']>;
-  amenities?: InputMaybe<Scalars['json']>;
+  amenities?: InputMaybe<Scalars['jsonb']>;
   bath?: InputMaybe<Scalars['String']>;
   beds?: InputMaybe<Scalars['String']>;
   cost?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   host_id?: InputMaybe<Scalars['uuid']>;
   hosts?: InputMaybe<Hosts_Obj_Rel_Insert_Input>;
-  image?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['jsonb']>;
   listed_on?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
   per?: InputMaybe<Scalars['String']>;
@@ -669,7 +724,6 @@ export type Properties_Max_Fields = {
   cost?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   host_id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['String']>;
   listed_on?: Maybe<Scalars['timestamptz']>;
   name?: Maybe<Scalars['String']>;
   per?: Maybe<Scalars['String']>;
@@ -684,7 +738,6 @@ export type Properties_Max_Order_By = {
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
-  image?: InputMaybe<Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -700,7 +753,6 @@ export type Properties_Min_Fields = {
   cost?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   host_id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['String']>;
   listed_on?: Maybe<Scalars['timestamptz']>;
   name?: Maybe<Scalars['String']>;
   per?: Maybe<Scalars['String']>;
@@ -715,7 +767,6 @@ export type Properties_Min_Order_By = {
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
-  image?: InputMaybe<Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -760,6 +811,12 @@ export type Properties_Pk_Columns_Input = {
   PID: Scalars['uuid'];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Properties_Prepend_Input = {
+  amenities?: InputMaybe<Scalars['jsonb']>;
+  image?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** select columns of table "properties" */
 export enum Properties_Select_Column {
   /** column name */
@@ -791,13 +848,13 @@ export enum Properties_Select_Column {
 /** input type for updating data in table "properties" */
 export type Properties_Set_Input = {
   PID?: InputMaybe<Scalars['uuid']>;
-  amenities?: InputMaybe<Scalars['json']>;
+  amenities?: InputMaybe<Scalars['jsonb']>;
   bath?: InputMaybe<Scalars['String']>;
   beds?: InputMaybe<Scalars['String']>;
   cost?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   host_id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['jsonb']>;
   listed_on?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
   per?: InputMaybe<Scalars['String']>;
@@ -815,13 +872,13 @@ export type Properties_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Properties_Stream_Cursor_Value_Input = {
   PID?: InputMaybe<Scalars['uuid']>;
-  amenities?: InputMaybe<Scalars['json']>;
+  amenities?: InputMaybe<Scalars['jsonb']>;
   bath?: InputMaybe<Scalars['String']>;
   beds?: InputMaybe<Scalars['String']>;
   cost?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   host_id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['jsonb']>;
   listed_on?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
   per?: InputMaybe<Scalars['String']>;
@@ -857,6 +914,16 @@ export enum Properties_Update_Column {
 }
 
 export type Properties_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Properties_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Properties_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Properties_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Properties_Delete_Key_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Properties_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Properties_Set_Input>;
   /** filter the rows which have to be updated */
@@ -1324,8 +1391,8 @@ export type AddNewPropertyMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']>;
   per?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<Scalars['String']>;
-  amenities?: InputMaybe<Scalars['json']>;
+  amenities?: InputMaybe<Scalars['jsonb']>;
+  image?: InputMaybe<Scalars['jsonb']>;
 }>;
 
 
@@ -1368,9 +1435,9 @@ export type UpdateUserRoleWhereUser_IdMutation = { __typename?: 'mutation_root',
 
 
 export const AddNewPropertyDocument = `
-    mutation AddNewProperty($bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $host_id: uuid = "", $name: String = "", $per: String = "", $type: String = "", $image: String = "", $amenities: json = "") {
+    mutation AddNewProperty($bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $host_id: uuid = "", $name: String = "", $per: String = "", $type: String = "", $amenities: jsonb = "", $image: jsonb = "") {
   insert_properties(
-    objects: {bath: $bath, beds: $beds, cost: $cost, description: $description, host_id: $host_id, name: $name, per: $per, type: $type, image: $image, amenities: $amenities}
+    objects: {bath: $bath, beds: $beds, cost: $cost, description: $description, host_id: $host_id, name: $name, per: $per, type: $type, amenities: $amenities, image: $image}
   ) {
     affected_rows
   }

@@ -32,7 +32,7 @@ export default function PropertyList() {
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
         <span className="text-gray-600">{LoggedUser?.userInfo?.hosts[0]?.properties?.length} properties</span>
-<AddNewPropertyForm />
+<AddNewPropertyForm user={LoggedUser?.userInfo} />
       </div>
 
       {/* Property Grid - 4 per row */}

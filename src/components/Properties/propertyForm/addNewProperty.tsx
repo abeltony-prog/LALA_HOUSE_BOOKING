@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Drawer, Button, Input, SelectPicker, CheckboxGroup, Checkbox, RadioGroup, Radio } from "rsuite";
 import { useAddNewPropertyMutation } from "src/graphql/generated/graphql";
 
-export default function AddNewPropertyForm() {
+export default function AddNewPropertyForm({user} : any) {
+    
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState({
     name: "",
@@ -13,13 +14,17 @@ export default function AddNewPropertyForm() {
     bedrooms: "",
     bathrooms: "",
     description: "",
-    amenities: [],
+    amenities: [] as any,
     images: null
   });
 
   const {mutate:SaveNewProperty , isLoading} = useAddNewPropertyMutation({
     onSuccess(){
         setOpen(false)
+    },
+    onError(error){
+        console.log(error);
+        
     }
   })
 
@@ -37,9 +42,9 @@ export default function AddNewPropertyForm() {
   };
 
   const handleSubmit = () => {
-    console.log("New Property Data:", property);
+    // console.log("New Property Data:", property);
     try{
-        SaveNewProperty({
+        SaveNewProperty ({
             name: property?.name,
             amenities: property?.amenities,
             type: property?.type,
@@ -48,8 +53,11 @@ export default function AddNewPropertyForm() {
             beds: property?.bedrooms,
             bath: property?.bathrooms,
             description: property?.description,
-            image: property?.images
+            image: property?.images,
+            host_id: user?.hosts[0]?.HID
             })
+
+            
     }catch(error){
         console.log(error);
         
