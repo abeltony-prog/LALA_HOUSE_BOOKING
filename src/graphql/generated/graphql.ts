@@ -1,36 +1,17 @@
-import {
-  useMutation,
-  useQuery,
-  UseMutationOptions,
-  UseQueryOptions,
-} from "react-query";
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch(
-      "https://humorous-grizzly-62.hasura.app/v1/graphql",
-      {
-        method: "POST",
-        ...{
-          headers: {
-            "x-hasura-admin-secret":
-              "xqVURgYxokUcGBOSmQvGaZb34DmWn3D4ng4zOm3azDAbQdccuLtOti1Y9tVFYO8y",
-          },
-        },
-        body: JSON.stringify({ query, variables }),
-      }
-    );
+    const res = await fetch("https://humorous-grizzly-62.hasura.app/v1/graphql", {
+    method: "POST",
+    ...({"headers":{"x-hasura-admin-secret":"xqVURgYxokUcGBOSmQvGaZb34DmWn3D4ng4zOm3azDAbQdccuLtOti1Y9tVFYO8y"}}),
+      body: JSON.stringify({ query, variables }),
+    });
 
     const json = await res.json();
 
@@ -41,7 +22,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
     }
 
     return json.data;
-  };
+  }
 }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -50,100 +31,103 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  json: any;
   timestamptz: any;
   uuid: any;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars["Int"]>;
-  _gt?: InputMaybe<Scalars["Int"]>;
-  _gte?: InputMaybe<Scalars["Int"]>;
-  _in?: InputMaybe<Array<Scalars["Int"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]>;
-  _lt?: InputMaybe<Scalars["Int"]>;
-  _lte?: InputMaybe<Scalars["Int"]>;
-  _neq?: InputMaybe<Scalars["Int"]>;
-  _nin?: InputMaybe<Array<Scalars["Int"]>>;
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars["String"]>;
-  _gt?: InputMaybe<Scalars["String"]>;
-  _gte?: InputMaybe<Scalars["String"]>;
+  _eq?: InputMaybe<Scalars['String']>;
+  _gt?: InputMaybe<Scalars['String']>;
+  _gte?: InputMaybe<Scalars['String']>;
   /** does the column match the given case-insensitive pattern */
-  _ilike?: InputMaybe<Scalars["String"]>;
-  _in?: InputMaybe<Array<Scalars["String"]>>;
+  _ilike?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<Scalars['String']>>;
   /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: InputMaybe<Scalars["String"]>;
-  _is_null?: InputMaybe<Scalars["Boolean"]>;
+  _iregex?: InputMaybe<Scalars['String']>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
   /** does the column match the given pattern */
-  _like?: InputMaybe<Scalars["String"]>;
-  _lt?: InputMaybe<Scalars["String"]>;
-  _lte?: InputMaybe<Scalars["String"]>;
-  _neq?: InputMaybe<Scalars["String"]>;
+  _like?: InputMaybe<Scalars['String']>;
+  _lt?: InputMaybe<Scalars['String']>;
+  _lte?: InputMaybe<Scalars['String']>;
+  _neq?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: InputMaybe<Scalars["String"]>;
-  _nin?: InputMaybe<Array<Scalars["String"]>>;
+  _nilike?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<Scalars['String']>>;
   /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: InputMaybe<Scalars["String"]>;
+  _niregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given pattern */
-  _nlike?: InputMaybe<Scalars["String"]>;
+  _nlike?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: InputMaybe<Scalars["String"]>;
+  _nregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: InputMaybe<Scalars["String"]>;
+  _nsimilar?: InputMaybe<Scalars['String']>;
   /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: InputMaybe<Scalars["String"]>;
+  _regex?: InputMaybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
-  _similar?: InputMaybe<Scalars["String"]>;
+  _similar?: InputMaybe<Scalars['String']>;
 };
 
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
-  Asc = "ASC",
+  Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = "DESC",
+  Desc = 'DESC'
 }
 
 /** columns and relationships of "hosts" */
 export type Hosts = {
-  __typename?: "hosts";
-  HID: Scalars["uuid"];
-  join_on: Scalars["timestamptz"];
-  name: Scalars["String"];
+  __typename?: 'hosts';
+  HID: Scalars['uuid'];
+  join_on: Scalars['timestamptz'];
+  name: Scalars['String'];
   /** An array relationship */
   properties: Array<Properties>;
   /** An aggregate relationship */
   properties_aggregate: Properties_Aggregate;
   /** An object relationship */
   user: Users;
-  user_id: Scalars["uuid"];
+  user_id: Scalars['uuid'];
 };
+
 
 /** columns and relationships of "hosts" */
 export type HostsPropertiesArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
 
+
 /** columns and relationships of "hosts" */
 export type HostsProperties_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
 
 /** aggregated selection of "hosts" */
 export type Hosts_Aggregate = {
-  __typename?: "hosts_aggregate";
+  __typename?: 'hosts_aggregate';
   aggregate?: Maybe<Hosts_Aggregate_Fields>;
   nodes: Array<Hosts>;
 };
@@ -154,23 +138,24 @@ export type Hosts_Aggregate_Bool_Exp = {
 
 export type Hosts_Aggregate_Bool_Exp_Count = {
   arguments?: InputMaybe<Array<Hosts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<Hosts_Bool_Exp>;
   predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "hosts" */
 export type Hosts_Aggregate_Fields = {
-  __typename?: "hosts_aggregate_fields";
-  count: Scalars["Int"];
+  __typename?: 'hosts_aggregate_fields';
+  count: Scalars['Int'];
   max?: Maybe<Hosts_Max_Fields>;
   min?: Maybe<Hosts_Min_Fields>;
 };
 
+
 /** aggregate fields of "hosts" */
 export type Hosts_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Hosts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "hosts" */
@@ -204,28 +189,28 @@ export type Hosts_Bool_Exp = {
 /** unique or primary key constraints on table "hosts" */
 export enum Hosts_Constraint {
   /** unique or primary key constraint on columns "HID" */
-  HostsHidKey = "hosts_HID_key",
+  HostsHidKey = 'hosts_HID_key',
   /** unique or primary key constraint on columns "user_id" */
-  HostsPkey = "hosts_pkey",
+  HostsPkey = 'hosts_pkey'
 }
 
 /** input type for inserting data into table "hosts" */
 export type Hosts_Insert_Input = {
-  HID?: InputMaybe<Scalars["uuid"]>;
-  join_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
+  HID?: InputMaybe<Scalars['uuid']>;
+  join_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
   properties?: InputMaybe<Properties_Arr_Rel_Insert_Input>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: InputMaybe<Scalars["uuid"]>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
 export type Hosts_Max_Fields = {
-  __typename?: "hosts_max_fields";
-  HID?: Maybe<Scalars["uuid"]>;
-  join_on?: Maybe<Scalars["timestamptz"]>;
-  name?: Maybe<Scalars["String"]>;
-  user_id?: Maybe<Scalars["uuid"]>;
+  __typename?: 'hosts_max_fields';
+  HID?: Maybe<Scalars['uuid']>;
+  join_on?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "hosts" */
@@ -238,11 +223,11 @@ export type Hosts_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Hosts_Min_Fields = {
-  __typename?: "hosts_min_fields";
-  HID?: Maybe<Scalars["uuid"]>;
-  join_on?: Maybe<Scalars["timestamptz"]>;
-  name?: Maybe<Scalars["String"]>;
-  user_id?: Maybe<Scalars["uuid"]>;
+  __typename?: 'hosts_min_fields';
+  HID?: Maybe<Scalars['uuid']>;
+  join_on?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "hosts" */
@@ -255,9 +240,9 @@ export type Hosts_Min_Order_By = {
 
 /** response of any mutation on the table "hosts" */
 export type Hosts_Mutation_Response = {
-  __typename?: "hosts_mutation_response";
+  __typename?: 'hosts_mutation_response';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Hosts>;
 };
@@ -288,27 +273,27 @@ export type Hosts_Order_By = {
 
 /** primary key columns input for table: hosts */
 export type Hosts_Pk_Columns_Input = {
-  user_id: Scalars["uuid"];
+  user_id: Scalars['uuid'];
 };
 
 /** select columns of table "hosts" */
 export enum Hosts_Select_Column {
   /** column name */
-  Hid = "HID",
+  Hid = 'HID',
   /** column name */
-  JoinOn = "join_on",
+  JoinOn = 'join_on',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  UserId = "user_id",
+  UserId = 'user_id'
 }
 
 /** input type for updating data in table "hosts" */
 export type Hosts_Set_Input = {
-  HID?: InputMaybe<Scalars["uuid"]>;
-  join_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  user_id?: InputMaybe<Scalars["uuid"]>;
+  HID?: InputMaybe<Scalars['uuid']>;
+  join_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** Streaming cursor of the table "hosts" */
@@ -321,22 +306,22 @@ export type Hosts_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Hosts_Stream_Cursor_Value_Input = {
-  HID?: InputMaybe<Scalars["uuid"]>;
-  join_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  user_id?: InputMaybe<Scalars["uuid"]>;
+  HID?: InputMaybe<Scalars['uuid']>;
+  join_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** update columns of table "hosts" */
 export enum Hosts_Update_Column {
   /** column name */
-  Hid = "HID",
+  Hid = 'HID',
   /** column name */
-  JoinOn = "join_on",
+  JoinOn = 'join_on',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  UserId = "user_id",
+  UserId = 'user_id'
 }
 
 export type Hosts_Updates = {
@@ -346,9 +331,22 @@ export type Hosts_Updates = {
   where: Hosts_Bool_Exp;
 };
 
+/** Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'. */
+export type Json_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['json']>;
+  _gt?: InputMaybe<Scalars['json']>;
+  _gte?: InputMaybe<Scalars['json']>;
+  _in?: InputMaybe<Array<Scalars['json']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['json']>;
+  _lte?: InputMaybe<Scalars['json']>;
+  _neq?: InputMaybe<Scalars['json']>;
+  _nin?: InputMaybe<Array<Scalars['json']>>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
-  __typename?: "mutation_root";
+  __typename?: 'mutation_root';
   /** delete data from the table: "hosts" */
   delete_hosts?: Maybe<Hosts_Mutation_Response>;
   /** delete single row from the table: "hosts" */
@@ -393,35 +391,42 @@ export type Mutation_Root = {
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_HostsArgs = {
   where: Hosts_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Hosts_By_PkArgs = {
-  user_id: Scalars["uuid"];
+  user_id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_PropertiesArgs = {
   where: Properties_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Properties_By_PkArgs = {
-  PID: Scalars["uuid"];
+  PID: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
-  UID: Scalars["uuid"];
+  UID: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_HostsArgs = {
@@ -429,11 +434,13 @@ export type Mutation_RootInsert_HostsArgs = {
   on_conflict?: InputMaybe<Hosts_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Hosts_OneArgs = {
   object: Hosts_Insert_Input;
   on_conflict?: InputMaybe<Hosts_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_PropertiesArgs = {
@@ -441,11 +448,13 @@ export type Mutation_RootInsert_PropertiesArgs = {
   on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Properties_OneArgs = {
   object: Properties_Insert_Input;
   on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
@@ -453,11 +462,13 @@ export type Mutation_RootInsert_UsersArgs = {
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_HostsArgs = {
@@ -465,16 +476,19 @@ export type Mutation_RootUpdate_HostsArgs = {
   where: Hosts_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Hosts_By_PkArgs = {
   _set?: InputMaybe<Hosts_Set_Input>;
   pk_columns: Hosts_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Hosts_ManyArgs = {
   updates: Array<Hosts_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_PropertiesArgs = {
@@ -482,16 +496,19 @@ export type Mutation_RootUpdate_PropertiesArgs = {
   where: Properties_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Properties_By_PkArgs = {
   _set?: InputMaybe<Properties_Set_Input>;
   pk_columns: Properties_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Properties_ManyArgs = {
   updates: Array<Properties_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
@@ -499,11 +516,13 @@ export type Mutation_RootUpdate_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Users_By_PkArgs = {
   _set?: InputMaybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Users_ManyArgs = {
@@ -513,39 +532,47 @@ export type Mutation_RootUpdate_Users_ManyArgs = {
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
-  Asc = "asc",
+  Asc = 'asc',
   /** in ascending order, nulls first */
-  AscNullsFirst = "asc_nulls_first",
+  AscNullsFirst = 'asc_nulls_first',
   /** in ascending order, nulls last */
-  AscNullsLast = "asc_nulls_last",
+  AscNullsLast = 'asc_nulls_last',
   /** in descending order, nulls first */
-  Desc = "desc",
+  Desc = 'desc',
   /** in descending order, nulls first */
-  DescNullsFirst = "desc_nulls_first",
+  DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = "desc_nulls_last",
+  DescNullsLast = 'desc_nulls_last'
 }
 
 /** columns and relationships of "properties" */
 export type Properties = {
-  __typename?: "properties";
-  PID: Scalars["uuid"];
-  bath: Scalars["String"];
-  beds: Scalars["String"];
-  cost: Scalars["String"];
-  description: Scalars["String"];
-  host_id: Scalars["uuid"];
+  __typename?: 'properties';
+  PID: Scalars['uuid'];
+  amenities?: Maybe<Scalars['json']>;
+  bath: Scalars['String'];
+  beds: Scalars['String'];
+  cost: Scalars['String'];
+  description: Scalars['String'];
+  host_id: Scalars['uuid'];
   /** An object relationship */
   hosts: Hosts;
-  listed_on: Scalars["timestamptz"];
-  name: Scalars["String"];
-  per: Scalars["String"];
-  type: Scalars["String"];
+  image?: Maybe<Scalars['String']>;
+  listed_on: Scalars['timestamptz'];
+  name: Scalars['String'];
+  per: Scalars['String'];
+  type: Scalars['String'];
+};
+
+
+/** columns and relationships of "properties" */
+export type PropertiesAmenitiesArgs = {
+  path?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregated selection of "properties" */
 export type Properties_Aggregate = {
-  __typename?: "properties_aggregate";
+  __typename?: 'properties_aggregate';
   aggregate?: Maybe<Properties_Aggregate_Fields>;
   nodes: Array<Properties>;
 };
@@ -556,23 +583,24 @@ export type Properties_Aggregate_Bool_Exp = {
 
 export type Properties_Aggregate_Bool_Exp_Count = {
   arguments?: InputMaybe<Array<Properties_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<Properties_Bool_Exp>;
   predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "properties" */
 export type Properties_Aggregate_Fields = {
-  __typename?: "properties_aggregate_fields";
-  count: Scalars["Int"];
+  __typename?: 'properties_aggregate_fields';
+  count: Scalars['Int'];
   max?: Maybe<Properties_Max_Fields>;
   min?: Maybe<Properties_Min_Fields>;
 };
 
+
 /** aggregate fields of "properties" */
 export type Properties_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Properties_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "properties" */
@@ -595,12 +623,14 @@ export type Properties_Bool_Exp = {
   _and?: InputMaybe<Array<Properties_Bool_Exp>>;
   _not?: InputMaybe<Properties_Bool_Exp>;
   _or?: InputMaybe<Array<Properties_Bool_Exp>>;
+  amenities?: InputMaybe<Json_Comparison_Exp>;
   bath?: InputMaybe<String_Comparison_Exp>;
   beds?: InputMaybe<String_Comparison_Exp>;
   cost?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   host_id?: InputMaybe<Uuid_Comparison_Exp>;
   hosts?: InputMaybe<Hosts_Bool_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
   listed_on?: InputMaybe<Timestamptz_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   per?: InputMaybe<String_Comparison_Exp>;
@@ -610,37 +640,40 @@ export type Properties_Bool_Exp = {
 /** unique or primary key constraints on table "properties" */
 export enum Properties_Constraint {
   /** unique or primary key constraint on columns "PID" */
-  PropertiesPkey = "properties_pkey",
+  PropertiesPkey = 'properties_pkey'
 }
 
 /** input type for inserting data into table "properties" */
 export type Properties_Insert_Input = {
-  PID?: InputMaybe<Scalars["uuid"]>;
-  bath?: InputMaybe<Scalars["String"]>;
-  beds?: InputMaybe<Scalars["String"]>;
-  cost?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  host_id?: InputMaybe<Scalars["uuid"]>;
+  PID?: InputMaybe<Scalars['uuid']>;
+  amenities?: InputMaybe<Scalars['json']>;
+  bath?: InputMaybe<Scalars['String']>;
+  beds?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  host_id?: InputMaybe<Scalars['uuid']>;
   hosts?: InputMaybe<Hosts_Obj_Rel_Insert_Input>;
-  listed_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  per?: InputMaybe<Scalars["String"]>;
-  type?: InputMaybe<Scalars["String"]>;
+  image?: InputMaybe<Scalars['String']>;
+  listed_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  per?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Properties_Max_Fields = {
-  __typename?: "properties_max_fields";
-  PID?: Maybe<Scalars["uuid"]>;
-  bath?: Maybe<Scalars["String"]>;
-  beds?: Maybe<Scalars["String"]>;
-  cost?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  host_id?: Maybe<Scalars["uuid"]>;
-  listed_on?: Maybe<Scalars["timestamptz"]>;
-  name?: Maybe<Scalars["String"]>;
-  per?: Maybe<Scalars["String"]>;
-  type?: Maybe<Scalars["String"]>;
+  __typename?: 'properties_max_fields';
+  PID?: Maybe<Scalars['uuid']>;
+  bath?: Maybe<Scalars['String']>;
+  beds?: Maybe<Scalars['String']>;
+  cost?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  host_id?: Maybe<Scalars['uuid']>;
+  image?: Maybe<Scalars['String']>;
+  listed_on?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  per?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "properties" */
@@ -651,6 +684,7 @@ export type Properties_Max_Order_By = {
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -659,17 +693,18 @@ export type Properties_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Properties_Min_Fields = {
-  __typename?: "properties_min_fields";
-  PID?: Maybe<Scalars["uuid"]>;
-  bath?: Maybe<Scalars["String"]>;
-  beds?: Maybe<Scalars["String"]>;
-  cost?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  host_id?: Maybe<Scalars["uuid"]>;
-  listed_on?: Maybe<Scalars["timestamptz"]>;
-  name?: Maybe<Scalars["String"]>;
-  per?: Maybe<Scalars["String"]>;
-  type?: Maybe<Scalars["String"]>;
+  __typename?: 'properties_min_fields';
+  PID?: Maybe<Scalars['uuid']>;
+  bath?: Maybe<Scalars['String']>;
+  beds?: Maybe<Scalars['String']>;
+  cost?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  host_id?: Maybe<Scalars['uuid']>;
+  image?: Maybe<Scalars['String']>;
+  listed_on?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  per?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "properties" */
@@ -680,6 +715,7 @@ export type Properties_Min_Order_By = {
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -688,9 +724,9 @@ export type Properties_Min_Order_By = {
 
 /** response of any mutation on the table "properties" */
 export type Properties_Mutation_Response = {
-  __typename?: "properties_mutation_response";
+  __typename?: 'properties_mutation_response';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Properties>;
 };
@@ -705,12 +741,14 @@ export type Properties_On_Conflict = {
 /** Ordering options when selecting data from "properties". */
 export type Properties_Order_By = {
   PID?: InputMaybe<Order_By>;
+  amenities?: InputMaybe<Order_By>;
   bath?: InputMaybe<Order_By>;
   beds?: InputMaybe<Order_By>;
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
   hosts?: InputMaybe<Hosts_Order_By>;
+  image?: InputMaybe<Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -719,45 +757,51 @@ export type Properties_Order_By = {
 
 /** primary key columns input for table: properties */
 export type Properties_Pk_Columns_Input = {
-  PID: Scalars["uuid"];
+  PID: Scalars['uuid'];
 };
 
 /** select columns of table "properties" */
 export enum Properties_Select_Column {
   /** column name */
-  Pid = "PID",
+  Pid = 'PID',
   /** column name */
-  Bath = "bath",
+  Amenities = 'amenities',
   /** column name */
-  Beds = "beds",
+  Bath = 'bath',
   /** column name */
-  Cost = "cost",
+  Beds = 'beds',
   /** column name */
-  Description = "description",
+  Cost = 'cost',
   /** column name */
-  HostId = "host_id",
+  Description = 'description',
   /** column name */
-  ListedOn = "listed_on",
+  HostId = 'host_id',
   /** column name */
-  Name = "name",
+  Image = 'image',
   /** column name */
-  Per = "per",
+  ListedOn = 'listed_on',
   /** column name */
-  Type = "type",
+  Name = 'name',
+  /** column name */
+  Per = 'per',
+  /** column name */
+  Type = 'type'
 }
 
 /** input type for updating data in table "properties" */
 export type Properties_Set_Input = {
-  PID?: InputMaybe<Scalars["uuid"]>;
-  bath?: InputMaybe<Scalars["String"]>;
-  beds?: InputMaybe<Scalars["String"]>;
-  cost?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  host_id?: InputMaybe<Scalars["uuid"]>;
-  listed_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  per?: InputMaybe<Scalars["String"]>;
-  type?: InputMaybe<Scalars["String"]>;
+  PID?: InputMaybe<Scalars['uuid']>;
+  amenities?: InputMaybe<Scalars['json']>;
+  bath?: InputMaybe<Scalars['String']>;
+  beds?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  host_id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
+  listed_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  per?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "properties" */
@@ -770,40 +814,46 @@ export type Properties_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Properties_Stream_Cursor_Value_Input = {
-  PID?: InputMaybe<Scalars["uuid"]>;
-  bath?: InputMaybe<Scalars["String"]>;
-  beds?: InputMaybe<Scalars["String"]>;
-  cost?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  host_id?: InputMaybe<Scalars["uuid"]>;
-  listed_on?: InputMaybe<Scalars["timestamptz"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  per?: InputMaybe<Scalars["String"]>;
-  type?: InputMaybe<Scalars["String"]>;
+  PID?: InputMaybe<Scalars['uuid']>;
+  amenities?: InputMaybe<Scalars['json']>;
+  bath?: InputMaybe<Scalars['String']>;
+  beds?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  host_id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
+  listed_on?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  per?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "properties" */
 export enum Properties_Update_Column {
   /** column name */
-  Pid = "PID",
+  Pid = 'PID',
   /** column name */
-  Bath = "bath",
+  Amenities = 'amenities',
   /** column name */
-  Beds = "beds",
+  Bath = 'bath',
   /** column name */
-  Cost = "cost",
+  Beds = 'beds',
   /** column name */
-  Description = "description",
+  Cost = 'cost',
   /** column name */
-  HostId = "host_id",
+  Description = 'description',
   /** column name */
-  ListedOn = "listed_on",
+  HostId = 'host_id',
   /** column name */
-  Name = "name",
+  Image = 'image',
   /** column name */
-  Per = "per",
+  ListedOn = 'listed_on',
   /** column name */
-  Type = "type",
+  Name = 'name',
+  /** column name */
+  Per = 'per',
+  /** column name */
+  Type = 'type'
 }
 
 export type Properties_Updates = {
@@ -814,7 +864,7 @@ export type Properties_Updates = {
 };
 
 export type Query_Root = {
-  __typename?: "query_root";
+  __typename?: 'query_root';
   /** An array relationship */
   hosts: Array<Hosts>;
   /** An aggregate relationship */
@@ -835,68 +885,77 @@ export type Query_Root = {
   users_by_pk?: Maybe<Users>;
 };
 
+
 export type Query_RootHostsArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
+
 
 export type Query_RootHosts_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
 
+
 export type Query_RootHosts_By_PkArgs = {
-  user_id: Scalars["uuid"];
+  user_id: Scalars['uuid'];
 };
+
 
 export type Query_RootPropertiesArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
+
 
 export type Query_RootProperties_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
 
+
 export type Query_RootProperties_By_PkArgs = {
-  PID: Scalars["uuid"];
+  PID: Scalars['uuid'];
 };
+
 
 export type Query_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Order_By>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
+
 
 export type Query_RootUsers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Order_By>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
+
 export type Query_RootUsers_By_PkArgs = {
-  UID: Scalars["uuid"];
+  UID: Scalars['uuid'];
 };
 
 export type Subscription_Root = {
-  __typename?: "subscription_root";
+  __typename?: 'subscription_root';
   /** An array relationship */
   hosts: Array<Hosts>;
   /** An aggregate relationship */
@@ -923,149 +982,164 @@ export type Subscription_Root = {
   users_stream: Array<Users>;
 };
 
+
 export type Subscription_RootHostsArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
+
 
 export type Subscription_RootHosts_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
 
+
 export type Subscription_RootHosts_By_PkArgs = {
-  user_id: Scalars["uuid"];
+  user_id: Scalars['uuid'];
 };
 
+
 export type Subscription_RootHosts_StreamArgs = {
-  batch_size: Scalars["Int"];
+  batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Hosts_Stream_Cursor_Input>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
 
+
 export type Subscription_RootPropertiesArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
+
 
 export type Subscription_RootProperties_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
 
+
 export type Subscription_RootProperties_By_PkArgs = {
-  PID: Scalars["uuid"];
+  PID: Scalars['uuid'];
 };
 
+
 export type Subscription_RootProperties_StreamArgs = {
-  batch_size: Scalars["Int"];
+  batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Properties_Stream_Cursor_Input>>;
   where?: InputMaybe<Properties_Bool_Exp>;
 };
 
+
 export type Subscription_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Order_By>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
+
 
 export type Subscription_RootUsers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Order_By>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
+
 export type Subscription_RootUsers_By_PkArgs = {
-  UID: Scalars["uuid"];
+  UID: Scalars['uuid'];
 };
 
+
 export type Subscription_RootUsers_StreamArgs = {
-  batch_size: Scalars["Int"];
+  batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars["timestamptz"]>;
-  _gt?: InputMaybe<Scalars["timestamptz"]>;
-  _gte?: InputMaybe<Scalars["timestamptz"]>;
-  _in?: InputMaybe<Array<Scalars["timestamptz"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]>;
-  _lt?: InputMaybe<Scalars["timestamptz"]>;
-  _lte?: InputMaybe<Scalars["timestamptz"]>;
-  _neq?: InputMaybe<Scalars["timestamptz"]>;
-  _nin?: InputMaybe<Array<Scalars["timestamptz"]>>;
+  _eq?: InputMaybe<Scalars['timestamptz']>;
+  _gt?: InputMaybe<Scalars['timestamptz']>;
+  _gte?: InputMaybe<Scalars['timestamptz']>;
+  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamptz']>;
+  _lte?: InputMaybe<Scalars['timestamptz']>;
+  _neq?: InputMaybe<Scalars['timestamptz']>;
+  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
 /** columns and relationships of "users" */
 export type Users = {
-  __typename?: "users";
-  UID: Scalars["uuid"];
-  email: Scalars["String"];
-  gender: Scalars["String"];
+  __typename?: 'users';
+  UID: Scalars['uuid'];
+  email: Scalars['String'];
+  gender: Scalars['String'];
   /** An array relationship */
   hosts: Array<Hosts>;
   /** An aggregate relationship */
   hosts_aggregate: Hosts_Aggregate;
-  name: Scalars["String"];
-  password: Scalars["String"];
-  role: Scalars["String"];
+  name: Scalars['String'];
+  password: Scalars['String'];
+  role: Scalars['String'];
 };
+
 
 /** columns and relationships of "users" */
 export type UsersHostsArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
 
+
 /** columns and relationships of "users" */
 export type UsersHosts_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Hosts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  offset?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Hosts_Order_By>>;
   where?: InputMaybe<Hosts_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
 export type Users_Aggregate = {
-  __typename?: "users_aggregate";
+  __typename?: 'users_aggregate';
   aggregate?: Maybe<Users_Aggregate_Fields>;
   nodes: Array<Users>;
 };
 
 /** aggregate fields of "users" */
 export type Users_Aggregate_Fields = {
-  __typename?: "users_aggregate_fields";
-  count: Scalars["Int"];
+  __typename?: 'users_aggregate_fields';
+  count: Scalars['Int'];
   max?: Maybe<Users_Max_Fields>;
   min?: Maybe<Users_Min_Fields>;
 };
 
+
 /** aggregate fields of "users" */
 export type Users_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Users_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
@@ -1086,47 +1160,47 @@ export type Users_Bool_Exp = {
 /** unique or primary key constraints on table "users" */
 export enum Users_Constraint {
   /** unique or primary key constraint on columns "UID" */
-  UsersPkey = "users_pkey",
+  UsersPkey = 'users_pkey'
 }
 
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
-  UID?: InputMaybe<Scalars["uuid"]>;
-  email?: InputMaybe<Scalars["String"]>;
-  gender?: InputMaybe<Scalars["String"]>;
+  UID?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
   hosts?: InputMaybe<Hosts_Arr_Rel_Insert_Input>;
-  name?: InputMaybe<Scalars["String"]>;
-  password?: InputMaybe<Scalars["String"]>;
-  role?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Users_Max_Fields = {
-  __typename?: "users_max_fields";
-  UID?: Maybe<Scalars["uuid"]>;
-  email?: Maybe<Scalars["String"]>;
-  gender?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
-  password?: Maybe<Scalars["String"]>;
-  role?: Maybe<Scalars["String"]>;
+  __typename?: 'users_max_fields';
+  UID?: Maybe<Scalars['uuid']>;
+  email?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type Users_Min_Fields = {
-  __typename?: "users_min_fields";
-  UID?: Maybe<Scalars["uuid"]>;
-  email?: Maybe<Scalars["String"]>;
-  gender?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
-  password?: Maybe<Scalars["String"]>;
-  role?: Maybe<Scalars["String"]>;
+  __typename?: 'users_min_fields';
+  UID?: Maybe<Scalars['uuid']>;
+  email?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "users" */
 export type Users_Mutation_Response = {
-  __typename?: "users_mutation_response";
+  __typename?: 'users_mutation_response';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Users>;
 };
@@ -1158,33 +1232,33 @@ export type Users_Order_By = {
 
 /** primary key columns input for table: users */
 export type Users_Pk_Columns_Input = {
-  UID: Scalars["uuid"];
+  UID: Scalars['uuid'];
 };
 
 /** select columns of table "users" */
 export enum Users_Select_Column {
   /** column name */
-  Uid = "UID",
+  Uid = 'UID',
   /** column name */
-  Email = "email",
+  Email = 'email',
   /** column name */
-  Gender = "gender",
+  Gender = 'gender',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  Password = "password",
+  Password = 'password',
   /** column name */
-  Role = "role",
+  Role = 'role'
 }
 
 /** input type for updating data in table "users" */
 export type Users_Set_Input = {
-  UID?: InputMaybe<Scalars["uuid"]>;
-  email?: InputMaybe<Scalars["String"]>;
-  gender?: InputMaybe<Scalars["String"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  password?: InputMaybe<Scalars["String"]>;
-  role?: InputMaybe<Scalars["String"]>;
+  UID?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "users" */
@@ -1197,28 +1271,28 @@ export type Users_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Users_Stream_Cursor_Value_Input = {
-  UID?: InputMaybe<Scalars["uuid"]>;
-  email?: InputMaybe<Scalars["String"]>;
-  gender?: InputMaybe<Scalars["String"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  password?: InputMaybe<Scalars["String"]>;
-  role?: InputMaybe<Scalars["String"]>;
+  UID?: InputMaybe<Scalars['uuid']>;
+  email?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "users" */
 export enum Users_Update_Column {
   /** column name */
-  Uid = "UID",
+  Uid = 'UID',
   /** column name */
-  Email = "email",
+  Email = 'email',
   /** column name */
-  Gender = "gender",
+  Gender = 'gender',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  Password = "password",
+  Password = 'password',
   /** column name */
-  Role = "role",
+  Role = 'role'
 }
 
 export type Users_Updates = {
@@ -1230,100 +1304,88 @@ export type Users_Updates = {
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars["uuid"]>;
-  _gt?: InputMaybe<Scalars["uuid"]>;
-  _gte?: InputMaybe<Scalars["uuid"]>;
-  _in?: InputMaybe<Array<Scalars["uuid"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]>;
-  _lt?: InputMaybe<Scalars["uuid"]>;
-  _lte?: InputMaybe<Scalars["uuid"]>;
-  _neq?: InputMaybe<Scalars["uuid"]>;
-  _nin?: InputMaybe<Array<Scalars["uuid"]>>;
+  _eq?: InputMaybe<Scalars['uuid']>;
+  _gt?: InputMaybe<Scalars['uuid']>;
+  _gte?: InputMaybe<Scalars['uuid']>;
+  _in?: InputMaybe<Array<Scalars['uuid']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['uuid']>;
+  _lte?: InputMaybe<Scalars['uuid']>;
+  _neq?: InputMaybe<Scalars['uuid']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
+
+export type AddNewPropertyMutationVariables = Exact<{
+  bath?: InputMaybe<Scalars['String']>;
+  beds?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  host_id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  per?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+  amenities?: InputMaybe<Scalars['json']>;
+}>;
+
+
+export type AddNewPropertyMutation = { __typename?: 'mutation_root', insert_properties?: { __typename?: 'properties_mutation_response', affected_rows: number } | null };
 
 export type AddUsersMutationVariables = Exact<{
-  role?: InputMaybe<Scalars["String"]>;
-  password?: InputMaybe<Scalars["String"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  gender?: InputMaybe<Scalars["String"]>;
-  email?: InputMaybe<Scalars["String"]>;
+  role?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
 }>;
 
-export type AddUsersMutation = {
-  __typename?: "mutation_root";
-  insert_users?: {
-    __typename?: "users_mutation_response";
-    affected_rows: number;
-  } | null;
-};
+
+export type AddUsersMutation = { __typename?: 'mutation_root', insert_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
 export type MakeUseraHostMutationVariables = Exact<{
-  user_id?: InputMaybe<Scalars["uuid"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  role?: InputMaybe<Scalars["String"]>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
 }>;
 
-export type MakeUseraHostMutation = {
-  __typename?: "mutation_root";
-  insert_hosts?: {
-    __typename?: "hosts_mutation_response";
-    affected_rows: number;
-  } | null;
-  update_users?: {
-    __typename?: "users_mutation_response";
-    affected_rows: number;
-  } | null;
-};
+
+export type MakeUseraHostMutation = { __typename?: 'mutation_root', insert_hosts?: { __typename?: 'hosts_mutation_response', affected_rows: number } | null, update_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
 export type GetUsersQueryVariables = Exact<{
-  email?: InputMaybe<Scalars["String"]>;
+  email?: InputMaybe<Scalars['String']>;
 }>;
 
-export type GetUsersQuery = {
-  __typename?: "query_root";
-  users: Array<{
-    __typename?: "users";
-    UID: any;
-    email: string;
-    gender: string;
-    name: string;
-    password: string;
-    role: string;
-    hosts: Array<{
-      __typename?: "hosts";
-      HID: any;
-      join_on: any;
-      name: string;
-      user_id: any;
-      properties: Array<{
-        __typename?: "properties";
-        type: string;
-        per: string;
-        name: string;
-        listed_on: any;
-        host_id: any;
-        description: string;
-        cost: string;
-        beds: string;
-        bath: string;
-        PID: any;
-      }>;
-    }>;
-  }>;
-};
+
+export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any, properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, host_id: any, description: string, cost: string, beds: string, bath: string, PID: any }> }> }> };
 
 export type UpdateUserRoleWhereUser_IdMutationVariables = Exact<{
-  user_id?: InputMaybe<Scalars["uuid"]>;
-  role?: InputMaybe<Scalars["String"]>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+  role?: InputMaybe<Scalars['String']>;
 }>;
 
-export type UpdateUserRoleWhereUser_IdMutation = {
-  __typename?: "mutation_root";
-  update_users?: {
-    __typename?: "users_mutation_response";
-    affected_rows: number;
-  } | null;
-};
+
+export type UpdateUserRoleWhereUser_IdMutation = { __typename?: 'mutation_root', update_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
+
+
+export const AddNewPropertyDocument = `
+    mutation AddNewProperty($bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $host_id: uuid = "", $name: String = "", $per: String = "", $type: String = "", $image: String = "", $amenities: json = "") {
+  insert_properties(
+    objects: {bath: $bath, beds: $beds, cost: $cost, description: $description, host_id: $host_id, name: $name, per: $per, type: $type, image: $image, amenities: $amenities}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const useAddNewPropertyMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddNewPropertyMutation, TError, AddNewPropertyMutationVariables, TContext>) =>
+    useMutation<AddNewPropertyMutation, TError, AddNewPropertyMutationVariables, TContext>(
+      ['AddNewProperty'],
+      (variables?: AddNewPropertyMutationVariables) => fetcher<AddNewPropertyMutation, AddNewPropertyMutationVariables>(AddNewPropertyDocument, variables)(),
+      options
+    );
+useAddNewPropertyMutation.getKey = () => ['AddNewProperty'];
 
 export const AddUsersDocument = `
     mutation addUsers($role: String = "", $password: String = "", $name: String = "", $gender: String = "", $email: String = "") {
@@ -1334,24 +1396,16 @@ export const AddUsersDocument = `
   }
 }
     `;
-export const useAddUsersMutation = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    AddUsersMutation,
-    TError,
-    AddUsersMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<AddUsersMutation, TError, AddUsersMutationVariables, TContext>(
-    ["addUsers"],
-    (variables?: AddUsersMutationVariables) =>
-      fetcher<AddUsersMutation, AddUsersMutationVariables>(
-        AddUsersDocument,
-        variables
-      )(),
-    options
-  );
-useAddUsersMutation.getKey = () => ["addUsers"];
+export const useAddUsersMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddUsersMutation, TError, AddUsersMutationVariables, TContext>) =>
+    useMutation<AddUsersMutation, TError, AddUsersMutationVariables, TContext>(
+      ['addUsers'],
+      (variables?: AddUsersMutationVariables) => fetcher<AddUsersMutation, AddUsersMutationVariables>(AddUsersDocument, variables)(),
+      options
+    );
+useAddUsersMutation.getKey = () => ['addUsers'];
 
 export const MakeUseraHostDocument = `
     mutation makeUseraHost($user_id: uuid = "", $name: String = "", $role: String = "") {
@@ -1363,29 +1417,16 @@ export const MakeUseraHostDocument = `
   }
 }
     `;
-export const useMakeUseraHostMutation = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    MakeUseraHostMutation,
-    TError,
-    MakeUseraHostMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<
-    MakeUseraHostMutation,
-    TError,
-    MakeUseraHostMutationVariables,
-    TContext
-  >(
-    ["makeUseraHost"],
-    (variables?: MakeUseraHostMutationVariables) =>
-      fetcher<MakeUseraHostMutation, MakeUseraHostMutationVariables>(
-        MakeUseraHostDocument,
-        variables
-      )(),
-    options
-  );
-useMakeUseraHostMutation.getKey = () => ["makeUseraHost"];
+export const useMakeUseraHostMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<MakeUseraHostMutation, TError, MakeUseraHostMutationVariables, TContext>) =>
+    useMutation<MakeUseraHostMutation, TError, MakeUseraHostMutationVariables, TContext>(
+      ['makeUseraHost'],
+      (variables?: MakeUseraHostMutationVariables) => fetcher<MakeUseraHostMutation, MakeUseraHostMutationVariables>(MakeUseraHostDocument, variables)(),
+      options
+    );
+useMakeUseraHostMutation.getKey = () => ['makeUseraHost'];
 
 export const GetUsersDocument = `
     query getUsers($email: String = "") {
@@ -1417,18 +1458,22 @@ export const GetUsersDocument = `
   }
 }
     `;
-export const useGetUsersQuery = <TData = GetUsersQuery, TError = unknown>(
-  variables?: GetUsersQueryVariables,
-  options?: UseQueryOptions<GetUsersQuery, TError, TData>
-) =>
-  useQuery<GetUsersQuery, TError, TData>(
-    variables === undefined ? ["getUsers"] : ["getUsers", variables],
-    fetcher<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, variables),
-    options
-  );
+export const useGetUsersQuery = <
+      TData = GetUsersQuery,
+      TError = unknown
+    >(
+      variables?: GetUsersQueryVariables,
+      options?: UseQueryOptions<GetUsersQuery, TError, TData>
+    ) =>
+    useQuery<GetUsersQuery, TError, TData>(
+      variables === undefined ? ['getUsers'] : ['getUsers', variables],
+      fetcher<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, variables),
+      options
+    );
 
-useGetUsersQuery.getKey = (variables?: GetUsersQueryVariables) =>
-  variables === undefined ? ["getUsers"] : ["getUsers", variables];
+useGetUsersQuery.getKey = (variables?: GetUsersQueryVariables) => variables === undefined ? ['getUsers'] : ['getUsers', variables];
+;
+
 export const UpdateUserRoleWhereUser_IdDocument = `
     mutation updateUserRoleWhereUser_id($user_id: uuid = "", $role: String = "") {
   update_users(where: {UID: {_eq: $user_id}}, _set: {role: $role}) {
@@ -1437,30 +1482,12 @@ export const UpdateUserRoleWhereUser_IdDocument = `
 }
     `;
 export const useUpdateUserRoleWhereUser_IdMutation = <
-  TError = unknown,
-  TContext = unknown
->(
-  options?: UseMutationOptions<
-    UpdateUserRoleWhereUser_IdMutation,
-    TError,
-    UpdateUserRoleWhereUser_IdMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<
-    UpdateUserRoleWhereUser_IdMutation,
-    TError,
-    UpdateUserRoleWhereUser_IdMutationVariables,
-    TContext
-  >(
-    ["updateUserRoleWhereUser_id"],
-    (variables?: UpdateUserRoleWhereUser_IdMutationVariables) =>
-      fetcher<
-        UpdateUserRoleWhereUser_IdMutation,
-        UpdateUserRoleWhereUser_IdMutationVariables
-      >(UpdateUserRoleWhereUser_IdDocument, variables)(),
-    options
-  );
-useUpdateUserRoleWhereUser_IdMutation.getKey = () => [
-  "updateUserRoleWhereUser_id",
-];
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateUserRoleWhereUser_IdMutation, TError, UpdateUserRoleWhereUser_IdMutationVariables, TContext>) =>
+    useMutation<UpdateUserRoleWhereUser_IdMutation, TError, UpdateUserRoleWhereUser_IdMutationVariables, TContext>(
+      ['updateUserRoleWhereUser_id'],
+      (variables?: UpdateUserRoleWhereUser_IdMutationVariables) => fetcher<UpdateUserRoleWhereUser_IdMutation, UpdateUserRoleWhereUser_IdMutationVariables>(UpdateUserRoleWhereUser_IdDocument, variables)(),
+      options
+    );
+useUpdateUserRoleWhereUser_IdMutation.getKey = () => ['updateUserRoleWhereUser_id'];

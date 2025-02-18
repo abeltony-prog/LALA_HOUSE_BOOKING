@@ -2,6 +2,7 @@ import { ChevronDown } from "lucide-react";
 import React, { useContext } from "react";
 import Property from "./property";
 import { userAuth } from "context/auth";
+import AddNewPropertyForm from "./propertyForm/addNewProperty";
 
 export default function PropertyList() {
   const LoggedUser = useContext(userAuth) as unknown as any;
@@ -31,9 +32,7 @@ export default function PropertyList() {
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
         <span className="text-gray-600">{LoggedUser?.userInfo?.hosts[0]?.properties?.length} properties</span>
-        <button className="flex items-center rounded-md px-2 bg-black py-1 text-white transition hover:bg-gray-800 gap-2 text-sm">
-        Add Property
-        </button>
+<AddNewPropertyForm />
       </div>
 
       {/* Property Grid - 4 per row */}

@@ -1,0 +1,5 @@
+mutation AddNewProperty($bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $host_id: uuid = "", $name: String = "", $per: String = "", $type: String = "", $image: String = "", $amenities: json = "") {
+  insert_properties(objects: {bath: $bath, beds: $beds, cost: $cost, description: $description, host_id: $host_id, name: $name, per: $per, type: $type, image: $image, amenities: $amenities}) {
+    affected_rows
+  }
+}
