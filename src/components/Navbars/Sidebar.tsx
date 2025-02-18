@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Router, useRouter } from "next/router";
 
-export default function Sidebar() {
+export default function Sidebar({SessionDetails} : any) {
   const router = useRouter();
   const RedictURL = () => {
     router.push("/signin");
@@ -71,12 +71,56 @@ export default function Sidebar() {
         </div>
 
         <div className="mt-auto">
-          <button
-            onClick={RedictURL}
-            className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800"
-          >
-            Sign In
-          </button>
+          {
+            SessionDetails?.status === "authenticated" ? (
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 shadow-md">
+              {/* Profile Picture */}
+              <img 
+                   width={40}
+                   height={40}
+                   className="rounded-full border"
+              src="https://cdn.pixabay.com/photo/2016/08/28/13/31/basic-1625962_640.png" alt="" />
+            
+            
+              
+              {/* User Info */}
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  {SessionDetails.details?.name || "User Name"}
+                </p>
+                <p className="text-xs text-gray-500 flex items-center gap-2">
+              {SessionDetails.User?.role || "User Role"}
+              
+              {/* Switch Role Link */}
+              {
+                SessionDetails.User?.hosts.length === 0 ? (
+                  <button
+                  className="text-blue-600 text-xs font-medium hover:underline"
+                >
+                  Become a Host
+                </button>
+                ):(
+                  <button
+                  className="text-blue-600 text-xs font-medium hover:underline"
+                >
+                  Switch to Hosting
+                </button>
+                )
+              }
+           
+            </p>
+              </div>
+            </div>
+            ):(
+              <button
+              onClick={RedictURL}
+              className="w-full rounded-lg bg-black py-3 text-white transition hover:bg-gray-800"
+            >
+              Sign In
+            </button>
+            )
+          }
+   
         </div>
       </div>
     </>

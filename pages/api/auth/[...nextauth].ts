@@ -8,7 +8,7 @@ import { hasuraClient } from "src/client/hasuraClient";
 interface UserSession {
   name?: string | null | undefined;
   email?: string | null | undefined;
-  title?: string | null | undefined;
+  role?: string | null | undefined;
 }
 
 const query = {
@@ -46,7 +46,7 @@ export default NextAuth({
             id: user.UID || null, // Use `UUID` or set it as `null` if absent
             name: user.name,
             email: user.email,
-            title: user.role,
+            role: user.role,
           };
         }
         // If no user is found, return the default Google profile data
@@ -96,10 +96,10 @@ export default NextAuth({
   callbacks: {
     async session({ session, token }) {
       const sessionUser: UserSession = session?.user || {}; // Initialize with empty object if session.user is undefined
-      if (typeof token.title === "string") {
-        sessionUser.title = token.title;
+      if (typeof token.role === "string") {
+        sessionUser.role = token.role;
       } else {
-        sessionUser.title = null;
+        sessionUser.role = null;
       }
 
       return { ...session, user: sessionUser };

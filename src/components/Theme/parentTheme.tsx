@@ -1,12 +1,20 @@
 import SearchProperties from "@components/Filters/searchbar";
 import Sidebar from "@components/Navbars/Sidebar";
+import { useSession } from "next-auth/react";
 import React, { ReactElement } from "react";
+import { useGetUsersQuery } from "src/graphql/generated/graphql";
 
 interface iProps {
   children: ReactElement | ReactElement[];
 }
 
 const ParentTheme: React.FC<iProps> = ({ children }) => {
+  const { data: session, status } = useSession();
+  const {data:userDetails} = useGetUsersQuery({
+    email: session?.user?.email
+  })
+  console.log(userDetails);
+  
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
@@ -17,7 +25,11 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
       <div className="flex flex-1">
         <>
           {" "}
-          <Sidebar />
+          <Sidebar SessionDetails={{
+            details : session?.user,
+            status: status,
+            User:userDetails?.users[0]
+          }} />
           {children}
         </>
       </div>
