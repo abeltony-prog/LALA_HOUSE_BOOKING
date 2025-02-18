@@ -3,6 +3,10 @@ import React from "react";
 import Image from "next/image";
 import { Router, useRouter } from "next/router";
 import BecomeHostModel from "./hosts/becomeHostModel";
+import { useUpdateUserRoleWhereUser_IdMutation } from "src/graphql/generated/graphql";
+import { PuffLoader } from "react-spinners";
+
+let userRole: string
 
 export default function Sidebar({SessionDetails , refetch} : any) {
   const router = useRouter();
@@ -10,6 +14,35 @@ export default function Sidebar({SessionDetails , refetch} : any) {
     router.push("/signin");
   };
   console.log(SessionDetails?.User);
+
+if(SessionDetails?.User?.role === "Renter"){
+  userRole = "Host"
+}else{
+  userRole = "Renter"
+}
+  const {mutate:SwitchUserRole , isLoading:switchingProfile} = useUpdateUserRoleWhereUser_IdMutation({
+    onSuccess(){
+      refetch()
+    }
+  })
+  const SwitchUserProfile = ()=>{
+    try{
+      SwitchUserRole({
+        user_id:SessionDetails?.User?.UID,
+        role : userRole
+      })
+    }catch(error){
+      console.log(error);
+    }
+   
+  }
+if(switchingProfile){
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
+    <PuffLoader color="#000000" />
+  </div>
+  )
+}
   
   return (
     <>
@@ -128,10 +161,11 @@ export default function Sidebar({SessionDetails , refetch} : any) {
             <BecomeHostModel refetch={refetch} user={SessionDetails?.User} />
                 ):(
                   <button
+                  onClick={SwitchUserProfile}
                   className="text-blue-600 text-xs font-medium hover:underline"
                 >
                   {
-                    SessionDetails.User?.role === "Renter" ? "Switch to Renter" : "Switch to Hosting"
+                    SessionDetails.User?.role === "Renter" ? "Switch to Hosting" : "Switch to Rentering"
                   }
                   
                 </button>
