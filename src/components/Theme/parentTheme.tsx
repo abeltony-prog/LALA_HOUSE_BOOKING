@@ -1,5 +1,6 @@
 import SearchProperties from "@components/Filters/searchbar";
 import Sidebar from "@components/Navbars/Sidebar";
+import { MyProvider } from "context/auth";
 import { useSession } from "next-auth/react";
 import React, { ReactElement } from "react";
 import { useGetUsersQuery } from "src/graphql/generated/graphql";
@@ -28,7 +29,10 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
             status: status,
             User:userDetails?.users[0]
           }} />
+          <MyProvider value={{userInfo : userDetails?.users[0]}}>
           {children}
+          </MyProvider>
+        
         </>
       </div>
     </div>

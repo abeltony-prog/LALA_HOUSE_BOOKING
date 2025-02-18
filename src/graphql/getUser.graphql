@@ -11,6 +11,18 @@ query getUsers($email: String = "") {
       join_on
       name
       user_id
+      properties {
+        type
+        per
+        name
+        listed_on
+        host_id
+        description
+        cost
+        beds
+        bath
+        PID
+      }
     }
   }
 }

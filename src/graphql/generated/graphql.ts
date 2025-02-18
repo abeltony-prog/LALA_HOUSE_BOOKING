@@ -95,7 +95,33 @@ export type Hosts = {
   HID: Scalars['uuid'];
   join_on: Scalars['timestamptz'];
   name: Scalars['String'];
+  /** An array relationship */
+  properties: Array<Properties>;
+  /** An aggregate relationship */
+  properties_aggregate: Properties_Aggregate;
+  /** An object relationship */
+  user: Users;
   user_id: Scalars['uuid'];
+};
+
+
+/** columns and relationships of "hosts" */
+export type HostsPropertiesArgs = {
+  distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Properties_Order_By>>;
+  where?: InputMaybe<Properties_Bool_Exp>;
+};
+
+
+/** columns and relationships of "hosts" */
+export type HostsProperties_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Properties_Order_By>>;
+  where?: InputMaybe<Properties_Bool_Exp>;
 };
 
 /** aggregated selection of "hosts" */
@@ -153,6 +179,9 @@ export type Hosts_Bool_Exp = {
   _or?: InputMaybe<Array<Hosts_Bool_Exp>>;
   join_on?: InputMaybe<Timestamptz_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  properties?: InputMaybe<Properties_Bool_Exp>;
+  properties_aggregate?: InputMaybe<Properties_Aggregate_Bool_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -169,6 +198,8 @@ export type Hosts_Insert_Input = {
   HID?: InputMaybe<Scalars['uuid']>;
   join_on?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
+  properties?: InputMaybe<Properties_Arr_Rel_Insert_Input>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -215,6 +246,13 @@ export type Hosts_Mutation_Response = {
   returning: Array<Hosts>;
 };
 
+/** input type for inserting object relation for remote table "hosts" */
+export type Hosts_Obj_Rel_Insert_Input = {
+  data: Hosts_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Hosts_On_Conflict>;
+};
+
 /** on_conflict condition type for table "hosts" */
 export type Hosts_On_Conflict = {
   constraint: Hosts_Constraint;
@@ -227,6 +265,8 @@ export type Hosts_Order_By = {
   HID?: InputMaybe<Order_By>;
   join_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  properties_aggregate?: InputMaybe<Properties_Aggregate_Order_By>;
+  user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
@@ -500,6 +540,8 @@ export type Properties = {
   cost: Scalars['String'];
   description: Scalars['String'];
   host_id: Scalars['uuid'];
+  /** An object relationship */
+  hosts: Hosts;
   listed_on: Scalars['timestamptz'];
   name: Scalars['String'];
   per: Scalars['String'];
@@ -511,6 +553,17 @@ export type Properties_Aggregate = {
   __typename?: 'properties_aggregate';
   aggregate?: Maybe<Properties_Aggregate_Fields>;
   nodes: Array<Properties>;
+};
+
+export type Properties_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Properties_Aggregate_Bool_Exp_Count>;
+};
+
+export type Properties_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Properties_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Properties_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "properties" */
@@ -528,6 +581,20 @@ export type Properties_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "properties" */
+export type Properties_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Properties_Max_Order_By>;
+  min?: InputMaybe<Properties_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "properties" */
+export type Properties_Arr_Rel_Insert_Input = {
+  data: Array<Properties_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Properties_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "properties". All fields are combined with a logical 'AND'. */
 export type Properties_Bool_Exp = {
   PID?: InputMaybe<Uuid_Comparison_Exp>;
@@ -539,6 +606,7 @@ export type Properties_Bool_Exp = {
   cost?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   host_id?: InputMaybe<Uuid_Comparison_Exp>;
+  hosts?: InputMaybe<Hosts_Bool_Exp>;
   listed_on?: InputMaybe<Timestamptz_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   per?: InputMaybe<String_Comparison_Exp>;
@@ -559,6 +627,7 @@ export type Properties_Insert_Input = {
   cost?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   host_id?: InputMaybe<Scalars['uuid']>;
+  hosts?: InputMaybe<Hosts_Obj_Rel_Insert_Input>;
   listed_on?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
   per?: InputMaybe<Scalars['String']>;
@@ -580,6 +649,20 @@ export type Properties_Max_Fields = {
   type?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "properties" */
+export type Properties_Max_Order_By = {
+  PID?: InputMaybe<Order_By>;
+  bath?: InputMaybe<Order_By>;
+  beds?: InputMaybe<Order_By>;
+  cost?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  host_id?: InputMaybe<Order_By>;
+  listed_on?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  per?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Properties_Min_Fields = {
   __typename?: 'properties_min_fields';
@@ -593,6 +676,20 @@ export type Properties_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   per?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "properties" */
+export type Properties_Min_Order_By = {
+  PID?: InputMaybe<Order_By>;
+  bath?: InputMaybe<Order_By>;
+  beds?: InputMaybe<Order_By>;
+  cost?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  host_id?: InputMaybe<Order_By>;
+  listed_on?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  per?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "properties" */
@@ -619,6 +716,7 @@ export type Properties_Order_By = {
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
+  hosts?: InputMaybe<Hosts_Order_By>;
   listed_on?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   per?: InputMaybe<Order_By>;
@@ -729,9 +827,9 @@ export type Query_Root = {
   hosts_aggregate: Hosts_Aggregate;
   /** fetch data from the table: "hosts" using primary key columns */
   hosts_by_pk?: Maybe<Hosts>;
-  /** fetch data from the table: "properties" */
+  /** An array relationship */
   properties: Array<Properties>;
-  /** fetch aggregated fields from the table: "properties" */
+  /** An aggregate relationship */
   properties_aggregate: Properties_Aggregate;
   /** fetch data from the table: "properties" using primary key columns */
   properties_by_pk?: Maybe<Properties>;
@@ -822,9 +920,9 @@ export type Subscription_Root = {
   hosts_by_pk?: Maybe<Hosts>;
   /** fetch data from the table in a streaming manner: "hosts" */
   hosts_stream: Array<Hosts>;
-  /** fetch data from the table: "properties" */
+  /** An array relationship */
   properties: Array<Properties>;
-  /** fetch aggregated fields from the table: "properties" */
+  /** An aggregate relationship */
   properties_aggregate: Properties_Aggregate;
   /** fetch data from the table: "properties" using primary key columns */
   properties_by_pk?: Maybe<Properties>;
@@ -1063,6 +1161,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -1182,7 +1287,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any }> }> };
+export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any, properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, host_id: any, description: string, cost: string, beds: string, bath: string, PID: any }> }> }> };
 
 
 export const AddUsersDocument = `
@@ -1219,6 +1324,18 @@ export const GetUsersDocument = `
       join_on
       name
       user_id
+      properties {
+        type
+        per
+        name
+        listed_on
+        host_id
+        description
+        cost
+        beds
+        bath
+        PID
+      }
     }
   }
 }
