@@ -30,10 +30,9 @@ export default function PropertyList() {
   return (
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
-        <span className="text-gray-600">497 properties</span>
-        <button className="flex items-center gap-2 text-sm">
-          Sort by newest
-          <ChevronDown className="h-4 w-4" />
+        <span className="text-gray-600">{LoggedUser?.userInfo?.hosts[0]?.properties?.length} properties</span>
+        <button className="flex items-center rounded-md px-2 bg-black py-1 text-white transition hover:bg-gray-800 gap-2 text-sm">
+        Add Property
         </button>
       </div>
 
