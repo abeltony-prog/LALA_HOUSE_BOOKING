@@ -2,7 +2,7 @@ import React from "react";
 import { Drawer } from "rsuite";
 import PropertyDrawer from "./PropertyDetails/PropertyDrawer";
 
-export default function Property({ property , User }: any) {
+export default function Property({ property, User }: any) {
   const [open, setOpen] = React.useState(false);
   return (
     <>
@@ -16,7 +16,10 @@ export default function Property({ property , User }: any) {
           width={300}
           height={200}
           className="h-[200px] w-full object-cover"
-          src={property.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc7o1w00FioBpklxaTPGkc2F8DtqFU5EZVlHbyYYLArTwJL7wJu7BV6aFduv-cj_xXgZA&usqp=CAU"}
+          src={
+            property?.image ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc7o1w00FioBpklxaTPGkc2F8DtqFU5EZVlHbyYYLArTwJL7wJu7BV6aFduv-cj_xXgZA&usqp=CAU"
+          }
         />
 
         <div className="space-y-4 p-4">
@@ -31,7 +34,9 @@ export default function Property({ property , User }: any) {
             </div>
             <div className="text-right">
               <span className="text-lg font-medium">${property.cost}</span>
-              <span className="text-sm text-gray-500">/{property?.per === "perMonth" ? "month" : "night"}</span>
+              <span className="text-sm text-gray-500">
+                /{property?.per === "perMonth" ? "month" : "night"}
+              </span>
             </div>
           </div>
         </div>

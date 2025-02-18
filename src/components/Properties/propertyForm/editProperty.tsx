@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Input, SelectPicker, RadioGroup, Radio, CheckboxGroup, Checkbox } from "rsuite";
+import {
+  Input,
+  SelectPicker,
+  RadioGroup,
+  Radio,
+  CheckboxGroup,
+  Checkbox,
+} from "rsuite";
 import { useUpdatePropertyWherePropertyIdMutation } from "src/graphql/generated/graphql";
 
 export default function EditProperty({ propertyDetails }: any) {
@@ -33,7 +40,7 @@ export default function EditProperty({ propertyDetails }: any) {
     }
   }, [propertyDetails]);
 
-  const {mutate:updateProperty} = useUpdatePropertyWherePropertyIdMutation()
+  const { mutate: updateProperty } = useUpdatePropertyWherePropertyIdMutation();
 
   const propertyTypes = [
     { label: "Apartment", value: "apartment" },
@@ -42,7 +49,14 @@ export default function EditProperty({ propertyDetails }: any) {
     { label: "Villa", value: "villa" },
   ];
 
-  const amenitiesList = ["WiFi", "Parking", "Pool", "Air Conditioning", "Gym", "Air conditioner"];
+  const amenitiesList = [
+    "WiFi",
+    "Parking",
+    "Pool",
+    "Air Conditioning",
+    "Gym",
+    "Air conditioner",
+  ];
 
   const handleChange = (field: any, value: any) => {
     setProperty((prev) => ({ ...prev, [field]: value }));
@@ -55,34 +69,40 @@ export default function EditProperty({ propertyDetails }: any) {
     }));
   };
 
-  const SavePropertyChanges = () =>{
-try{
-    updateProperty({
+  const SavePropertyChanges = () => {
+    try {
+      updateProperty({
         name: property?.name,
-            amenities: property?.amenities,
-            type: property?.type,
-            per: property?.rentalType,
-            cost: property?.price,
-            beds: property?.bedrooms,
-            bath: property?.bathrooms,
-            description: property?.description,
-            image: property?.images,
-            property_id: propertyDetails?.property_id
-    })
-
-}catch(error){
-    console.log(error);
-    
-}
-    
-  }
+        amenities: property?.amenities,
+        type: property?.type,
+        per: property?.rentalType,
+        cost: property?.price,
+        beds: property?.bedrooms,
+        bath: property?.bathrooms,
+        description: property?.description,
+        image: property?.images,
+        property_id: propertyDetails?.property_id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
-      <label className="block text-sm font-medium text-gray-700">Property Name</label>
-      <Input value={property.name} onChange={(value) => handleChange("name", value)} placeholder="Enter property name" className="mb-3" />
+      <label className="block text-sm font-medium text-gray-700">
+        Property Name
+      </label>
+      <Input
+        value={property.name}
+        onChange={(value) => handleChange("name", value)}
+        placeholder="Enter property name"
+        className="mb-3"
+      />
 
-      <label className="block text-sm font-medium text-gray-700">Property Type</label>
+      <label className="block text-sm font-medium text-gray-700">
+        Property Type
+      </label>
       <SelectPicker
         data={propertyTypes}
         value={property.type}
@@ -91,38 +111,74 @@ try{
         className="mb-3 w-full"
       />
 
-      <label className="block text-sm font-medium text-gray-700">Location</label>
-      <Input value={property.location} onChange={(value) => handleChange("location", value)} placeholder="Enter address" className="mb-3" />
+      <label className="block text-sm font-medium text-gray-700">
+        Location
+      </label>
+      <Input
+        value={property.location}
+        onChange={(value) => handleChange("location", value)}
+        placeholder="Enter address"
+        className="mb-3"
+      />
 
-      <label className="block text-sm font-medium text-gray-700">Rental Type</label>
-      <RadioGroup name="rentalType" inline value={property.rentalType} onChange={(value) => handleChange("rentalType", value)} className="mb-3">
+      <label className="block text-sm font-medium text-gray-700">
+        Rental Type
+      </label>
+      <RadioGroup
+        name="rentalType"
+        inline
+        value={property.rentalType}
+        onChange={(value) => handleChange("rentalType", value)}
+        className="mb-3"
+      >
         <Radio value="perNight">Per Night</Radio>
         <Radio value="perMonth">Per Month</Radio>
       </RadioGroup>
 
       <label className="block text-sm font-medium text-gray-700">
-        Price ({property.rentalType === "perNight" ? "Per Night" : "Per Month"}) ($)
+        Price ({property.rentalType === "perNight" ? "Per Night" : "Per Month"})
+        ($)
       </label>
       <Input
         type="number"
         value={property.price}
         onChange={(value) => handleChange("price", value)}
-        placeholder={`Enter price ${property.rentalType === "perNight" ? "per night" : "per month"}`}
+        placeholder={`Enter price ${
+          property.rentalType === "perNight" ? "per night" : "per month"
+        }`}
         className="mb-3"
       />
 
       <div className="flex gap-3">
         <div className="w-1/2">
-          <label className="block text-sm font-medium text-gray-700">Bedrooms</label>
-          <Input type="number" value={property.bedrooms} onChange={(value) => handleChange("bedrooms", value)} placeholder="Enter number" className="mb-3" />
+          <label className="block text-sm font-medium text-gray-700">
+            Bedrooms
+          </label>
+          <Input
+            type="number"
+            value={property.bedrooms}
+            onChange={(value) => handleChange("bedrooms", value)}
+            placeholder="Enter number"
+            className="mb-3"
+          />
         </div>
         <div className="w-1/2">
-          <label className="block text-sm font-medium text-gray-700">Bathrooms</label>
-          <Input type="number" value={property.bathrooms} onChange={(value) => handleChange("bathrooms", value)} placeholder="Enter number" className="mb-3" />
+          <label className="block text-sm font-medium text-gray-700">
+            Bathrooms
+          </label>
+          <Input
+            type="number"
+            value={property.bathrooms}
+            onChange={(value) => handleChange("bathrooms", value)}
+            placeholder="Enter number"
+            className="mb-3"
+          />
         </div>
       </div>
 
-      <label className="block text-sm font-medium text-gray-700">Description</label>
+      <label className="block text-sm font-medium text-gray-700">
+        Description
+      </label>
       <Input
         as="textarea"
         rows={4}
@@ -132,8 +188,15 @@ try{
         className="mb-3"
       />
 
-      <label className="block text-sm font-medium text-gray-700">Amenities</label>
-      <CheckboxGroup inline name="amenities" value={property.amenities} onChange={(value) => handleChange("amenities", value)}>
+      <label className="block text-sm font-medium text-gray-700">
+        Amenities
+      </label>
+      <CheckboxGroup
+        inline
+        name="amenities"
+        value={property.amenities}
+        onChange={(value) => handleChange("amenities", value)}
+      >
         {amenitiesList.map((amenity) => (
           <Checkbox key={amenity} value={amenity}>
             {amenity}
@@ -141,14 +204,25 @@ try{
         ))}
       </CheckboxGroup>
 
-      <label className="block text-sm font-medium text-gray-700 mt-3">Upload Images</label>
-      <input type="file" multiple accept="image/*" className="mb-3 border p-2 w-full" onChange={handleFileChange} />
-           {/* Booking Button */}
-           <div className="bg-white p-4">
-          <button onClick={SavePropertyChanges} className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800">
-            Save Changes
-          </button>
-        </div>
+      <label className="mt-3 block text-sm font-medium text-gray-700">
+        Upload Images
+      </label>
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        className="mb-3 w-full border p-2"
+        onChange={handleFileChange}
+      />
+      {/* Booking Button */}
+      <div className="bg-white p-4">
+        <button
+          onClick={SavePropertyChanges}
+          className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800"
+        >
+          Save Changes
+        </button>
+      </div>
     </>
   );
 }

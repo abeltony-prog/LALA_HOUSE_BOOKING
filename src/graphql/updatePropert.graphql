@@ -1,5 +1,29 @@
-mutation UpdatePropertyWherePropertyID($property_id: uuid = "", $amenities: jsonb = "", $bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $image: jsonb = "", $name: String = "", $per: String = "", $type: String = "") {
-  update_properties(where: {PID: {_eq: $property_id}}, _set: {amenities: $amenities, bath: $bath, beds: $beds, cost: $cost, description: $description, image: $image, name: $name, per: $per, type: $type}) {
+mutation UpdatePropertyWherePropertyID(
+  $property_id: uuid = ""
+  $amenities: jsonb = ""
+  $bath: String = ""
+  $beds: String = ""
+  $cost: String = ""
+  $description: String = ""
+  $name: String = ""
+  $per: String = ""
+  $type: String = ""
+  $image: String = ""
+) {
+  update_properties(
+    where: { PID: { _eq: $property_id } }
+    _set: {
+      amenities: $amenities
+      bath: $bath
+      beds: $beds
+      cost: $cost
+      description: $description
+      name: $name
+      per: $per
+      type: $type
+      image: $image
+    }
+  ) {
     affected_rows
   }
 }

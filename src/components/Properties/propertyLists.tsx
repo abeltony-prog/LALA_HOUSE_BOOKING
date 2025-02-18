@@ -9,10 +9,6 @@ export default function PropertyList() {
 
   let properties;
 
-  console.log(
-    LoggedUser
-  );
-  
   try {
     properties =
       LoggedUser?.userInfo?.role === "Renter"
@@ -28,21 +24,23 @@ export default function PropertyList() {
               area: "50 m²",
             },
           ]
-        : LoggedUser?.userInfo?.hosts[0]?.properties?.map((pro : any)=>{
-          return{
-            name:pro?.name,
-            description: pro.description,
-            cost: pro?.cost,
-            image: pro?.image || `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
-            beds: pro?.beds,
-            bath: pro?.bath,
-            per: pro?.per,
-            amenities: pro?.amenities,
-            host: LoggedUser?.userInfo?.name,
-            type: pro?.type,
-            property_id: pro?.PID
-          }
-        })
+        : LoggedUser?.userInfo?.hosts[0]?.properties?.map((pro: any) => {
+            return {
+              name: pro?.name,
+              description: pro.description,
+              cost: pro?.cost,
+              image:
+                pro?.image ||
+                `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
+              beds: pro?.beds,
+              bath: pro?.bath,
+              per: pro?.per,
+              amenities: pro?.amenities,
+              host: LoggedUser?.userInfo?.name,
+              type: pro?.type,
+              property_id: pro?.PID,
+            };
+          });
   } catch (error) {
     console.log(error);
   }
@@ -50,14 +48,20 @@ export default function PropertyList() {
   return (
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
-        <span className="text-gray-600">{LoggedUser?.userInfo?.hosts[0]?.properties?.length} properties</span>
-<AddNewPropertyForm user={LoggedUser?.userInfo} />
+        <span className="text-gray-600">
+          {LoggedUser?.userInfo?.hosts[0]?.properties?.length} properties
+        </span>
+        <AddNewPropertyForm user={LoggedUser?.userInfo} />
       </div>
 
       {/* Property Grid - 4 per row */}
       <div className="grid grid-cols-4 gap-6">
         {properties?.map((property: any) => (
-          <Property User={LoggedUser?.userInfo} key={property?.name} property={property} />
+          <Property
+            User={LoggedUser?.userInfo}
+            key={property?.name}
+            property={property}
+          />
         ))}
       </div>
     </div>

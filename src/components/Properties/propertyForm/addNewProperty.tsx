@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Drawer, Button, Input, SelectPicker, CheckboxGroup, Checkbox, RadioGroup, Radio } from "rsuite";
+import {
+  Drawer,
+  Button,
+  Input,
+  SelectPicker,
+  CheckboxGroup,
+  Checkbox,
+  RadioGroup,
+  Radio,
+} from "rsuite";
 import { useAddNewPropertyMutation } from "src/graphql/generated/graphql";
 
-export default function AddNewPropertyForm({user} : any) {
-    
+export default function AddNewPropertyForm({ user }: any) {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState({
     name: "",
@@ -15,52 +23,61 @@ export default function AddNewPropertyForm({user} : any) {
     bathrooms: "",
     description: "",
     amenities: [] as any,
-    images: null
+    images: "",
   });
 
-  const {mutate:SaveNewProperty , isLoading} = useAddNewPropertyMutation({
-    onSuccess(){
-        setOpen(false)
+  const { mutate: SaveNewProperty, isLoading } = useAddNewPropertyMutation({
+    onSuccess() {
+      setOpen(false);
     },
-    onError(error){
-        console.log(error);
-        
-    }
-  })
+    onError(error) {
+      console.log(error);
+    },
+  });
 
   const propertyTypes = [
     { label: "Apartment", value: "apartment" },
     { label: "House", value: "house" },
     { label: "Condo", value: "condo" },
-    { label: "Villa", value: "villa" }
+    { label: "Villa", value: "villa" },
   ];
 
-  const amenitiesList = ["WiFi", "Parking", "Pool", "Air Conditioning", "Gym"  , "Air conditioner"];
+  const amenitiesList = [
+    "WiFi",
+    "Parking",
+    "Pool",
+    "Air Conditioning",
+    "Gym",
+    "Air conditioner",
+  ];
 
-  const handleChange = (field:any, value :any) => {
+  const handleChange = (field: any, value: any) => {
     setProperty((prev) => ({ ...prev, [field]: value }));
+  };
+  const handleFile = (e: any) => {
+    setProperty({
+      ...property,
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleSubmit = () => {
     // console.log("New Property Data:", property);
-    try{
-        SaveNewProperty ({
-            name: property?.name,
-            amenities: property?.amenities,
-            type: property?.type,
-            per: property?.rentalType,
-            cost: property?.price,
-            beds: property?.bedrooms,
-            bath: property?.bathrooms,
-            description: property?.description,
-            image: property?.images,
-            host_id: user?.hosts[0]?.HID
-            })
-
-            
-    }catch(error){
-        console.log(error);
-        
+    try {
+      SaveNewProperty({
+        name: property?.name,
+        amenities: property?.amenities,
+        type: property?.type,
+        per: property?.rentalType,
+        cost: property?.price,
+        beds: property?.bedrooms,
+        bath: property?.bathrooms,
+        description: property?.description,
+        image: property?.images,
+        host_id: user?.hosts[0]?.HID,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -69,7 +86,7 @@ export default function AddNewPropertyForm({user} : any) {
       {/* Add Property Button */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center rounded-md px-2 bg-black py-1 text-white transition hover:bg-gray-800 gap-2 text-sm"
+        className="flex items-center gap-2 rounded-md bg-black px-2 py-1 text-sm text-white transition hover:bg-gray-800"
       >
         Add Property
       </button>
@@ -82,8 +99,10 @@ export default function AddNewPropertyForm({user} : any) {
 
         <Drawer.Body>
           {/* Property Name */}
-          <label className="block text-sm font-medium text-gray-700">Property Name</label>
-          <Input 
+          <label className="block text-sm font-medium text-gray-700">
+            Property Name
+          </label>
+          <Input
             value={property.name}
             onChange={(value) => handleChange("name", value)}
             placeholder="Enter property name"
@@ -91,18 +110,22 @@ export default function AddNewPropertyForm({user} : any) {
           />
 
           {/* Property Type */}
-          <label className="block text-sm font-medium text-gray-700">Property Type</label>
-          <SelectPicker 
-            data={propertyTypes} 
-            value={property.type} 
-            onChange={(value) => handleChange("type", value)} 
+          <label className="block text-sm font-medium text-gray-700">
+            Property Type
+          </label>
+          <SelectPicker
+            data={propertyTypes}
+            value={property.type}
+            onChange={(value) => handleChange("type", value)}
             placeholder="Select type"
             className="mb-3 w-full"
           />
 
           {/* Location */}
-          <label className="block text-sm font-medium text-gray-700">Location</label>
-          <Input 
+          <label className="block text-sm font-medium text-gray-700">
+            Location
+          </label>
+          <Input
             value={property.location}
             onChange={(value) => handleChange("location", value)}
             placeholder="Enter address"
@@ -110,8 +133,10 @@ export default function AddNewPropertyForm({user} : any) {
           />
 
           {/* Rental Type Selection */}
-          <label className="block text-sm font-medium text-gray-700">Rental Type</label>
-          <RadioGroup 
+          <label className="block text-sm font-medium text-gray-700">
+            Rental Type
+          </label>
+          <RadioGroup
             name="rentalType"
             inline
             value={property.rentalType}
@@ -124,21 +149,27 @@ export default function AddNewPropertyForm({user} : any) {
 
           {/* Dynamic Price Input */}
           <label className="block text-sm font-medium text-gray-700">
-            Price ({property.rentalType === "perNight" ? "Per Night" : "Per Month"}) ($)
+            Price (
+            {property.rentalType === "perNight" ? "Per Night" : "Per Month"})
+            ($)
           </label>
-          <Input 
+          <Input
             type="number"
             value={property.price}
             onChange={(value) => handleChange("price", value)}
-            placeholder={`Enter price ${property.rentalType === "perNight" ? "per night" : "per month"}`}
+            placeholder={`Enter price ${
+              property.rentalType === "perNight" ? "per night" : "per month"
+            }`}
             className="mb-3"
           />
 
           {/* Bedrooms & Bathrooms */}
           <div className="flex gap-3">
             <div className="w-1/2">
-              <label className="block text-sm font-medium text-gray-700">Bedrooms</label>
-              <Input 
+              <label className="block text-sm font-medium text-gray-700">
+                Bedrooms
+              </label>
+              <Input
                 type="number"
                 value={property.bedrooms}
                 onChange={(value) => handleChange("bedrooms", value)}
@@ -147,8 +178,10 @@ export default function AddNewPropertyForm({user} : any) {
               />
             </div>
             <div className="w-1/2">
-              <label className="block text-sm font-medium text-gray-700">Bathrooms</label>
-              <Input 
+              <label className="block text-sm font-medium text-gray-700">
+                Bathrooms
+              </label>
+              <Input
                 type="number"
                 value={property.bathrooms}
                 onChange={(value) => handleChange("bathrooms", value)}
@@ -159,7 +192,9 @@ export default function AddNewPropertyForm({user} : any) {
           </div>
 
           {/* Description Input (Multiline) */}
-          <label className="block text-sm font-medium text-gray-700">Description</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Description
+          </label>
           <Input
             as="textarea"
             rows={4}
@@ -170,7 +205,9 @@ export default function AddNewPropertyForm({user} : any) {
           />
 
           {/* Amenities */}
-          <label className="block text-sm  font-medium text-gray-700">Amenities</label>
+          <label className="block text-sm  font-medium text-gray-700">
+            Amenities
+          </label>
           <CheckboxGroup
             inline
             name="amenities"
@@ -178,36 +215,37 @@ export default function AddNewPropertyForm({user} : any) {
             onChange={(value) => handleChange("amenities", value)}
           >
             {amenitiesList.map((amenity) => (
-              <Checkbox key={amenity} value={amenity}>{amenity}</Checkbox>
+              <Checkbox key={amenity} value={amenity}>
+                {amenity}
+              </Checkbox>
             ))}
           </CheckboxGroup>
 
           {/* Image Upload */}
-          <label className="block text-sm font-medium text-gray-700 mt-3">Upload Images</label>
+          <label className="mt-3 block text-sm font-medium text-gray-700">
+            Upload Images
+          </label>
           <input
             type="file"
-            multiple
-            accept="image/*"
-            className="mb-3 border p-2 w-full"
-            onChange={(e) => handleChange("images", e.target.files)}
+            id="images"
+            value={property?.images}
+            className="mb-3 w-full border p-2"
+            onChange={handleFile}
           />
-     <div className="flex gap-4 mt-4">
-     <button
-        onClick={() => setOpen(false)}
-        className="flex items-center rounded-md px-2 border border-black py-1 text-black transition hover:border-gray-800 gap-2 text-sm"
-      >
-        Cancel
-      </button>
-      <button
-        onClick={handleSubmit}
-        className="flex items-center ml-auto rounded-md px-2 bg-black py-1 text-white transition hover:bg-gray-800 gap-2 text-sm"
-      >
-        {
-            isLoading ? "Saving..." : "Save"
-        }
-        
-      </button>
-     </div>
+          <div className="mt-4 flex gap-4">
+            <button
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-md border border-black px-2 py-1 text-sm text-black transition hover:border-gray-800"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="ml-auto flex items-center gap-2 rounded-md bg-black px-2 py-1 text-sm text-white transition hover:bg-gray-800"
+            >
+              {isLoading ? "Saving..." : "Save"}
+            </button>
+          </div>
         </Drawer.Body>
       </Drawer>
     </>
