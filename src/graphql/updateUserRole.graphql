@@ -1,0 +1,5 @@
+mutation updateUserRoleWhereUser_id($user_id: uuid = "", $role: String = "") {
+  update_users(where: {UID: {_eq: $user_id}}, _set: {role: $role}) {
+    affected_rows
+  }
+}

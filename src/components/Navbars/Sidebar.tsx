@@ -2,8 +2,9 @@ import { ChevronDown } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { Router, useRouter } from "next/router";
+import BecomeHostModel from "./hosts/becomeHostModel";
 
-export default function Sidebar({SessionDetails} : any) {
+export default function Sidebar({SessionDetails , refetch} : any) {
   const router = useRouter();
   const RedictURL = () => {
     router.push("/signin");
@@ -124,16 +125,15 @@ export default function Sidebar({SessionDetails} : any) {
               {/* Switch Role Link */}
               {
                 SessionDetails.User?.hosts.length === 0 ? (
-                  <button
-                  className="text-blue-600 text-xs font-medium hover:underline"
-                >
-                  Become a Host
-                </button>
+            <BecomeHostModel refetch={refetch} user={SessionDetails?.User} />
                 ):(
                   <button
                   className="text-blue-600 text-xs font-medium hover:underline"
                 >
-                  Switch to Hosting
+                  {
+                    SessionDetails.User?.role === "Renter" ? "Switch to Renter" : "Switch to Hosting"
+                  }
+                  
                 </button>
                 )
               }

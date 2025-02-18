@@ -1,0 +1,8 @@
+mutation makeUseraHost($user_id: uuid = "", $name: String = "", $role: String = "") {
+  insert_hosts(objects: {user_id: $user_id, name: $name}) {
+    affected_rows
+  }
+  update_users(where: {UID: {_eq: $user_id}}, _set: {role: $role}) {
+    affected_rows
+  }
+}

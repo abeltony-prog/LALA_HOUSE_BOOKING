@@ -11,7 +11,7 @@ interface iProps {
 
 const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: session, status } = useSession();
-  const {data:userDetails} = useGetUsersQuery({
+  const {data:userDetails , refetch} = useGetUsersQuery({
     email: session?.user?.email
   })  
   return (
@@ -24,7 +24,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
       <div className="flex flex-1">
         <>
           {" "}
-          <Sidebar SessionDetails={{
+          <Sidebar refetch={refetch} SessionDetails={{
             details : session?.user,
             status: status,
             User:userDetails?.users[0]

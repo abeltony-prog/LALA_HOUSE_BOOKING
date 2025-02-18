@@ -1282,12 +1282,29 @@ export type AddUsersMutationVariables = Exact<{
 
 export type AddUsersMutation = { __typename?: 'mutation_root', insert_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
+export type MakeUseraHostMutationVariables = Exact<{
+  user_id?: InputMaybe<Scalars['uuid']>;
+  name?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type MakeUseraHostMutation = { __typename?: 'mutation_root', insert_hosts?: { __typename?: 'hosts_mutation_response', affected_rows: number } | null, update_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
+
 export type GetUsersQueryVariables = Exact<{
   email?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any, properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, host_id: any, description: string, cost: string, beds: string, bath: string, PID: any }> }> }> };
+
+export type UpdateUserRoleWhereUser_IdMutationVariables = Exact<{
+  user_id?: InputMaybe<Scalars['uuid']>;
+  role?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type UpdateUserRoleWhereUser_IdMutation = { __typename?: 'mutation_root', update_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
 
 export const AddUsersDocument = `
@@ -1309,6 +1326,27 @@ export const useAddUsersMutation = <
       options
     );
 useAddUsersMutation.getKey = () => ['addUsers'];
+
+export const MakeUseraHostDocument = `
+    mutation makeUseraHost($user_id: uuid = "", $name: String = "", $role: String = "") {
+  insert_hosts(objects: {user_id: $user_id, name: $name}) {
+    affected_rows
+  }
+  update_users(where: {UID: {_eq: $user_id}}, _set: {role: $role}) {
+    affected_rows
+  }
+}
+    `;
+export const useMakeUseraHostMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<MakeUseraHostMutation, TError, MakeUseraHostMutationVariables, TContext>) =>
+    useMutation<MakeUseraHostMutation, TError, MakeUseraHostMutationVariables, TContext>(
+      ['makeUseraHost'],
+      (variables?: MakeUseraHostMutationVariables) => fetcher<MakeUseraHostMutation, MakeUseraHostMutationVariables>(MakeUseraHostDocument, variables)(),
+      options
+    );
+useMakeUseraHostMutation.getKey = () => ['makeUseraHost'];
 
 export const GetUsersDocument = `
     query getUsers($email: String = "") {
@@ -1355,3 +1393,21 @@ export const useGetUsersQuery = <
 
 useGetUsersQuery.getKey = (variables?: GetUsersQueryVariables) => variables === undefined ? ['getUsers'] : ['getUsers', variables];
 ;
+
+export const UpdateUserRoleWhereUser_IdDocument = `
+    mutation updateUserRoleWhereUser_id($user_id: uuid = "", $role: String = "") {
+  update_users(where: {UID: {_eq: $user_id}}, _set: {role: $role}) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateUserRoleWhereUser_IdMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateUserRoleWhereUser_IdMutation, TError, UpdateUserRoleWhereUser_IdMutationVariables, TContext>) =>
+    useMutation<UpdateUserRoleWhereUser_IdMutation, TError, UpdateUserRoleWhereUser_IdMutationVariables, TContext>(
+      ['updateUserRoleWhereUser_id'],
+      (variables?: UpdateUserRoleWhereUser_IdMutationVariables) => fetcher<UpdateUserRoleWhereUser_IdMutation, UpdateUserRoleWhereUser_IdMutationVariables>(UpdateUserRoleWhereUser_IdDocument, variables)(),
+      options
+    );
+useUpdateUserRoleWhereUser_IdMutation.getKey = () => ['updateUserRoleWhereUser_id'];
