@@ -33,6 +33,8 @@ export default function EditProperty({ propertyDetails }: any) {
     }
   }, [propertyDetails]);
 
+  
+
   const propertyTypes = [
     { label: "Apartment", value: "apartment" },
     { label: "House", value: "house" },

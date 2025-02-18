@@ -1423,7 +1423,23 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any, properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, host_id: any, description: string, cost: string, beds: string, bath: string, PID: any }> }> }> };
+export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', UID: any, email: string, gender: string, name: string, password: string, role: string, hosts: Array<{ __typename?: 'hosts', HID: any, join_on: any, name: string, user_id: any, properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, host_id: any, description: string, cost: string, beds: string, bath: string, PID: any, amenities?: any | null, image?: any | null }> }> }> };
+
+export type UpdatePropertyWherePropertyIdMutationVariables = Exact<{
+  property_id?: InputMaybe<Scalars['uuid']>;
+  amenities?: InputMaybe<Scalars['jsonb']>;
+  bath?: InputMaybe<Scalars['String']>;
+  beds?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['jsonb']>;
+  name?: InputMaybe<Scalars['String']>;
+  per?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type UpdatePropertyWherePropertyIdMutation = { __typename?: 'mutation_root', update_properties?: { __typename?: 'properties_mutation_response', affected_rows: number } | null };
 
 export type UpdateUserRoleWhereUser_IdMutationVariables = Exact<{
   user_id?: InputMaybe<Scalars['uuid']>;
@@ -1520,6 +1536,8 @@ export const GetUsersDocument = `
         beds
         bath
         PID
+        amenities
+        image
       }
     }
   }
@@ -1540,6 +1558,27 @@ export const useGetUsersQuery = <
 
 useGetUsersQuery.getKey = (variables?: GetUsersQueryVariables) => variables === undefined ? ['getUsers'] : ['getUsers', variables];
 ;
+
+export const UpdatePropertyWherePropertyIdDocument = `
+    mutation UpdatePropertyWherePropertyID($property_id: uuid = "", $amenities: jsonb = "", $bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $image: jsonb = "", $name: String = "", $per: String = "", $type: String = "") {
+  update_properties(
+    where: {PID: {_eq: $property_id}}
+    _set: {amenities: $amenities, bath: $bath, beds: $beds, cost: $cost, description: $description, image: $image, name: $name, per: $per, type: $type}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdatePropertyWherePropertyIdMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdatePropertyWherePropertyIdMutation, TError, UpdatePropertyWherePropertyIdMutationVariables, TContext>) =>
+    useMutation<UpdatePropertyWherePropertyIdMutation, TError, UpdatePropertyWherePropertyIdMutationVariables, TContext>(
+      ['UpdatePropertyWherePropertyID'],
+      (variables?: UpdatePropertyWherePropertyIdMutationVariables) => fetcher<UpdatePropertyWherePropertyIdMutation, UpdatePropertyWherePropertyIdMutationVariables>(UpdatePropertyWherePropertyIdDocument, variables)(),
+      options
+    );
+useUpdatePropertyWherePropertyIdMutation.getKey = () => ['UpdatePropertyWherePropertyID'];
 
 export const UpdateUserRoleWhereUser_IdDocument = `
     mutation updateUserRoleWhereUser_id($user_id: uuid = "", $role: String = "") {

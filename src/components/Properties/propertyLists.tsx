@@ -8,6 +8,11 @@ export default function PropertyList() {
   const LoggedUser = useContext(userAuth) as unknown as any;
 
   let properties;
+
+  console.log(
+    LoggedUser
+  );
+  
   try {
     properties =
       LoggedUser?.userInfo?.role === "Renter"
@@ -28,13 +33,13 @@ export default function PropertyList() {
             name:pro?.name,
             description: pro.description,
             cost: pro?.cost,
-            image:
-              "https://m.economictimes.com/thumb/height-450,width-600,imgsize-22382,msid-111780228/which-mansion-tops-the-list-of-the-worlds-most-expensive-houses.jpg",
+            image: pro?.image[0]?.name || `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
             beds: pro?.beds,
             bath: pro?.bath,
             per: pro?.per,
             amenities: pro?.amenities,
-            host: LoggedUser?.userInfo?.name
+            host: LoggedUser?.userInfo?.name,
+            type: pro?.type
           }
         })
   } catch (error) {
