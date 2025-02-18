@@ -33,13 +33,14 @@ export default function PropertyList() {
             name:pro?.name,
             description: pro.description,
             cost: pro?.cost,
-            image: pro?.image[0]?.name || `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
+            image: pro?.image || `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
             beds: pro?.beds,
             bath: pro?.bath,
             per: pro?.per,
             amenities: pro?.amenities,
             host: LoggedUser?.userInfo?.name,
-            type: pro?.type
+            type: pro?.type,
+            property_id: pro?.PID
           }
         })
   } catch (error) {

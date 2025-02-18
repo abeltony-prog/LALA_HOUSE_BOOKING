@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, SelectPicker, RadioGroup, Radio, CheckboxGroup, Checkbox } from "rsuite";
+import { useUpdatePropertyWherePropertyIdMutation } from "src/graphql/generated/graphql";
 
 export default function EditProperty({ propertyDetails }: any) {
   const [property, setProperty] = useState({
@@ -15,7 +16,6 @@ export default function EditProperty({ propertyDetails }: any) {
     images: null,
   });
 
-  // Populate form with existing property details when component mounts
   useEffect(() => {
     if (propertyDetails) {
       setProperty({
@@ -33,7 +33,7 @@ export default function EditProperty({ propertyDetails }: any) {
     }
   }, [propertyDetails]);
 
-  
+  const {mutate:updateProperty} = useUpdatePropertyWherePropertyIdMutation()
 
   const propertyTypes = [
     { label: "Apartment", value: "apartment" },
@@ -55,13 +55,33 @@ export default function EditProperty({ propertyDetails }: any) {
     }));
   };
 
+  const SavePropertyChanges = () =>{
+try{
+    updateProperty({
+        name: property?.name,
+            amenities: property?.amenities,
+            type: property?.type,
+            per: property?.rentalType,
+            cost: property?.price,
+            beds: property?.bedrooms,
+            bath: property?.bathrooms,
+            description: property?.description,
+            image: property?.images,
+            property_id: propertyDetails?.property_id
+    })
+
+}catch(error){
+    console.log(error);
+    
+}
+    
+  }
+
   return (
     <>
-      {/* Property Name */}
       <label className="block text-sm font-medium text-gray-700">Property Name</label>
       <Input value={property.name} onChange={(value) => handleChange("name", value)} placeholder="Enter property name" className="mb-3" />
 
-      {/* Property Type */}
       <label className="block text-sm font-medium text-gray-700">Property Type</label>
       <SelectPicker
         data={propertyTypes}
@@ -71,18 +91,15 @@ export default function EditProperty({ propertyDetails }: any) {
         className="mb-3 w-full"
       />
 
-      {/* Location */}
       <label className="block text-sm font-medium text-gray-700">Location</label>
       <Input value={property.location} onChange={(value) => handleChange("location", value)} placeholder="Enter address" className="mb-3" />
 
-      {/* Rental Type Selection */}
       <label className="block text-sm font-medium text-gray-700">Rental Type</label>
       <RadioGroup name="rentalType" inline value={property.rentalType} onChange={(value) => handleChange("rentalType", value)} className="mb-3">
         <Radio value="perNight">Per Night</Radio>
         <Radio value="perMonth">Per Month</Radio>
       </RadioGroup>
 
-      {/* Dynamic Price Input */}
       <label className="block text-sm font-medium text-gray-700">
         Price ({property.rentalType === "perNight" ? "Per Night" : "Per Month"}) ($)
       </label>
@@ -94,7 +111,6 @@ export default function EditProperty({ propertyDetails }: any) {
         className="mb-3"
       />
 
-      {/* Bedrooms & Bathrooms */}
       <div className="flex gap-3">
         <div className="w-1/2">
           <label className="block text-sm font-medium text-gray-700">Bedrooms</label>
@@ -106,7 +122,6 @@ export default function EditProperty({ propertyDetails }: any) {
         </div>
       </div>
 
-      {/* Description Input (Multiline) */}
       <label className="block text-sm font-medium text-gray-700">Description</label>
       <Input
         as="textarea"
@@ -117,7 +132,6 @@ export default function EditProperty({ propertyDetails }: any) {
         className="mb-3"
       />
 
-      {/* Amenities */}
       <label className="block text-sm font-medium text-gray-700">Amenities</label>
       <CheckboxGroup inline name="amenities" value={property.amenities} onChange={(value) => handleChange("amenities", value)}>
         {amenitiesList.map((amenity) => (
@@ -127,12 +141,11 @@ export default function EditProperty({ propertyDetails }: any) {
         ))}
       </CheckboxGroup>
 
-      {/* Image Upload */}
       <label className="block text-sm font-medium text-gray-700 mt-3">Upload Images</label>
       <input type="file" multiple accept="image/*" className="mb-3 border p-2 w-full" onChange={handleFileChange} />
            {/* Booking Button */}
            <div className="bg-white p-4">
-          <button className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800">
+          <button onClick={SavePropertyChanges} className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800">
             Save Changes
           </button>
         </div>
