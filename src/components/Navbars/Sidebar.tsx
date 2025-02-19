@@ -67,8 +67,8 @@ export default function Sidebar({ SessionDetails, refetch }: any) {
               {[
                 { icon: "🏢", label: "Apartment" },
                 { icon: "🏠", label: "Whole house" },
-                { icon: "🏢", label: "Office" },
-                { icon: "🛏️", label: "Room" },
+                { icon: "🏢", label: "Condo" },
+                { icon: "🛏️", label: "Villa" },
               ].map((item) => (
                 <button
                   key={item.label}
