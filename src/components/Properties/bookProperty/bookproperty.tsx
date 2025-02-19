@@ -18,7 +18,11 @@ export default function BookPropertyModel({property , User} : any) {
   const {data:properties , isLoading:loadingbookings} = useValidateAvailablePropertiesQuery({
     property_id:property?.property_id
   })
-  const { mutate:MakeBookigns } = useAddPropertyBookingsMutation()
+  const { mutate:MakeBookigns, isLoading:booking } = useAddPropertyBookingsMutation({
+    onSuccess(){
+        setOpen(false)
+    }
+  })
   // Helper function to check if a date is booked
   const isDateBooked = (fromDate: Date, toDate: Date) => {
     return properties?.bookings.some((booking) => {
@@ -154,9 +158,9 @@ export default function BookPropertyModel({property , User} : any) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button disabled={loadingbookings} onClick={handleConfirm} style={{ backgroundColor: "black" }} appearance="primary">
+          <Button disabled={loadingbookings || booking} onClick={handleConfirm} style={{ backgroundColor: "black" }} appearance="primary">
             {
-                loadingbookings ? <LoaderCircle /> : "Confirm"
+                loadingbookings || booking ? <LoaderCircle /> : "Confirm"
             }
             
           </Button>
