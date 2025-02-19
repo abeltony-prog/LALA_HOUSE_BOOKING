@@ -9,7 +9,6 @@ export default function Property({ property, reload, User }: any) {
   const isPropertyBooked = property?.isBooked?.find(
     (item: { user_id: any }) => item?.user_id === User?.UID
   )?.BID;
-  console.log(isPropertyBooked);
 
   return (
     <>
