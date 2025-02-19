@@ -6,7 +6,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import React from "react";
-import { Drawer, Placeholder } from "rsuite";
+import { Drawer } from "rsuite";
 import EditProperty from "../propertyForm/editProperty";
 
 export default function PropertyDrawer({ property, User }: any) {
