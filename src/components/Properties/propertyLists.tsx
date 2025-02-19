@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import React, { useContext } from "react";
-import Property from "./property";
+import Property from "./propertyView";
 import { userAuth } from "context/auth";
 import AddNewPropertyForm from "./propertyForm/addNewProperty";
 
@@ -56,7 +56,13 @@ export default function PropertyList() {
         <span className="text-gray-600">
           {Logged?.userInfo?.hosts[0]?.properties?.length} properties
         </span>
-        <AddNewPropertyForm user={Logged?.userInfo} />
+        {
+          Logged?.userInfo?.role === "Host" && (
+<AddNewPropertyForm user={Logged?.userInfo} />
+          )
+           
+        }
+       
       </div>
 
       {/* Property Grid - 4 per row */}

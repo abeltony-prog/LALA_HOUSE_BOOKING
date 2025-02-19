@@ -1,13 +1,10 @@
 import {
-  BedDouble,
-  ShowerHead,
   Star,
-  Users,
-  UtensilsCrossed,
 } from "lucide-react";
 import React from "react";
 import { Drawer } from "rsuite";
 import EditProperty from "../propertyForm/editProperty";
+import BookPropertyModel from "../bookProperty/bookproperty";
 
 export default function PropertyDrawer({ property, User }: any) {
   return (
@@ -121,9 +118,7 @@ export default function PropertyDrawer({ property, User }: any) {
               </div>
             </div>
             <div className="border-t bg-white p-4">
-              <button className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800">
-                Book Now
-              </button>
+            <BookPropertyModel />
             </div>
           </>
         ) : (
