@@ -26,7 +26,8 @@ export default function PropertyList() {
             per: property?.per,
             amenities: property?.amenities,
             type: property?.type,
-            host:property?.hosts?.name
+            host:property?.hosts?.name,
+            property_id: property?.PID
           }
         })
         : Logged?.userInfo?.hosts[0]?.properties?.map((pro: any) => {

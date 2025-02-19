@@ -118,7 +118,7 @@ export default function PropertyDrawer({ property, User }: any) {
               </div>
             </div>
             <div className="border-t bg-white p-4">
-            <BookPropertyModel />
+            <BookPropertyModel User={User} property={property} />
             </div>
           </>
         ) : (

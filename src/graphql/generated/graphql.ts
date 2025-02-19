@@ -82,6 +82,271 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "bookings" */
+export type Bookings = {
+  __typename?: 'bookings';
+  BID: Scalars['uuid'];
+  done_on: Scalars['timestamptz'];
+  from_date: Scalars['String'];
+  people?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  property: Properties;
+  property_id: Scalars['uuid'];
+  status: Scalars['String'];
+  to_date: Scalars['String'];
+  user_id?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  users?: Maybe<Users>;
+};
+
+/** aggregated selection of "bookings" */
+export type Bookings_Aggregate = {
+  __typename?: 'bookings_aggregate';
+  aggregate?: Maybe<Bookings_Aggregate_Fields>;
+  nodes: Array<Bookings>;
+};
+
+export type Bookings_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Bookings_Aggregate_Bool_Exp_Count>;
+};
+
+export type Bookings_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Bookings_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Bookings_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "bookings" */
+export type Bookings_Aggregate_Fields = {
+  __typename?: 'bookings_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Bookings_Max_Fields>;
+  min?: Maybe<Bookings_Min_Fields>;
+};
+
+
+/** aggregate fields of "bookings" */
+export type Bookings_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Bookings_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "bookings" */
+export type Bookings_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Bookings_Max_Order_By>;
+  min?: InputMaybe<Bookings_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "bookings" */
+export type Bookings_Arr_Rel_Insert_Input = {
+  data: Array<Bookings_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Bookings_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "bookings". All fields are combined with a logical 'AND'. */
+export type Bookings_Bool_Exp = {
+  BID?: InputMaybe<Uuid_Comparison_Exp>;
+  _and?: InputMaybe<Array<Bookings_Bool_Exp>>;
+  _not?: InputMaybe<Bookings_Bool_Exp>;
+  _or?: InputMaybe<Array<Bookings_Bool_Exp>>;
+  done_on?: InputMaybe<Timestamptz_Comparison_Exp>;
+  from_date?: InputMaybe<String_Comparison_Exp>;
+  people?: InputMaybe<String_Comparison_Exp>;
+  property?: InputMaybe<Properties_Bool_Exp>;
+  property_id?: InputMaybe<Uuid_Comparison_Exp>;
+  status?: InputMaybe<String_Comparison_Exp>;
+  to_date?: InputMaybe<String_Comparison_Exp>;
+  user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  users?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "bookings" */
+export enum Bookings_Constraint {
+  /** unique or primary key constraint on columns "BID" */
+  BookingsPkey = 'bookings_pkey'
+}
+
+/** input type for inserting data into table "bookings" */
+export type Bookings_Insert_Input = {
+  BID?: InputMaybe<Scalars['uuid']>;
+  done_on?: InputMaybe<Scalars['timestamptz']>;
+  from_date?: InputMaybe<Scalars['String']>;
+  people?: InputMaybe<Scalars['String']>;
+  property?: InputMaybe<Properties_Obj_Rel_Insert_Input>;
+  property_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['String']>;
+  to_date?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+  users?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Bookings_Max_Fields = {
+  __typename?: 'bookings_max_fields';
+  BID?: Maybe<Scalars['uuid']>;
+  done_on?: Maybe<Scalars['timestamptz']>;
+  from_date?: Maybe<Scalars['String']>;
+  people?: Maybe<Scalars['String']>;
+  property_id?: Maybe<Scalars['uuid']>;
+  status?: Maybe<Scalars['String']>;
+  to_date?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "bookings" */
+export type Bookings_Max_Order_By = {
+  BID?: InputMaybe<Order_By>;
+  done_on?: InputMaybe<Order_By>;
+  from_date?: InputMaybe<Order_By>;
+  people?: InputMaybe<Order_By>;
+  property_id?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+  to_date?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Bookings_Min_Fields = {
+  __typename?: 'bookings_min_fields';
+  BID?: Maybe<Scalars['uuid']>;
+  done_on?: Maybe<Scalars['timestamptz']>;
+  from_date?: Maybe<Scalars['String']>;
+  people?: Maybe<Scalars['String']>;
+  property_id?: Maybe<Scalars['uuid']>;
+  status?: Maybe<Scalars['String']>;
+  to_date?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "bookings" */
+export type Bookings_Min_Order_By = {
+  BID?: InputMaybe<Order_By>;
+  done_on?: InputMaybe<Order_By>;
+  from_date?: InputMaybe<Order_By>;
+  people?: InputMaybe<Order_By>;
+  property_id?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+  to_date?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "bookings" */
+export type Bookings_Mutation_Response = {
+  __typename?: 'bookings_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Bookings>;
+};
+
+/** on_conflict condition type for table "bookings" */
+export type Bookings_On_Conflict = {
+  constraint: Bookings_Constraint;
+  update_columns?: Array<Bookings_Update_Column>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "bookings". */
+export type Bookings_Order_By = {
+  BID?: InputMaybe<Order_By>;
+  done_on?: InputMaybe<Order_By>;
+  from_date?: InputMaybe<Order_By>;
+  people?: InputMaybe<Order_By>;
+  property?: InputMaybe<Properties_Order_By>;
+  property_id?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+  to_date?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  users?: InputMaybe<Users_Order_By>;
+};
+
+/** primary key columns input for table: bookings */
+export type Bookings_Pk_Columns_Input = {
+  BID: Scalars['uuid'];
+};
+
+/** select columns of table "bookings" */
+export enum Bookings_Select_Column {
+  /** column name */
+  Bid = 'BID',
+  /** column name */
+  DoneOn = 'done_on',
+  /** column name */
+  FromDate = 'from_date',
+  /** column name */
+  People = 'people',
+  /** column name */
+  PropertyId = 'property_id',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  ToDate = 'to_date',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "bookings" */
+export type Bookings_Set_Input = {
+  BID?: InputMaybe<Scalars['uuid']>;
+  done_on?: InputMaybe<Scalars['timestamptz']>;
+  from_date?: InputMaybe<Scalars['String']>;
+  people?: InputMaybe<Scalars['String']>;
+  property_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['String']>;
+  to_date?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "bookings" */
+export type Bookings_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Bookings_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Bookings_Stream_Cursor_Value_Input = {
+  BID?: InputMaybe<Scalars['uuid']>;
+  done_on?: InputMaybe<Scalars['timestamptz']>;
+  from_date?: InputMaybe<Scalars['String']>;
+  people?: InputMaybe<Scalars['String']>;
+  property_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['String']>;
+  to_date?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "bookings" */
+export enum Bookings_Update_Column {
+  /** column name */
+  Bid = 'BID',
+  /** column name */
+  DoneOn = 'done_on',
+  /** column name */
+  FromDate = 'from_date',
+  /** column name */
+  People = 'people',
+  /** column name */
+  PropertyId = 'property_id',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  ToDate = 'to_date',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Bookings_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Bookings_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Bookings_Bool_Exp;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -362,6 +627,10 @@ export type Jsonb_Comparison_Exp = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "bookings" */
+  delete_bookings?: Maybe<Bookings_Mutation_Response>;
+  /** delete single row from the table: "bookings" */
+  delete_bookings_by_pk?: Maybe<Bookings>;
   /** delete data from the table: "hosts" */
   delete_hosts?: Maybe<Hosts_Mutation_Response>;
   /** delete single row from the table: "hosts" */
@@ -374,6 +643,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "bookings" */
+  insert_bookings?: Maybe<Bookings_Mutation_Response>;
+  /** insert a single row into the table: "bookings" */
+  insert_bookings_one?: Maybe<Bookings>;
   /** insert data into the table: "hosts" */
   insert_hosts?: Maybe<Hosts_Mutation_Response>;
   /** insert a single row into the table: "hosts" */
@@ -386,6 +659,12 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "bookings" */
+  update_bookings?: Maybe<Bookings_Mutation_Response>;
+  /** update single row of the table: "bookings" */
+  update_bookings_by_pk?: Maybe<Bookings>;
+  /** update multiples rows of table: "bookings" */
+  update_bookings_many?: Maybe<Array<Maybe<Bookings_Mutation_Response>>>;
   /** update data of the table: "hosts" */
   update_hosts?: Maybe<Hosts_Mutation_Response>;
   /** update single row of the table: "hosts" */
@@ -404,6 +683,18 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_BookingsArgs = {
+  where: Bookings_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Bookings_By_PkArgs = {
+  BID: Scalars['uuid'];
 };
 
 
@@ -440,6 +731,20 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   UID: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_BookingsArgs = {
+  objects: Array<Bookings_Insert_Input>;
+  on_conflict?: InputMaybe<Bookings_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Bookings_OneArgs = {
+  object: Bookings_Insert_Input;
+  on_conflict?: InputMaybe<Bookings_On_Conflict>;
 };
 
 
@@ -482,6 +787,26 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_BookingsArgs = {
+  _set?: InputMaybe<Bookings_Set_Input>;
+  where: Bookings_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Bookings_By_PkArgs = {
+  _set?: InputMaybe<Bookings_Set_Input>;
+  pk_columns: Bookings_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Bookings_ManyArgs = {
+  updates: Array<Bookings_Updates>;
 };
 
 
@@ -577,6 +902,10 @@ export type Properties = {
   amenities?: Maybe<Scalars['jsonb']>;
   bath: Scalars['String'];
   beds: Scalars['String'];
+  /** An array relationship */
+  bookings: Array<Bookings>;
+  /** An aggregate relationship */
+  bookings_aggregate: Bookings_Aggregate;
   cost: Scalars['String'];
   description: Scalars['String'];
   host_id: Scalars['uuid'];
@@ -593,6 +922,26 @@ export type Properties = {
 /** columns and relationships of "properties" */
 export type PropertiesAmenitiesArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "properties" */
+export type PropertiesBookingsArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+
+/** columns and relationships of "properties" */
+export type PropertiesBookings_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
 };
 
 /** aggregated selection of "properties" */
@@ -656,6 +1005,8 @@ export type Properties_Bool_Exp = {
   amenities?: InputMaybe<Jsonb_Comparison_Exp>;
   bath?: InputMaybe<String_Comparison_Exp>;
   beds?: InputMaybe<String_Comparison_Exp>;
+  bookings?: InputMaybe<Bookings_Bool_Exp>;
+  bookings_aggregate?: InputMaybe<Bookings_Aggregate_Bool_Exp>;
   cost?: InputMaybe<String_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   host_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -694,6 +1045,7 @@ export type Properties_Insert_Input = {
   amenities?: InputMaybe<Scalars['jsonb']>;
   bath?: InputMaybe<Scalars['String']>;
   beds?: InputMaybe<Scalars['String']>;
+  bookings?: InputMaybe<Bookings_Arr_Rel_Insert_Input>;
   cost?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   host_id?: InputMaybe<Scalars['uuid']>;
@@ -776,6 +1128,13 @@ export type Properties_Mutation_Response = {
   returning: Array<Properties>;
 };
 
+/** input type for inserting object relation for remote table "properties" */
+export type Properties_Obj_Rel_Insert_Input = {
+  data: Properties_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Properties_On_Conflict>;
+};
+
 /** on_conflict condition type for table "properties" */
 export type Properties_On_Conflict = {
   constraint: Properties_Constraint;
@@ -789,6 +1148,7 @@ export type Properties_Order_By = {
   amenities?: InputMaybe<Order_By>;
   bath?: InputMaybe<Order_By>;
   beds?: InputMaybe<Order_By>;
+  bookings_aggregate?: InputMaybe<Bookings_Aggregate_Order_By>;
   cost?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   host_id?: InputMaybe<Order_By>;
@@ -926,6 +1286,12 @@ export type Properties_Updates = {
 export type Query_Root = {
   __typename?: 'query_root';
   /** An array relationship */
+  bookings: Array<Bookings>;
+  /** An aggregate relationship */
+  bookings_aggregate: Bookings_Aggregate;
+  /** fetch data from the table: "bookings" using primary key columns */
+  bookings_by_pk?: Maybe<Bookings>;
+  /** An array relationship */
   hosts: Array<Hosts>;
   /** An aggregate relationship */
   hosts_aggregate: Hosts_Aggregate;
@@ -943,6 +1309,29 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootBookingsArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+
+export type Query_RootBookings_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+
+export type Query_RootBookings_By_PkArgs = {
+  BID: Scalars['uuid'];
 };
 
 
@@ -1017,6 +1406,14 @@ export type Query_RootUsers_By_PkArgs = {
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** An array relationship */
+  bookings: Array<Bookings>;
+  /** An aggregate relationship */
+  bookings_aggregate: Bookings_Aggregate;
+  /** fetch data from the table: "bookings" using primary key columns */
+  bookings_by_pk?: Maybe<Bookings>;
+  /** fetch data from the table in a streaming manner: "bookings" */
+  bookings_stream: Array<Bookings>;
+  /** An array relationship */
   hosts: Array<Hosts>;
   /** An aggregate relationship */
   hosts_aggregate: Hosts_Aggregate;
@@ -1040,6 +1437,36 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+
+export type Subscription_RootBookingsArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+
+export type Subscription_RootBookings_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bookings_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Bookings_Order_By>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
+};
+
+
+export type Subscription_RootBookings_By_PkArgs = {
+  BID: Scalars['uuid'];
+};
+
+
+export type Subscription_RootBookings_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Bookings_Stream_Cursor_Input>>;
+  where?: InputMaybe<Bookings_Bool_Exp>;
 };
 
 
@@ -1402,6 +1829,18 @@ export type AddUsersMutationVariables = Exact<{
 
 export type AddUsersMutation = { __typename?: 'mutation_root', insert_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
+export type AddPropertyBookingsMutationVariables = Exact<{
+  from_date?: InputMaybe<Scalars['String']>;
+  people?: InputMaybe<Scalars['String']>;
+  property_id?: InputMaybe<Scalars['uuid']>;
+  status?: InputMaybe<Scalars['String']>;
+  to_date?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+}>;
+
+
+export type AddPropertyBookingsMutation = { __typename?: 'mutation_root', insert_bookings?: { __typename?: 'bookings_mutation_response', affected_rows: number } | null };
+
 export type MakeUseraHostMutationVariables = Exact<{
   user_id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
@@ -1447,6 +1886,13 @@ export type UpdateUserRoleWhereUser_IdMutationVariables = Exact<{
 
 export type UpdateUserRoleWhereUser_IdMutation = { __typename?: 'mutation_root', update_users?: { __typename?: 'users_mutation_response', affected_rows: number } | null };
 
+export type ValidateAvailablePropertiesQueryVariables = Exact<{
+  property_id?: InputMaybe<Scalars['uuid']>;
+}>;
+
+
+export type ValidateAvailablePropertiesQuery = { __typename?: 'query_root', bookings: Array<{ __typename?: 'bookings', BID: any, done_on: any, from_date: string, property_id: any, status: string, to_date: string }> };
+
 
 export const AddNewPropertyDocument = `
     mutation AddNewProperty($bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $host_id: uuid = "", $name: String = "", $per: String = "", $type: String = "", $amenities: jsonb = "", $image: String = "") {
@@ -1487,6 +1933,26 @@ export const useAddUsersMutation = <
       options
     );
 useAddUsersMutation.getKey = () => ['addUsers'];
+
+export const AddPropertyBookingsDocument = `
+    mutation AddPropertyBookings($from_date: String = "", $people: String = "", $property_id: uuid = "", $status: String = "", $to_date: String = "", $user_id: uuid = "") {
+  insert_bookings(
+    objects: {from_date: $from_date, people: $people, property_id: $property_id, status: $status, to_date: $to_date, user_id: $user_id}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const useAddPropertyBookingsMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddPropertyBookingsMutation, TError, AddPropertyBookingsMutationVariables, TContext>) =>
+    useMutation<AddPropertyBookingsMutation, TError, AddPropertyBookingsMutationVariables, TContext>(
+      ['AddPropertyBookings'],
+      (variables?: AddPropertyBookingsMutationVariables) => fetcher<AddPropertyBookingsMutation, AddPropertyBookingsMutationVariables>(AddPropertyBookingsDocument, variables)(),
+      options
+    );
+useAddPropertyBookingsMutation.getKey = () => ['AddPropertyBookings'];
 
 export const MakeUseraHostDocument = `
     mutation makeUseraHost($user_id: uuid = "", $name: String = "", $role: String = "") {
@@ -1637,3 +2103,31 @@ export const useUpdateUserRoleWhereUser_IdMutation = <
       options
     );
 useUpdateUserRoleWhereUser_IdMutation.getKey = () => ['updateUserRoleWhereUser_id'];
+
+export const ValidateAvailablePropertiesDocument = `
+    query ValidateAvailableProperties($property_id: uuid = "") {
+  bookings(where: {property_id: {_eq: $property_id}}) {
+    BID
+    done_on
+    from_date
+    property_id
+    status
+    to_date
+  }
+}
+    `;
+export const useValidateAvailablePropertiesQuery = <
+      TData = ValidateAvailablePropertiesQuery,
+      TError = unknown
+    >(
+      variables?: ValidateAvailablePropertiesQueryVariables,
+      options?: UseQueryOptions<ValidateAvailablePropertiesQuery, TError, TData>
+    ) =>
+    useQuery<ValidateAvailablePropertiesQuery, TError, TData>(
+      variables === undefined ? ['ValidateAvailableProperties'] : ['ValidateAvailableProperties', variables],
+      fetcher<ValidateAvailablePropertiesQuery, ValidateAvailablePropertiesQueryVariables>(ValidateAvailablePropertiesDocument, variables),
+      options
+    );
+
+useValidateAvailablePropertiesQuery.getKey = (variables?: ValidateAvailablePropertiesQueryVariables) => variables === undefined ? ['ValidateAvailableProperties'] : ['ValidateAvailableProperties', variables];
+;

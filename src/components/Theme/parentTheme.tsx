@@ -15,7 +15,6 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
     email: session?.user?.email,
   });
   const {data:AllProperties} = useGetAllPropertiesQuery()
-  console.log(AllProperties);
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
