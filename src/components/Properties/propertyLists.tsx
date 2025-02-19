@@ -27,7 +27,8 @@ export default function PropertyList() {
             amenities: property?.amenities,
             type: property?.type,
             host:property?.hosts?.name,
-            property_id: property?.PID
+            property_id: property?.PID,
+            isBooked: property?.bookings
           }
         })
         : Logged?.userInfo?.hosts[0]?.properties?.map((pro: any) => {
@@ -71,6 +72,7 @@ export default function PropertyList() {
         {properties?.map((property: any) => (
           <Property
             User={Logged?.userInfo}
+            reload={Logged?.refetch}
             key={property?.name}
             property={property}
           />

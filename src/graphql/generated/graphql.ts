@@ -1853,7 +1853,7 @@ export type MakeUseraHostMutation = { __typename?: 'mutation_root', insert_hosts
 export type GetAllPropertiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllPropertiesQuery = { __typename?: 'query_root', properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, image?: string | null, host_id: any, description: string, cost: string, beds: string, bath: string, amenities?: any | null, PID: any, hosts: { __typename?: 'hosts', HID: any, name: string, user: { __typename?: 'users', email: string, name: string } } }> };
+export type GetAllPropertiesQuery = { __typename?: 'query_root', properties: Array<{ __typename?: 'properties', type: string, per: string, name: string, listed_on: any, image?: string | null, host_id: any, description: string, cost: string, beds: string, bath: string, amenities?: any | null, PID: any, hosts: { __typename?: 'hosts', HID: any, name: string, user: { __typename?: 'users', email: string, name: string } }, bookings: Array<{ __typename?: 'bookings', BID: any, done_on: any, from_date: string, people?: string | null, property_id: any, status: string, to_date: string, user_id?: any | null }> }> };
 
 export type GetUsersQueryVariables = Exact<{
   email?: InputMaybe<Scalars['String']>;
@@ -1977,7 +1977,7 @@ useMakeUseraHostMutation.getKey = () => ['makeUseraHost'];
 
 export const GetAllPropertiesDocument = `
     query GetAllProperties {
-  properties {
+  properties(order_by: {cost: asc}) {
     type
     per
     name
@@ -1997,6 +1997,16 @@ export const GetAllPropertiesDocument = `
         email
         name
       }
+    }
+    bookings {
+      BID
+      done_on
+      from_date
+      people
+      property_id
+      status
+      to_date
+      user_id
     }
   }
 }

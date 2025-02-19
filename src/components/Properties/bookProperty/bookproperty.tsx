@@ -4,7 +4,7 @@ import { Modal, Button, DatePicker, InputNumber, Message } from "rsuite";
 import { useAddPropertyBookingsMutation, useValidateAvailablePropertiesQuery } from "src/graphql/generated/graphql";
 
 
-export default function BookPropertyModel({property , User} : any) {
+export default function BookPropertyModel({property, reload , isPropertyBooked, User} : any) {
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [suggestedDate, setSuggestedDate] = useState<Date | null>(null);
@@ -21,6 +21,7 @@ export default function BookPropertyModel({property , User} : any) {
   const { mutate:MakeBookigns, isLoading:booking } = useAddPropertyBookingsMutation({
     onSuccess(){
         setOpen(false)
+        reload()
     }
   })
   // Helper function to check if a date is booked
@@ -94,12 +95,20 @@ export default function BookPropertyModel({property , User} : any) {
   return (
     <>
       {/* Book Now Button */}
-      <button
+      {
+        isPropertyBooked ?   <button
+        className="w-full rounded-lg bg-red-400 py-3 text-white cursor-pointer hover:bg-red-500"
+      >
+        Cancel Booking
+      </button>:
+        <button
         onClick={handleOpen}
-        className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800"
+        className="w-full rounded-lg bg-black py-3 cursor-pointer text-white hover:bg-gray-800"
       >
         Book Now
       </button>
+      }
+    
 
       {/* Booking Modal */}
       <Modal open={open} size="sm" onClose={handleClose}>

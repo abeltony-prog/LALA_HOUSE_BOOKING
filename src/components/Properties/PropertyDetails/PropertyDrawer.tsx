@@ -6,7 +6,7 @@ import { Drawer } from "rsuite";
 import EditProperty from "../propertyForm/editProperty";
 import BookPropertyModel from "../bookProperty/bookproperty";
 
-export default function PropertyDrawer({ property, User }: any) {
+export default function PropertyDrawer({ property,isPropertyBooked,reload, User }: any) {
   return (
     <>
       <Drawer.Body>
@@ -118,7 +118,7 @@ export default function PropertyDrawer({ property, User }: any) {
               </div>
             </div>
             <div className="border-t bg-white p-4">
-            <BookPropertyModel User={User} property={property} />
+            <BookPropertyModel reload={reload} isPropertyBooked={isPropertyBooked} User={User} property={property} />
             </div>
           </>
         ) : (

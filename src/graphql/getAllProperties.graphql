@@ -1,5 +1,5 @@
 query GetAllProperties {
-  properties {
+  properties(order_by: {cost: asc}) {
     type
     per
     name
@@ -19,6 +19,16 @@ query GetAllProperties {
         email
         name
       }
+    }
+    bookings {
+      BID
+      done_on
+      from_date
+      people
+      property_id
+      status
+      to_date
+      user_id
     }
   }
 }

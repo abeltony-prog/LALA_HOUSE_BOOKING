@@ -14,7 +14,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
   });
-  const {data:AllProperties} = useGetAllPropertiesQuery()
+  const {data:AllProperties , refetch:ReloadProperties} = useGetAllPropertiesQuery()
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
@@ -33,7 +33,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
               User: userDetails?.users[0],
             }}
           />
-          <MyProvider value={{ userInfo: userDetails?.users[0] , Properties: AllProperties?.properties }}>
+          <MyProvider value={{ userInfo: userDetails?.users[0] , Properties: AllProperties?.properties , refetch:ReloadProperties }}>
             {children}
           </MyProvider>
         </>
