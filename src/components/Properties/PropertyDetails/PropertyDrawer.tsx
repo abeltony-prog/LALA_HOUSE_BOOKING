@@ -61,26 +61,15 @@ export default function PropertyDrawer({ property, User }: any) {
 
               {/* House Features */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-2">
-                  <BedDouble className="h-5 w-5 text-gray-700" />
-                  <span className="text-sm">{property.beds} beds</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-gray-700" />
-                  <span className="text-sm">
-                    Accommodates {property.capacity} people
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <UtensilsCrossed className="h-5 w-5 text-gray-700" />
-                  <span className="text-sm">
-                    {property.kitchen ? "Kitchen Available" : "No Kitchen"}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShowerHead className="h-5 w-5 text-gray-700" />
-                  <span className="text-sm">{property.baths} baths</span>
-                </div>
+                {
+                    property?.amenities?.map((amenity : any, index : any)=>(
+                        <div key={index} className="flex items-center gap-2">
+                            <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">  <g> <path className="st0" d="M469.402,35.492C334.09,110.664,197.114,324.5,197.114,324.5L73.509,184.176L0,254.336l178.732,222.172 l65.15-2.504C327.414,223.414,512,55.539,512,55.539L469.402,35.492z"></path> </g> </g></svg>
+                        <span className="text-sm">{amenity}</span>
+                      </div>
+                    ))
+                }
+               
               </div>
 
               {/* Reviews Section */}
