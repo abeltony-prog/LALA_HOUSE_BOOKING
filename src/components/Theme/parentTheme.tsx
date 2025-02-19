@@ -3,7 +3,10 @@ import Sidebar from "@components/Navbars/Sidebar";
 import { MyProvider } from "context/auth";
 import { useSession } from "next-auth/react";
 import React, { ReactElement } from "react";
-import { useGetAllPropertiesQuery, useGetUsersQuery } from "src/graphql/generated/graphql";
+import {
+  useGetAllPropertiesQuery,
+  useGetUsersQuery,
+} from "src/graphql/generated/graphql";
 
 interface iProps {
   children: ReactElement | ReactElement[];
@@ -14,7 +17,8 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
   });
-  const {data:AllProperties , refetch:ReloadProperties} = useGetAllPropertiesQuery()
+  const { data: AllProperties, refetch: ReloadProperties } =
+    useGetAllPropertiesQuery();
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
@@ -33,7 +37,13 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
               User: userDetails?.users[0],
             }}
           />
-          <MyProvider value={{ userInfo: userDetails?.users[0] , Properties: AllProperties?.properties , refetch:ReloadProperties }}>
+          <MyProvider
+            value={{
+              userInfo: userDetails?.users[0],
+              Properties: AllProperties?.properties,
+              refetch: ReloadProperties,
+            }}
+          >
             {children}
           </MyProvider>
         </>

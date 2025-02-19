@@ -1,5 +1,5 @@
 query ValidateAvailableProperties($property_id: uuid = "") {
-  bookings(where: {property_id: {_eq: $property_id}}) {
+  bookings(where: { property_id: { _eq: $property_id } }) {
     BID
     done_on
     from_date

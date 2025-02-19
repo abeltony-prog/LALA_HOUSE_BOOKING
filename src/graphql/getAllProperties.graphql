@@ -1,5 +1,5 @@
 query GetAllProperties {
-  properties(order_by: {cost: asc}) {
+  properties(order_by: { cost: asc }) {
     type
     per
     name

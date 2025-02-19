@@ -1,5 +1,21 @@
-mutation AddPropertyBookings($from_date: String = "", $people: String = "", $property_id: uuid = "", $status: String = "", $to_date: String = "", $user_id: uuid = "") {
-  insert_bookings(objects: {from_date: $from_date, people: $people, property_id: $property_id, status: $status, to_date: $to_date, user_id: $user_id}) {
+mutation AddPropertyBookings(
+  $from_date: String = ""
+  $people: String = ""
+  $property_id: uuid = ""
+  $status: String = ""
+  $to_date: String = ""
+  $user_id: uuid = ""
+) {
+  insert_bookings(
+    objects: {
+      from_date: $from_date
+      people: $people
+      property_id: $property_id
+      status: $status
+      to_date: $to_date
+      user_id: $user_id
+    }
+  ) {
     affected_rows
   }
 }

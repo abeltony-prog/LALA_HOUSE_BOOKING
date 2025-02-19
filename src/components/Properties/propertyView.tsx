@@ -6,9 +6,11 @@ import { useValidateAvailablePropertiesQuery } from "src/graphql/generated/graph
 export default function Property({ property, reload, User }: any) {
   const [open, setOpen] = React.useState(false);
 
-  const isPropertyBooked = property?.isBooked?.find((item: { user_id: any; })=> item?.user_id === User?.UID)?.BID
+  const isPropertyBooked = property?.isBooked?.find(
+    (item: { user_id: any }) => item?.user_id === User?.UID
+  )?.BID;
   console.log(isPropertyBooked);
-  
+
   return (
     <>
       <div
@@ -29,11 +31,14 @@ export default function Property({ property, reload, User }: any) {
 
         <div className="space-y-4 p-4">
           <div>
-            <h5 className="font-medium">{property.name} {
-              isPropertyBooked && (
-<span className=" text-red-400 text-sm py-1 px-1">You Booked</span> 
-              )
-            } </h5>
+            <h5 className="font-medium">
+              {property.name}{" "}
+              {isPropertyBooked && (
+                <span className=" py-1 px-1 text-sm text-red-400">
+                  You Booked
+                </span>
+              )}{" "}
+            </h5>
             <p className="text-sm text-gray-500">{property.description}</p>
           </div>
           <div className="flex items-center justify-between">
@@ -51,7 +56,12 @@ export default function Property({ property, reload, User }: any) {
         </div>
       </div>
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <PropertyDrawer isPropertyBooked={isPropertyBooked} reload={reload} User={User} property={property} />
+        <PropertyDrawer
+          isPropertyBooked={isPropertyBooked}
+          reload={reload}
+          User={User}
+          property={property}
+        />
       </Drawer>
     </>
   );

@@ -11,26 +11,25 @@ export default function PropertyList() {
 
   try {
     properties =
-    Logged?.userInfo?.role === "Renter"
-        ?
-        Logged?.Properties?.map((property : any)=>{
-          return{
-            name: property?.name,
-            description: property?.description,
-            cost: property?.cost,
-            image:
-            property?.image ||
-            `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
-            beds: property?.beds,
-            bath: property?.bath,
-            per: property?.per,
-            amenities: property?.amenities,
-            type: property?.type,
-            host:property?.hosts?.name,
-            property_id: property?.PID,
-            isBooked: property?.bookings
-          }
-        })
+      Logged?.userInfo?.role === "Renter"
+        ? Logged?.Properties?.map((property: any) => {
+            return {
+              name: property?.name,
+              description: property?.description,
+              cost: property?.cost,
+              image:
+                property?.image ||
+                `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
+              beds: property?.beds,
+              bath: property?.bath,
+              per: property?.per,
+              amenities: property?.amenities,
+              type: property?.type,
+              host: property?.hosts?.name,
+              property_id: property?.PID,
+              isBooked: property?.bookings,
+            };
+          })
         : Logged?.userInfo?.hosts[0]?.properties?.map((pro: any) => {
             return {
               name: pro?.name,
@@ -58,13 +57,9 @@ export default function PropertyList() {
         <span className="text-gray-600">
           {Logged?.userInfo?.hosts[0]?.properties?.length} properties
         </span>
-        {
-          Logged?.userInfo?.role === "Host" && (
-<AddNewPropertyForm user={Logged?.userInfo} />
-          )
-           
-        }
-       
+        {Logged?.userInfo?.role === "Host" && (
+          <AddNewPropertyForm user={Logged?.userInfo} />
+        )}
       </div>
 
       {/* Property Grid - 4 per row */}
