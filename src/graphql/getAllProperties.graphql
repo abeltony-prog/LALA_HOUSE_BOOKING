@@ -1,0 +1,24 @@
+query GetAllProperties {
+  properties {
+    type
+    per
+    name
+    listed_on
+    image
+    host_id
+    description
+    cost
+    beds
+    bath
+    amenities
+    PID
+    hosts {
+      HID
+      name
+      user {
+        email
+        name
+      }
+    }
+  }
+}
