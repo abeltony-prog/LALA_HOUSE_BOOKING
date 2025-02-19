@@ -79,7 +79,8 @@ export default function BookPropertyModel({property , User} : any) {
             from_date:bookingDetails?.from,
             to_date:bookingDetails?.to,
             people: bookingDetails?.guests as any,
-            property_id: property?.property_id
+            property_id: property?.property_id,
+            status: "Pending"
         })
     }catch(error){
         console.log(error);
