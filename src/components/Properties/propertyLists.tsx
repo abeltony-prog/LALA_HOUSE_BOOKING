@@ -80,7 +80,12 @@ export default function PropertyList() {
         </div>
       ) : (
         <div>
-          <BookingsTable Loggeds={Logged} />
+          <BookingsTable
+            info={{
+              user_id: Logged?.userInfo?.hosts[0]?.HID,
+              PageTab: Logged?.PageTab,
+            }}
+          />
         </div>
       )}
     </div>

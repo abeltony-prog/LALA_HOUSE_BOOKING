@@ -1,30 +1,37 @@
-import { info } from "console";
-import { userAuth } from "context/auth";
 import { Loader } from "lucide-react";
-import React, { useContext } from "react";
+import React from "react";
 import { Table, Button, Placeholder } from "rsuite";
-import { useGetAllHostsBookingsQuery, useRemoveBookingsWherebooking_IdMutation, useUpdateBookingStatusMutation } from "src/graphql/generated/graphql";
+import {
+  useGetAllHostsBookingsQuery,
+  useRemoveBookingsWherebooking_IdMutation,
+  useUpdateBookingStatusMutation,
+} from "src/graphql/generated/graphql";
 
 const { Column, HeaderCell, Cell } = Table;
 
 export default function BookingsTable({
   reservedBookings,
   refetchBookings,
+  info,
 }: any) {
-    const Logged = useContext(userAuth) as unknown as any;
-
-const {data:hostsBookings , isLoading:loadingBookigs , refetch:refetchbookigs} = useGetAllHostsBookingsQuery({
-    host_id: Logged?.userInfo?.hosts?.HID
-})
-const {mutate:changeStatus , isLoading:changingStatus } = useUpdateBookingStatusMutation({
-    onSuccess(){
-        refetchbookigs()
-    },
-    onError(error){
-        alert(error)
-    }
-})
-const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.bookings : reservedBookings
+  const {
+    data: hostsBookings,
+    isLoading: loadingBookigs,
+    refetch: refetchbookigs,
+  } = useGetAllHostsBookingsQuery({
+    host_id: info?.user_id,
+  });
+  const { mutate: changeStatus, isLoading: changingStatus } =
+    useUpdateBookingStatusMutation({
+      onSuccess() {
+        refetchbookigs();
+      },
+      onError(error) {
+        alert(error);
+      },
+    });
+  const Allbookings =
+    info?.PageTab === "Bookings" ? hostsBookings?.bookings : reservedBookings;
 
   const data = Allbookings?.map((property: any, index: any) => {
     return {
@@ -39,7 +46,11 @@ const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.booking
       ),
       Status:
         property?.status === "Pending" || property?.status === "Canceled" ? (
-          <span className={`rounded-full ${property?.status === "Canceled" ? "bg-red-500" : "bg-blue-500" }  py-1 px-4 text-white`}>
+          <span
+            className={`rounded-full ${
+              property?.status === "Canceled" ? "bg-red-500" : "bg-blue-500"
+            }  py-1 px-4 text-white`}
+          >
             {" "}
             {property?.status}
           </span>
@@ -48,7 +59,10 @@ const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.booking
             Confirmed
           </span>
         ),
-      host: Logged?.userInfo?.role === "Renter" ? property?.users?.name : property?.property?.hosts?.name,
+      host:
+        info?.PageTab === "Bookings"
+          ? property?.users?.name
+          : property?.property?.hosts?.name,
       range: (
         <span>
           {new Date(property?.from_date).toLocaleDateString()}-{" "}
@@ -75,13 +89,12 @@ const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.booking
     });
   };
 
-  const handleChangeBookingStatus = (id: any , status: string | undefined) => {
+  const handleChangeBookingStatus = (id: any, status: string | undefined) => {
     changeStatus({
-        booking_id: id,
-        status: status
-    })
-  }
-
+      booking_id: id,
+      status: status,
+    });
+  };
 
   return (
     <>
@@ -113,7 +126,9 @@ const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.booking
         </Column>
 
         <Column width={100}>
-          <HeaderCell>{Logged?.userInfo?.role === "Renter"  ? "Renter" : "Host"}</HeaderCell>
+          <HeaderCell>
+            {info?.PageTab === "Bookings" ? "Renter" : "Host"}
+          </HeaderCell>
           <Cell dataKey="host" />
         </Column>
 
@@ -127,37 +142,49 @@ const Allbookings = Logged?.userInfo?.role === "Renter" ? hostsBookings?.booking
           <Cell dataKey="done_on" />
         </Column>
         <Column width={200} fixed="right">
-  <HeaderCell>...</HeaderCell>
-  <Cell style={{ padding: "6px" }}>
-    {(rowData) =>
-      Logged?.userInfo?.role === "Renter" ? (
-        <Button
-          appearance="link"
-          onClick={() => RemoveBookings(rowData.id)}
-        >
-          {Loadingbookings ? <Loader /> : "Cancel Booking"}
-        </Button>
-      ) : Logged?.userInfo?.role === "Host" ? (
-        <>
-          <Button
-            appearance="subtle"
-            style={{ color: "green" }}
-            onClick={() => handleChangeBookingStatus(rowData.id, "Confirmed")}
-          >
-            {changingStatus ? <Loader /> : "Approve"}
-          </Button>
-          <Button
-            appearance="subtle"
-            style={{ color: "red" }}
-            onClick={() => handleChangeBookingStatus(rowData.id, "Canceled")}
-          >
-            {changingStatus ? <Loader /> : "Cancel"}
-          </Button>
-        </>
-      ) : null
-    }
-  </Cell>
-</Column>
+          <HeaderCell>...</HeaderCell>
+          {info?.PageTab === "Properties" ? (
+            <Cell style={{ padding: "6px" }}>
+              {(rowData) => (
+                <Button
+                  appearance="link"
+                  onClick={() => RemoveBookings(rowData.id)}
+                >
+                  {Loadingbookings ? <Loader /> : "Cancel Booking"}
+                </Button>
+              )}
+            </Cell>
+          ) : (
+            <Cell style={{ padding: "6px" }}>
+              {(rowData) => (
+                <>
+                  <Button
+                    appearance="subtle"
+                    style={{
+                      color: "green",
+                    }}
+                    onClick={() =>
+                      handleChangeBookingStatus(rowData.id, "Confirmed")
+                    }
+                  >
+                    {changingStatus ? <Loader /> : "Approve"}
+                  </Button>
+                  <Button
+                    appearance="subtle"
+                    style={{
+                      color: "red",
+                    }}
+                    onClick={() =>
+                      handleChangeBookingStatus(rowData.id, "Canceled")
+                    }
+                  >
+                    {changingStatus ? <Loader /> : "Cancel"}
+                  </Button>
+                </>
+              )}
+            </Cell>
+          )}
+        </Column>
       </Table>
     </>
   );
