@@ -1,7 +1,10 @@
 import { Search, X } from "lucide-react";
 import React from "react";
 
-export default function SearchProperties({filters , handleSearchChanges} : any) {
+export default function SearchProperties({
+  filters,
+  handleSearchChanges,
+}: any) {
   return (
     <>
       <div className="flex flex-1 items-center gap-2">
@@ -10,7 +13,7 @@ export default function SearchProperties({filters , handleSearchChanges} : any) 
           type="text"
           id="search"
           onChange={handleSearchChanges}
-value={filters?.search}
+          value={filters?.search}
           placeholder="Park|Guel, Barcelona"
           className="w-full text-lg outline-none"
         />

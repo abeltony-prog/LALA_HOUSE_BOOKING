@@ -1,5 +1,5 @@
 mutation removeBookingsWherebooking_id($booking_id: uuid = "") {
-  delete_bookings(where: {BID: {_eq: $booking_id}}) {
+  delete_bookings(where: { BID: { _eq: $booking_id } }) {
     affected_rows
   }
 }

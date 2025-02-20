@@ -7,7 +7,12 @@ import RentersBookings from "@components/Properties/bookProperty/BookingsTable/R
 
 let userRole: string;
 
-export default function Sidebar({ SessionDetails, refetch , filters , setFilters }: any) {
+export default function Sidebar({
+  SessionDetails,
+  refetch,
+  filters,
+  setFilters,
+}: any) {
   const router = useRouter();
   const RedictURL = () => {
     router.push("/signin");
@@ -69,24 +74,26 @@ export default function Sidebar({ SessionDetails, refetch , filters , setFilters
           </div>
           {SessionDetails?.User?.role === "Renter" ? (
             <div className="grid grid-cols-2 gap-3">
-{[
-  { icon: "🌍", label: "All" },
-  { icon: "🏢", label: "Apartment" },
-  { icon: "🏠", label: "Whole house" },
-  { icon: "🏢", label: "Condo" },
-  { icon: "🛏️", label: "Villa" },
-].map((item) => (
-  <button
-    key={item.label}
-    onClick={() => handleTypeChange(item.label)}
-    className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
-      filters.type === item.label ? "border-black" : "border-gray-200"
-    }`}
-  >
-    <span className="text-2xl">{item.icon}</span>
-    <span className="text-sm">{item.label}</span>
-  </button>
-))}
+              {[
+                { icon: "🌍", label: "All" },
+                { icon: "🏢", label: "Apartment" },
+                { icon: "🏠", label: "Whole house" },
+                { icon: "🏢", label: "Condo" },
+                { icon: "🛏️", label: "Villa" },
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => handleTypeChange(item.label)}
+                  className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
+                    filters.type === item.label
+                      ? "border-black"
+                      : "border-gray-200"
+                  }`}
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <span className="text-sm">{item.label}</span>
+                </button>
+              ))}
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-3">
@@ -115,7 +122,7 @@ export default function Sidebar({ SessionDetails, refetch , filters , setFilters
               <h5 className="font-medium">More</h5>
             </div>
             <div className="grid grid-cols-1 gap-3">
-             <RentersBookings user_id={SessionDetails?.User?.UID} />
+              <RentersBookings user_id={SessionDetails?.User?.UID} />
             </div>
           </div>
         )}

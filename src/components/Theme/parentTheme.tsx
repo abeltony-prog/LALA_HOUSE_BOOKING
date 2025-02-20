@@ -21,16 +21,17 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
     search: "",
     type: "All",
   });
-  
-  const { data: AllProperties , refetch:ReloadProperties } = useGetAllPropertiesQuery();
 
-  const handleSearchChanges = ( e : any)=> {
+  const { data: AllProperties, refetch: ReloadProperties } =
+    useGetAllPropertiesQuery();
+
+  const handleSearchChanges = (e: any) => {
     setFilters({
       ...filters,
-      [e.target.id]: e.target.value
-    })
-  }
-  
+      [e.target.id]: e.target.value,
+    });
+  };
+
   // Apply filters dynamically
   const filteredProperties = AllProperties?.properties.filter((property) => {
     return (
@@ -41,12 +42,15 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
       (filters.type === "All" || property.type === filters.type) // Show all properties if "All" is selected
     );
   });
-    
+
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
       <header className="flex items-center justify-between border-b p-4">
-        <SearchProperties filters={filters} handleSearchChanges={handleSearchChanges} />
+        <SearchProperties
+          filters={filters}
+          handleSearchChanges={handleSearchChanges}
+        />
       </header>
 
       <div className="flex flex-1">
