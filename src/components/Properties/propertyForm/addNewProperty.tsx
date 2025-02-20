@@ -36,10 +36,10 @@ export default function AddNewPropertyForm({ user }: any) {
   });
 
   const propertyTypes = [
-    { label: "Apartment", value: "apartment" },
-    { label: "House", value: "house" },
-    { label: "Condo", value: "condo" },
-    { label: "Villa", value: "villa" },
+    { label: "Apartment", value: "Apartment" },
+    { label: "House", value: "Whole house" },
+    { label: "Condo", value: "Condo" },
+    { label: "Villa", value: "Villa" },
   ];
 
   const amenitiesList = [

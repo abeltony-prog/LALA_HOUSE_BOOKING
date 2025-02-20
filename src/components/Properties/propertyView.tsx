@@ -38,7 +38,8 @@ export default function Property({ property, reload, User }: any) {
                 </span>
               )}{" "}
             </h5>
-            <p className="text-sm text-gray-500">{property.description}</p>
+            <p className="text-sm text-gray-500 mb-3">{property.description}</p>
+            <span className="rounded-lg bg-black text-white py-1 px-2 ">{property?.type}</span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex gap-4 text-sm text-gray-600">

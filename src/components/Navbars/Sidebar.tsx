@@ -6,7 +6,7 @@ import { PuffLoader } from "react-spinners";
 
 let userRole: string;
 
-export default function Sidebar({ SessionDetails, refetch }: any) {
+export default function Sidebar({ SessionDetails, refetch , filters , setFilters }: any) {
   const router = useRouter();
   const RedictURL = () => {
     router.push("/signin");
@@ -42,6 +42,10 @@ export default function Sidebar({ SessionDetails, refetch }: any) {
     );
   }
 
+  const handleTypeChange = (type: string) => {
+    setFilters((prev: any) => ({ ...prev, type }));
+  };
+
   return (
     <>
       {/* Sidebar */}
@@ -64,24 +68,24 @@ export default function Sidebar({ SessionDetails, refetch }: any) {
           </div>
           {SessionDetails?.User?.role === "Renter" ? (
             <div className="grid grid-cols-2 gap-3">
-              {[
-                { icon: "🏢", label: "Apartment" },
-                { icon: "🏠", label: "Whole house" },
-                { icon: "🏢", label: "Condo" },
-                { icon: "🛏️", label: "Villa" },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
-                    item.label === "Apartment"
-                      ? "border-black"
-                      : "border-gray-200"
-                  }`}
-                >
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="text-sm">{item.label}</span>
-                </button>
-              ))}
+{[
+  { icon: "🌍", label: "All" },
+  { icon: "🏢", label: "Apartment" },
+  { icon: "🏠", label: "Whole house" },
+  { icon: "🏢", label: "Condo" },
+  { icon: "🛏️", label: "Villa" },
+].map((item) => (
+  <button
+    key={item.label}
+    onClick={() => handleTypeChange(item.label)}
+    className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
+      filters.type === item.label ? "border-black" : "border-gray-200"
+    }`}
+  >
+    <span className="text-2xl">{item.icon}</span>
+    <span className="text-sm">{item.label}</span>
+  </button>
+))}
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-3">

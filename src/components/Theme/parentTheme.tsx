@@ -2,7 +2,7 @@ import SearchProperties from "@components/Filters/searchbar";
 import Sidebar from "@components/Navbars/Sidebar";
 import { MyProvider } from "context/auth";
 import { useSession } from "next-auth/react";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import {
   useGetAllPropertiesQuery,
   useGetUsersQuery,
@@ -17,13 +17,36 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
   });
-  const { data: AllProperties, refetch: ReloadProperties } =
-    useGetAllPropertiesQuery();
+  const [filters, setFilters] = useState({
+    search: "",
+    type: "All",
+  });
+  
+  const { data: AllProperties , refetch:ReloadProperties } = useGetAllPropertiesQuery();
+
+  const handleSearchChanges = ( e : any)=> {
+    setFilters({
+      ...filters,
+      [e.target.id]: e.target.value
+    })
+  }
+  
+  // Apply filters dynamically
+  const filteredProperties = AllProperties?.properties.filter((property) => {
+    return (
+      (!filters.search ||
+        property.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+        property.per.toLowerCase().includes(filters.search.toLowerCase()) ||
+        property.beds.toLowerCase().includes(filters.search.toLowerCase())) &&
+      (filters.type === "All" || property.type === filters.type) // Show all properties if "All" is selected
+    );
+  });
+    
   return (
     <div className="flex h-screen flex-col">
       {/* Header */}
       <header className="flex items-center justify-between border-b p-4">
-        <SearchProperties />
+        <SearchProperties filters={filters} handleSearchChanges={handleSearchChanges} />
       </header>
 
       <div className="flex flex-1">
@@ -31,6 +54,8 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
           {" "}
           <Sidebar
             refetch={refetch}
+            setFilters={setFilters}
+            filters={filters}
             SessionDetails={{
               details: session?.user,
               status: status,
@@ -40,7 +65,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
           <MyProvider
             value={{
               userInfo: userDetails?.users[0],
-              Properties: AllProperties?.properties,
+              Properties: filteredProperties,
               refetch: ReloadProperties,
             }}
           >
