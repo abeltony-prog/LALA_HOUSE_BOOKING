@@ -11,6 +11,8 @@ export default function Sidebar({
   SessionDetails,
   refetch,
   filters,
+  setPageTab,
+  PageTab,
   setFilters,
 }: any) {
   const router = useRouter();
@@ -28,6 +30,7 @@ export default function Sidebar({
     useUpdateUserRoleWhereUser_IdMutation({
       onSuccess() {
         refetch();
+        setPageTab("Properties");
       },
     });
   const SwitchUserProfile = () => {
@@ -103,10 +106,9 @@ export default function Sidebar({
               ].map((item) => (
                 <button
                   key={item.label}
+                  onClick={() => setPageTab(item?.label)}
                   className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
-                    item.label === "Properties"
-                      ? "border-black"
-                      : "border-gray-200"
+                    PageTab === item.label ? "border-black" : "border-gray-200"
                   }`}
                 >
                   <span className="text-2xl">{item.icon}</span>

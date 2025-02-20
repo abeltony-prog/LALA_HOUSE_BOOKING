@@ -17,10 +17,14 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
   });
+
+  // console.log(userDetails);
   const [filters, setFilters] = useState({
     search: "",
     type: "All",
   });
+
+  const [PageTab, setPageTab] = useState("Properties");
 
   const { data: AllProperties, refetch: ReloadProperties } =
     useGetAllPropertiesQuery();
@@ -57,8 +61,10 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
         <>
           {" "}
           <Sidebar
+            setPageTab={setPageTab}
             refetch={refetch}
             setFilters={setFilters}
+            PageTab={PageTab}
             filters={filters}
             SessionDetails={{
               details: session?.user,
@@ -71,6 +77,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
               userInfo: userDetails?.users[0],
               Properties: filteredProperties,
               refetch: ReloadProperties,
+              PageTab: PageTab,
             }}
           >
             {children}

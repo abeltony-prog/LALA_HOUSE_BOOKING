@@ -28,3 +28,57 @@ query getBookingsWhereUser_id($user_id: uuid = "") {
     BID
   }
 }
+
+query getAllHostsBookings($host_id: uuid = "") {
+  bookings(
+    where: { property: { host_id: { _eq: $host_id } } }
+    order_by: { done_on: desc }
+  ) {
+    user_id
+    to_date
+    status
+    property_id
+    people
+    from_date
+    done_on
+    BID
+    property {
+      PID
+      amenities
+      bath
+      beds
+      cost
+      description
+      host_id
+      image
+      listed_on
+      name
+      per
+      type
+      hosts {
+        HID
+        name
+      }
+      bookings {
+        BID
+        done_on
+        from_date
+        people
+        property_id
+        status
+        to_date
+        user_id
+        users {
+          UID
+          email
+          name
+        }
+      }
+    }
+    users {
+      name
+      UID
+      email
+    }
+  }
+}

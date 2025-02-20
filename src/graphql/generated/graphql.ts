@@ -1873,6 +1873,64 @@ export type GetBookingsWhereUser_IdQuery = {
   }>;
 };
 
+export type GetAllHostsBookingsQueryVariables = Exact<{
+  host_id?: InputMaybe<Scalars["uuid"]>;
+}>;
+
+export type GetAllHostsBookingsQuery = {
+  __typename?: "query_root";
+  bookings: Array<{
+    __typename?: "bookings";
+    user_id?: any | null;
+    to_date: string;
+    status: string;
+    property_id: any;
+    people?: string | null;
+    from_date: string;
+    done_on: any;
+    BID: any;
+    property: {
+      __typename?: "properties";
+      PID: any;
+      amenities?: any | null;
+      bath: string;
+      beds: string;
+      cost: string;
+      description: string;
+      host_id: any;
+      image?: string | null;
+      listed_on: any;
+      name: string;
+      per: string;
+      type: string;
+      hosts: { __typename?: "hosts"; HID: any; name: string };
+      bookings: Array<{
+        __typename?: "bookings";
+        BID: any;
+        done_on: any;
+        from_date: string;
+        people?: string | null;
+        property_id: any;
+        status: string;
+        to_date: string;
+        user_id?: any | null;
+        users?: {
+          __typename?: "users";
+          UID: any;
+          email: string;
+          name: string;
+        } | null;
+      }>;
+    };
+    users?: {
+      __typename?: "users";
+      name: string;
+      UID: any;
+      email: string;
+    } | null;
+  }>;
+};
+
 export type GetAllPropertiesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAllPropertiesQuery = {
@@ -1948,6 +2006,19 @@ export type GetUsersQuery = {
       }>;
     }>;
   }>;
+};
+
+export type UpdateBookingStatusMutationVariables = Exact<{
+  status?: InputMaybe<Scalars["String"]>;
+  booking_id?: InputMaybe<Scalars["uuid"]>;
+}>;
+
+export type UpdateBookingStatusMutation = {
+  __typename?: "mutation_root";
+  update_bookings?: {
+    __typename?: "bookings_mutation_response";
+    affected_rows: number;
+  } | null;
 };
 
 export type UpdatePropertyWherePropertyIdMutationVariables = Exact<{
@@ -2224,6 +2295,85 @@ useGetBookingsWhereUser_IdQuery.getKey = (
   variables === undefined
     ? ["getBookingsWhereUser_id"]
     : ["getBookingsWhereUser_id", variables];
+export const GetAllHostsBookingsDocument = `
+    query getAllHostsBookings($host_id: uuid = "") {
+  bookings(
+    where: {property: {host_id: {_eq: $host_id}}}
+    order_by: {done_on: desc}
+  ) {
+    user_id
+    to_date
+    status
+    property_id
+    people
+    from_date
+    done_on
+    BID
+    property {
+      PID
+      amenities
+      bath
+      beds
+      cost
+      description
+      host_id
+      image
+      listed_on
+      name
+      per
+      type
+      hosts {
+        HID
+        name
+      }
+      bookings {
+        BID
+        done_on
+        from_date
+        people
+        property_id
+        status
+        to_date
+        user_id
+        users {
+          UID
+          email
+          name
+        }
+      }
+    }
+    users {
+      name
+      UID
+      email
+    }
+  }
+}
+    `;
+export const useGetAllHostsBookingsQuery = <
+  TData = GetAllHostsBookingsQuery,
+  TError = unknown
+>(
+  variables?: GetAllHostsBookingsQueryVariables,
+  options?: UseQueryOptions<GetAllHostsBookingsQuery, TError, TData>
+) =>
+  useQuery<GetAllHostsBookingsQuery, TError, TData>(
+    variables === undefined
+      ? ["getAllHostsBookings"]
+      : ["getAllHostsBookings", variables],
+    fetcher<GetAllHostsBookingsQuery, GetAllHostsBookingsQueryVariables>(
+      GetAllHostsBookingsDocument,
+      variables
+    ),
+    options
+  );
+
+useGetAllHostsBookingsQuery.getKey = (
+  variables?: GetAllHostsBookingsQueryVariables
+) =>
+  variables === undefined
+    ? ["getAllHostsBookings"]
+    : ["getAllHostsBookings", variables];
 export const GetAllPropertiesDocument = `
     query GetAllProperties {
   properties(order_by: {cost: asc}) {
@@ -2328,6 +2478,40 @@ export const useGetUsersQuery = <TData = GetUsersQuery, TError = unknown>(
 
 useGetUsersQuery.getKey = (variables?: GetUsersQueryVariables) =>
   variables === undefined ? ["getUsers"] : ["getUsers", variables];
+export const UpdateBookingStatusDocument = `
+    mutation updateBookingStatus($status: String = "", $booking_id: uuid = "") {
+  update_bookings(where: {BID: {_eq: $booking_id}}, _set: {status: $status}) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateBookingStatusMutation = <
+  TError = unknown,
+  TContext = unknown
+>(
+  options?: UseMutationOptions<
+    UpdateBookingStatusMutation,
+    TError,
+    UpdateBookingStatusMutationVariables,
+    TContext
+  >
+) =>
+  useMutation<
+    UpdateBookingStatusMutation,
+    TError,
+    UpdateBookingStatusMutationVariables,
+    TContext
+  >(
+    ["updateBookingStatus"],
+    (variables?: UpdateBookingStatusMutationVariables) =>
+      fetcher<
+        UpdateBookingStatusMutation,
+        UpdateBookingStatusMutationVariables
+      >(UpdateBookingStatusDocument, variables)(),
+    options
+  );
+useUpdateBookingStatusMutation.getKey = () => ["updateBookingStatus"];
+
 export const UpdatePropertyWherePropertyIdDocument = `
     mutation UpdatePropertyWherePropertyID($property_id: uuid = "", $amenities: jsonb = "", $bath: String = "", $beds: String = "", $cost: String = "", $description: String = "", $name: String = "", $per: String = "", $type: String = "", $image: String = "") {
   update_properties(

@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import Property from "./propertyView";
 import { userAuth } from "context/auth";
 import AddNewPropertyForm from "./propertyForm/addNewProperty";
+import BookingsTable from "./bookProperty/BookingsTable/bookingsTable";
 
 export default function PropertyList() {
   const Logged = useContext(userAuth) as unknown as any;
@@ -54,25 +55,34 @@ export default function PropertyList() {
   return (
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
-        <span className="text-gray-600">
-          {Logged?.userInfo?.hosts[0]?.properties?.length} properties
-        </span>
+        {Logged?.PageTab === "Properties" && (
+          <span className="text-gray-600">
+            {Logged?.userInfo?.hosts[0]?.properties?.length} properties
+          </span>
+        )}
+
         {Logged?.userInfo?.role === "Host" && (
-          <AddNewPropertyForm user={Logged?.userInfo} />
+          <div className={`${Logged?.PageTab !== "Properties" && "ml-auto"}`}>
+            <AddNewPropertyForm user={Logged?.userInfo} />
+          </div>
         )}
       </div>
-
-      {/* Property Grid - 4 per row */}
-      <div className="grid grid-cols-4 gap-6">
-        {properties?.map((property: any) => (
-          <Property
-            User={Logged?.userInfo}
-            reload={Logged?.refetch}
-            key={property?.name}
-            property={property}
-          />
-        ))}
-      </div>
+      {Logged?.PageTab === "Properties" ? (
+        <div className="grid grid-cols-4 gap-6">
+          {properties?.map((property: any) => (
+            <Property
+              User={Logged?.userInfo}
+              reload={Logged?.refetch}
+              key={property?.name}
+              property={property}
+            />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <BookingsTable Loggeds={Logged} />
+        </div>
+      )}
     </div>
   );
 }

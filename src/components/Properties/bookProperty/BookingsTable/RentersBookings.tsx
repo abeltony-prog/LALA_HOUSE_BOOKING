@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Drawer, Placeholder } from "rsuite";
 import { useGetBookingsWhereUser_IdQuery } from "src/graphql/generated/graphql";
 import BookingsTable from "./bookingsTable";
+import { userAuth } from "context/auth";
 
 export default function RentersBookings({ user_id }: any) {
+  const Logged = useContext(userAuth) as unknown as any;
+
   const [open, setOpen] = useState(false);
   const {
     data: bookings,
@@ -42,6 +45,7 @@ export default function RentersBookings({ user_id }: any) {
             <BookingsTable
               refetchBookings={refetchBookings}
               reservedBookings={bookings?.bookings}
+              Loggeds={Logged}
             />
           )}
         </Drawer.Body>

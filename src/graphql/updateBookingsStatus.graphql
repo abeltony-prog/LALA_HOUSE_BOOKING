@@ -1,0 +1,8 @@
+mutation updateBookingStatus($status: String = "", $booking_id: uuid = "") {
+  update_bookings(
+    where: { BID: { _eq: $booking_id } }
+    _set: { status: $status }
+  ) {
+    affected_rows
+  }
+}
