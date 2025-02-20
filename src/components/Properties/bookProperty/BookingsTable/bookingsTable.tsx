@@ -14,6 +14,8 @@ export default function BookingsTable({
   refetchBookings,
   info,
 }: any) {
+    console.log( info);
+    
   const {
     data: hostsBookings,
     isLoading: loadingBookigs,
