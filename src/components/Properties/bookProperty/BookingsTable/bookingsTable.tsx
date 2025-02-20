@@ -1,12 +1,13 @@
 import React from "react";
 import { Table, Button } from 'rsuite';
+import { useRemoveBookingsWherebooking_IdMutation } from "src/graphql/generated/graphql";
 
 const { Column, HeaderCell, Cell } = Table;
 
 export default function BookingsTable({reservedBookings} : any){
     const data = reservedBookings?.map((property: any, index : any)=>{
         return{
-            id: index +1,
+            id:property?.BID,
             Property : property?.property?.name,
             Amenities: property?.property?.amenities?.join(" , ") || "No amenities available",
             cost: <span>{new Intl.NumberFormat('en-US').format(property?.property?.cost)} RWF</span>,
@@ -17,18 +18,24 @@ export default function BookingsTable({reservedBookings} : any){
         }
     })
 
+    const {mutate:RemoveBooking} = useRemoveBookingsWherebooking_IdMutation()
+    
+    const RemoveBookings = (id : any) => {
+        RemoveBooking({
+            booking_id: id
+        })
+        
+    }
+
     return(
         <><h4>All My Bookings</h4><hr /><Table
             height={900}
             data={data}
-            onRowClick={rowData => {
-                console.log(rowData);
-            } }
         >
-            <Column width={60} align="center" fixed>
+            {/* <Column width={60} align="center" fixed>
                 <HeaderCell>Id</HeaderCell>
                 <Cell dataKey="id" />
-            </Column>
+            </Column> */}
 
             <Column width={150}>
                 <HeaderCell>Property</HeaderCell>
@@ -68,7 +75,7 @@ export default function BookingsTable({reservedBookings} : any){
 
                 <Cell style={{ padding: '6px' }}>
                     {rowData => (
-                        <Button appearance="link" onClick={() => alert(`id:${rowData.id}`)}>
+                        <Button appearance="link" onClick={() => RemoveBookings(rowData.id)}>
                             Cancel Booking
                         </Button>
                     )}
