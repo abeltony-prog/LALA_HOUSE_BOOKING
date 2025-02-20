@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import BecomeHostModel from "./hosts/becomeHostModel";
 import { useUpdateUserRoleWhereUser_IdMutation } from "src/graphql/generated/graphql";
 import { PuffLoader } from "react-spinners";
+import RentersBookings from "@components/Properties/bookProperty/BookingsTable/RentersBookings";
 
 let userRole: string;
 
@@ -111,25 +112,10 @@ export default function Sidebar({ SessionDetails, refetch , filters , setFilters
         {SessionDetails?.User?.role === "Renter" && (
           <div>
             <div className="mb-4 mt-4 flex justify-between">
-              <h5 className="font-medium">Category</h5>
+              <h5 className="font-medium">More</h5>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { icon: "🌙", label: "Per Night" },
-                { icon: "🕒", label: "Per Month" },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className={`flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
-                    item.label === "Apartment"
-                      ? "border-black"
-                      : "border-gray-200"
-                  }`}
-                >
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="text-sm">{item.label}</span>
-                </button>
-              ))}
+            <div className="grid grid-cols-1 gap-3">
+             <RentersBookings user_id={SessionDetails?.User?.UID} />
             </div>
           </div>
         )}

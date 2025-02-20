@@ -1,0 +1,39 @@
+import React, { useState } from "react";
+import { Drawer, Placeholder } from "rsuite";
+import { useGetBookingsWhereUser_IdQuery } from "src/graphql/generated/graphql";
+import BookingsTable from "./bookingsTable";
+
+export default function RentersBookings({user_id} : any){
+    const [open, setOpen] = useState(false);
+    const {data:bookings , isLoading} = useGetBookingsWhereUser_IdQuery({
+        user_id:user_id
+    })
+    return(
+       <>
+        {[
+            { icon: "🕒", label: "Bookings" },
+          ].map((item) => (
+            <button
+            onClick={()=>setOpen(true)}
+              key={item.label}
+              className={`flex  items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
+                item.label === "Apartment"
+                  ? "border-black"
+                  : "border-gray-200"
+              }`}
+            >
+              <span className="text-2xl">{item.icon}</span>
+              <span className="text-sm">{item.label}</span>
+            </button>
+          ))}
+        <Drawer open={open} size={"full"} onClose={() => setOpen(false)}>
+        <Drawer.Body>
+            {
+                isLoading ?  <Placeholder.Paragraph /> : <BookingsTable reservedBookings={bookings?.bookings} />
+            }
+         
+        </Drawer.Body>
+      </Drawer>
+       </>
+    )
+}

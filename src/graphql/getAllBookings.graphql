@@ -1,0 +1,30 @@
+query getBookingsWhereUser_id($user_id: uuid = "") {
+  bookings(where: {user_id: {_eq: $user_id}}, order_by: {done_on: asc}) {
+    user_id
+    to_date
+    status
+    property {
+      PID
+      amenities
+      bath
+      beds
+      cost
+      description
+      host_id
+      image
+      listed_on
+      name
+      per
+      type
+      hosts {
+        name
+        HID
+      }
+    }
+    property_id
+    people
+    from_date
+    done_on
+    BID
+  }
+}
