@@ -1,10 +1,11 @@
+import { Loader } from "lucide-react";
 import React from "react";
 import { Table, Button } from 'rsuite';
 import { useRemoveBookingsWherebooking_IdMutation } from "src/graphql/generated/graphql";
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function BookingsTable({reservedBookings} : any){
+export default function BookingsTable({reservedBookings , refetchBookings} : any){
     const data = reservedBookings?.map((property: any, index : any)=>{
         return{
             id:property?.BID,
@@ -18,7 +19,14 @@ export default function BookingsTable({reservedBookings} : any){
         }
     })
 
-    const {mutate:RemoveBooking} = useRemoveBookingsWherebooking_IdMutation()
+    const {mutate:RemoveBooking , isLoading:Loadingbookings} = useRemoveBookingsWherebooking_IdMutation({
+        onSuccess(){
+            refetchBookings()
+        },
+        onError(error){
+            alert(error)
+        }
+    })
     
     const RemoveBookings = (id : any) => {
         RemoveBooking({
@@ -76,7 +84,9 @@ export default function BookingsTable({reservedBookings} : any){
                 <Cell style={{ padding: '6px' }}>
                     {rowData => (
                         <Button appearance="link" onClick={() => RemoveBookings(rowData.id)}>
-                            Cancel Booking
+                           {
+                            Loadingbookings ? <Loader /> : "Cancel Booking"
+                           } 
                         </Button>
                     )}
                 </Cell>

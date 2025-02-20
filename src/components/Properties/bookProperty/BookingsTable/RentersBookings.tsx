@@ -5,16 +5,25 @@ import BookingsTable from "./bookingsTable";
 
 export default function RentersBookings({user_id} : any){
     const [open, setOpen] = useState(false);
-    const {data:bookings , isLoading} = useGetBookingsWhereUser_IdQuery({
+    const {data:bookings , isLoading , refetch:refetchBookings} = useGetBookingsWhereUser_IdQuery({
         user_id:user_id
     })
+    const handleOpenBookings = () => {
+     try{
+        refetchBookings()
+        setOpen(true)
+     }catch(error){
+        console.log(error);
+        
+     }
+    }
     return(
        <>
         {[
             { icon: "🕒", label: "Bookings" },
           ].map((item) => (
             <button
-            onClick={()=>setOpen(true)}
+            onClick={handleOpenBookings}
               key={item.label}
               className={`flex  items-center gap-2 rounded-xl border p-4 transition-colors hover:border-gray-400 ${
                 item.label === "Apartment"
@@ -29,7 +38,7 @@ export default function RentersBookings({user_id} : any){
         <Drawer open={open} size={"full"} onClose={() => setOpen(false)}>
         <Drawer.Body>
             {
-                isLoading ?  <Placeholder.Paragraph /> : <BookingsTable reservedBookings={bookings?.bookings} />
+                isLoading ?  <Placeholder.Paragraph /> : <BookingsTable refetchBookings={refetchBookings} reservedBookings={bookings?.bookings} />
             }
          
         </Drawer.Body>
