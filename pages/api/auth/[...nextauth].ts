@@ -42,17 +42,19 @@ export default NextAuth({
         if (data?.users?.length > 0) {
           const user = data.users[0];
           return {
-            // Ensure `id` fallback or removal
-            id: user.UID || null, // Use `UUID` or set it as `null` if absent
+            id: user.UID || null,
             name: user.name,
             email: user.email,
             role: user.role,
+            newUser: false, // Indicate user exists
           };
         }
-        // If no user is found, return the default Google profile data
+        // If no user is found
         return {
-          ...profile,
-          id: profile.sub || null, // Fallback to `sub` (Google's unique user ID) or `null`
+          id: profile.sub, // Use Google’s unique `sub` as the fallback ID
+          name: profile.name,
+          email: profile.email,
+          role: "newUser", // Mark them as a new user
         };
       },
     }),
@@ -95,31 +97,25 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token }) {
-      const sessionUser: UserSession = session?.user || {}; // Initialize with empty object if session.user is undefined
-      if (typeof token.role === "string") {
-        sessionUser.role = token.role;
-      } else {
-        sessionUser.role = null;
-      }
-
-      return { ...session, user: sessionUser };
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: token.role || "newUser", 
+        },
+      };
     },
+  
     async jwt({ token, user }) {
       if (user) {
-        const customUser = user as {
-          name: string;
-          email: string;
-        };
-
-        // Store user data in the JWT token
-        token.name = customUser.name;
-        token.email = customUser.email;
+        token.role = (user as any).role || "newUser"; 
+        token.name = user.name;
+        token.email = user.email;
       }
-
       return token;
-    },
+    }
   },
   pages: {
-    error: "/signin", // Redirect to the Login page if there is an error
+    error: "/signin", 
   },
 });

@@ -2,7 +2,8 @@ import SearchProperties from "@components/Filters/searchbar";
 import Sidebar from "@components/Navbars/Sidebar";
 import { MyProvider } from "context/auth";
 import { useSession } from "next-auth/react";
-import React, { ReactElement, useState } from "react";
+import { useRouter } from "next/router";
+import React, { ReactElement, useEffect, useState } from "react";
 import {
   useGetAllPropertiesQuery,
   useGetUsersQuery,
@@ -10,13 +11,27 @@ import {
 
 interface iProps {
   children: ReactElement | ReactElement[];
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  role?: string;
 }
 
 const ParentTheme: React.FC<iProps> = ({ children }) => {
-  const { data: session, status } = useSession();
+  const router =  useRouter()
+  const { data: session, status } = useSession<any>();
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
   });
+
+  console.log(session);
+  
+  
+  useEffect(() => {
+    if ((session?.user as iProps)?.role === "newUser") {
+      router.push(`/signup?email=${session?.user?.email}`);
+    }
+  }, [session, router]);
 
   // console.log(userDetails);
   const [filters, setFilters] = useState({
@@ -46,6 +61,10 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
       (filters.type === "All" || property.type === filters.type) // Show all properties if "All" is selected
     );
   });
+
+  if(status === "unauthenticated"){
+    router.push('/signin')
+  }
 
   return (
     <div className="flex h-screen flex-col">
