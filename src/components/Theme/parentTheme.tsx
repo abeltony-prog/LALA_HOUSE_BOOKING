@@ -22,10 +22,7 @@ const ParentTheme: React.FC<iProps> = ({ children }) => {
   const { data: session, status } = useSession<any>();
   const { data: userDetails, refetch } = useGetUsersQuery({
     email: session?.user?.email,
-  });
-
-  console.log(session);
-  
+  });  
   
   useEffect(() => {
     if ((session?.user as iProps)?.role === "newUser") {
