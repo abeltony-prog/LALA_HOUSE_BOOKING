@@ -1,8 +1,10 @@
-import { LoaderCircle } from "lucide-react";
+import { Loader, Loader2, LoaderCircle } from "lucide-react";
 import React, { useState } from "react";
 import { Modal, Button, DatePicker, InputNumber, Message } from "rsuite";
 import {
+    RemoveBookingsWherebooking_IdDocument,
   useAddPropertyBookingsMutation,
+  useRemoveBookingsWherebooking_IdMutation,
   useValidateAvailablePropertiesQuery,
 } from "src/graphql/generated/graphql";
 
@@ -31,7 +33,20 @@ export default function BookPropertyModel({
         setOpen(false);
         reload();
       },
+      onError(error){
+        alert(error)
+      }
     });
+
+    const {mutate:removeBooking , isLoading:Iscanceling} = useRemoveBookingsWherebooking_IdMutation({
+        onSuccess() {
+            setOpen(false);
+            reload();
+          },
+          onError(error){
+            alert(error)
+          }
+    })
   // Helper function to check if a date is booked
   const isDateBooked = (fromDate: Date, toDate: Date) => {
     return properties?.bookings.some((booking) => {
@@ -99,20 +114,38 @@ export default function BookPropertyModel({
     console.log("Booking Confirmed:", bookingDetails);
     setOpen(false);
   };
+  const CancleBooking = ()=>{
+   try{
+    removeBooking({
+        booking_id: isPropertyBooked,
+    })
+   }catch(error){
+    console.log(error);
+    
+   }
+  }
 
   return (
     <>
       {/* Book Now Button */}
       {isPropertyBooked ? (
-        <button className="w-full cursor-pointer rounded-lg bg-red-400 py-3 text-white hover:bg-red-500">
-          Cancel Booking
+        <button
+        onClick={CancleBooking}
+        className="w-full cursor-pointer rounded-lg bg-red-400 py-3 text-white hover:bg-red-500">
+            {
+                Iscanceling ? <Loader /> : "Cancel Booking"
+            }
+          
         </button>
       ) : (
         <button
           onClick={handleOpen}
           className="w-full cursor-pointer rounded-lg bg-black py-3 text-white hover:bg-gray-800"
         >
-          Book Now
+            {
+                booking ? <Loader2 /> : " Book Now"
+            }
+         
         </button>
       )}
 

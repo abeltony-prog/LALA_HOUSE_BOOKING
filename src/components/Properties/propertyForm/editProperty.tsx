@@ -9,7 +9,7 @@ import {
 } from "rsuite";
 import { useUpdatePropertyWherePropertyIdMutation } from "src/graphql/generated/graphql";
 
-export default function EditProperty({ propertyDetails }: any) {
+export default function EditProperty({ propertyDetails , reload }: any) {
   const [property, setProperty] = useState({
     name: "",
     type: "",
@@ -40,7 +40,11 @@ export default function EditProperty({ propertyDetails }: any) {
     }
   }, [propertyDetails]);
 
-  const { mutate: updateProperty } = useUpdatePropertyWherePropertyIdMutation();
+  const { mutate: updateProperty } = useUpdatePropertyWherePropertyIdMutation({
+    onSuccess(){
+        reload()
+    }
+  });
 
   const propertyTypes = [
     { label: "Apartment", value: "apartment" },

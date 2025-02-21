@@ -153,7 +153,7 @@ export default function PropertyDrawer({
           </>
         ) : (
           <div className="mt-2">
-            <EditProperty propertyDetails={property} />
+            <EditProperty  reload={reload} propertyDetails={property} />
           </div>
         )}
       </Drawer.Body>

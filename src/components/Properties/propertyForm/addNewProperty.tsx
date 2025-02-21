@@ -11,7 +11,7 @@ import {
 } from "rsuite";
 import { useAddNewPropertyMutation } from "src/graphql/generated/graphql";
 
-export default function AddNewPropertyForm({ user }: any) {
+export default function AddNewPropertyForm({ user , reload }: any) {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState({
     name: "",
@@ -29,6 +29,7 @@ export default function AddNewPropertyForm({ user }: any) {
   const { mutate: SaveNewProperty, isLoading } = useAddNewPropertyMutation({
     onSuccess() {
       setOpen(false);
+      reload()
     },
     onError(error) {
       console.log(error);

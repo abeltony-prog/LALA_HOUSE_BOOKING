@@ -4,6 +4,7 @@ import BecomeHostModel from "./hosts/becomeHostModel";
 import { useUpdateUserRoleWhereUser_IdMutation } from "src/graphql/generated/graphql";
 import { PuffLoader } from "react-spinners";
 import RentersBookings from "@components/Properties/bookProperty/BookingsTable/RentersBookings";
+import { signOut } from "next-auth/react";
 
 let userRole: string;
 
@@ -131,15 +132,14 @@ export default function Sidebar({
 
         <div className="mt-auto">
           {SessionDetails?.status === "authenticated" ? (
-            <div className="flex items-center gap-3 rounded-lg bg-gray-100 p-3 shadow-md">
+            <><div className="flex items-center gap-3 rounded-lg bg-gray-100 p-3 shadow-md">
               {/* Profile Picture */}
               <img
                 width={40}
                 height={40}
                 className="rounded-full border"
                 src="https://cdn.pixabay.com/photo/2016/08/28/13/31/basic-1625962_640.png"
-                alt=""
-              />
+                alt="" />
 
               {/* User Info */}
               <div>
@@ -153,8 +153,7 @@ export default function Sidebar({
                   {SessionDetails.User?.hosts.length === 0 ? (
                     <BecomeHostModel
                       refetch={refetch}
-                      user={SessionDetails?.User}
-                    />
+                      user={SessionDetails?.User} />
                   ) : (
                     <button
                       onClick={SwitchUserProfile}
@@ -167,7 +166,9 @@ export default function Sidebar({
                   )}
                 </p>
               </div>
-            </div>
+            </div><span onClick={() => signOut({ callbackUrl: "/signin" })} className="flex justify-center mt-4 cursor-pointer hover:text-red-400 items-center w-full">Sign out</span>
+</>
+
           ) : (
             <button
               onClick={RedictURL}

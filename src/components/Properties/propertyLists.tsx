@@ -19,7 +19,7 @@ export default function PropertyList() {
               description: property?.description,
               cost: property?.cost,
               image:
-                property?.image ||
+                // property?.image ||
                 `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
               beds: property?.beds,
               bath: property?.bath,
@@ -37,7 +37,7 @@ export default function PropertyList() {
               description: pro.description,
               cost: pro?.cost,
               image:
-                pro?.image ||
+                // pro?.image ||
                 `https://thumb.ac-illust.com/1f/1fe58b1c6283f34757e9a7cc73ebe806_t.jpeg`,
               beds: pro?.beds,
               bath: pro?.bath,
@@ -63,7 +63,7 @@ export default function PropertyList() {
 
         {Logged?.userInfo?.role === "Host" && (
           <div className={`${Logged?.PageTab !== "Properties" && "ml-auto"}`}>
-            <AddNewPropertyForm user={Logged?.userInfo} />
+            <AddNewPropertyForm reload={Logged?.refetch} user={Logged?.userInfo} />
           </div>
         )}
       </div>
