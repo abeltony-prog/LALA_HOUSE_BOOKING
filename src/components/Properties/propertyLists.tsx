@@ -10,6 +10,8 @@ export default function PropertyList() {
 
   let properties;
 
+  const reloadProperties = () => Logged?.refetch(); 
+
   try {
     properties =
       Logged?.userInfo?.role === "Renter"
@@ -56,9 +58,9 @@ export default function PropertyList() {
     <div className="flex-1 space-y-6 overflow-y-auto p-6">
       <div className="flex items-center justify-between">
         {Logged?.PageTab === "Properties" && (
-          <span className="text-gray-600">
+          <><span className="text-gray-600">
             {Logged?.userInfo?.hosts[0]?.properties?.length} properties
-          </span>
+          </span><span onClick={reloadProperties} className="cursor-pointer hover:text-blue-400 font-bold">Refresh</span></>
         )}
 
         {Logged?.userInfo?.role === "Host" && (
@@ -69,7 +71,7 @@ export default function PropertyList() {
       </div>
       {Logged?.PageTab === "Properties" ? (
         <div className="grid grid-cols-4 gap-6">
-          {properties?.map((property: any) => (
+          {properties?.map((property: any , index : any) => (
             <Property
               User={Logged?.userInfo}
               reload={Logged?.refetch}

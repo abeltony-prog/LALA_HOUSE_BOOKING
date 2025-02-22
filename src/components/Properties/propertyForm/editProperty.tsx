@@ -1,3 +1,4 @@
+import { Loader } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import {
   Input,
@@ -9,7 +10,7 @@ import {
 } from "rsuite";
 import { useUpdatePropertyWherePropertyIdMutation } from "src/graphql/generated/graphql";
 
-export default function EditProperty({ propertyDetails , reload }: any) {
+export default function EditProperty({ propertyDetails, setOpen , reload }: any) {
   const [property, setProperty] = useState({
     name: "",
     type: "",
@@ -40,9 +41,10 @@ export default function EditProperty({ propertyDetails , reload }: any) {
     }
   }, [propertyDetails]);
 
-  const { mutate: updateProperty } = useUpdatePropertyWherePropertyIdMutation({
+  const { mutate: updateProperty , isLoading:updating} = useUpdatePropertyWherePropertyIdMutation({
     onSuccess(){
         reload()
+        setOpen()
     }
   });
 
@@ -224,7 +226,10 @@ export default function EditProperty({ propertyDetails , reload }: any) {
           onClick={SavePropertyChanges}
           className="w-full rounded-lg bg-black py-3 text-white hover:bg-gray-800"
         >
-          Save Changes
+          {
+            updating ? <Loader /> : "Save Changes"
+          }
+          
         </button>
       </div>
     </>

@@ -8,6 +8,7 @@ export default function PropertyDrawer({
   property,
   isPropertyBooked,
   reload,
+  setOpen,
   User,
 }: any) {
   return (
@@ -153,7 +154,7 @@ export default function PropertyDrawer({
           </>
         ) : (
           <div className="mt-2">
-            <EditProperty  reload={reload} propertyDetails={property} />
+            <EditProperty  reload={()=>reload()} setOpen={()=>setOpen()} propertyDetails={property} />
           </div>
         )}
       </Drawer.Body>
